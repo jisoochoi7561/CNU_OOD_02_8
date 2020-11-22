@@ -3,58 +3,58 @@
 #include <string>
 #include <vector>
 
-// »óÅÂ : ±¤ ÃÊ´Ü Ã»´Ü È«´Ü ÇÇ ¿­²ı ½ÖÇÇ
-// »óÅÂ´Â card.txt¿¡ ÀÖ´Â °ÍÀ» ±âÁØÀ¸·Î ÇÏ¿´½À´Ï´Ù.
-enum State { ±¤, ºñ±¤, È«´Ü, ÃÊ´Ü, Ã»´Ü, ÇÇ, ¿­²ı, ½ÖÇÇ };
-// Card Å¬·¡½º
+// ìƒíƒœ : ê´‘ ì´ˆë‹¨ ì²­ë‹¨ í™ë‹¨ í”¼ ì—´ë— ìŒí”¼
+// ìƒíƒœëŠ” card.txtì— ìˆëŠ” ê²ƒì„ ê¸°ì¤€ìœ¼ë¡œ í•˜ì˜€ìŠµë‹ˆë‹¤.
+enum State { ê´‘, ë¹„ê´‘, í™ë‹¨, ì´ˆë‹¨, ì²­ë‹¨, í”¼, ì—´ë—, ìŒí”¼ };
+// Card í´ë˜ìŠ¤
 class Card {
  public:
-  explicit Card() : month_(1), state_(±¤) {}
+  explicit Card() : month_(1), state_(ê´‘) {}
 
-  // Card »ı¼º : ¿ù,»óÅÂ
+  // Card ìƒì„± : ì›”,ìƒíƒœ
   Card(const int month, const State state) : month_(month), state_(state) {}
 
-  // Card ¿ù ¸®ÅÏ
+  // Card ì›” ë¦¬í„´
   int GetMonthOfCard() const { return this->month_; }
-  // Card »óÅÂ ¸®ÅÏ
+  // Card ìƒíƒœ ë¦¬í„´
   State GetStateOfCard() const {
     //
     return this->state_;
   }
-  // Card »óÅÂ ¹®ÀÚ¿­·Î º¯È¯
+  // Card ìƒíƒœ ë¬¸ìì—´ë¡œ ë³€í™˜
   std::string stateToString() {
-    // switch ¹®À¸·Î ±¸Çö
+    // switch ë¬¸ìœ¼ë¡œ êµ¬í˜„
     switch (this->state_) {
-      case ±¤:
-        return "±¤";
+      case ê´‘:
+        return "ê´‘";
         break;
-      case È«´Ü:
-        return "È«´Ü";
+      case í™ë‹¨:
+        return "í™ë‹¨";
         break;
-      case ÃÊ´Ü:
-        return "ÃÊ´Ü";
+      case ì´ˆë‹¨:
+        return "ì´ˆë‹¨";
         break;
-      case Ã»´Ü:
-        return "Ã»´Ü";
+      case ì²­ë‹¨:
+        return "ì²­ë‹¨";
         break;
-      case ÇÇ:
-        return "ÇÇ";
+      case í”¼:
+        return "í”¼";
         break;
-      case ¿­²ı:
-        return "¿­²ı";
+      case ì—´ë—:
+        return "ì—´ë—";
         break;
-      case ½ÖÇÇ:
-        return "½ÖÇÇ";
+      case ìŒí”¼:
+        return "ìŒí”¼";
         break;
     }
   }
-  // Card Á¤º¸ Ãâ·Â
+  // Card ì •ë³´ ì¶œë ¥
   std::string toString() {
     return ("card info: month = " + std::to_string(this->month_)) +
            (" state = " + this->stateToString());
   }
 
-  // CardÀÇ equality´Â ¿ùÀ» ±âÁØÀ¸·Î ÇÏ¿´À½.
+  // Cardì˜ equalityëŠ” ì›”ì„ ê¸°ì¤€ìœ¼ë¡œ í•˜ì˜€ìŒ.
   bool operator==(const Card& other) {
     if (this->month_ == other.month_) {
       return true;
@@ -62,7 +62,7 @@ class Card {
     return false;
   }
 
-  // CardSet¿¡¼­ Á¤·ÄÀ» À§ÇÑ < operator overloading
+  // CardSetì—ì„œ ì •ë ¬ì„ ìœ„í•œ < operator overloading
   bool operator<(const Card& other) {
     if (this->month_ == other.month_) {
       return this->state_ < other.state_;
@@ -76,39 +76,39 @@ class Card {
   int month_;
 };
 
-// µÚÁıÀ» Ä«µå¸¦ ½×¾Æ ³õÀº ´õ¹Ì(dummy), ¹Ù´Ú, ÇÃ·¹ÀÌ¾î°¡ °¢°¢ °®°í ÀÖ´Â Ä«µå
-// ÁıÇÕ ´õ¹Ì, ¹Ù´Ú, ÇÃ·¹ÀÌ¾î°¡ »ó¼Ó¹Ş½À´Ï´Ù. random access ÇÒ ¼ö ÀÖ°í Ä«µå¸¦
-// Ãß°¡Çß´Ù Á¦°ÅÇß´Ù ÇÒ ÀÏÀÌ ¸¹À¸¹Ç·Î vector¸¦ ¼±ÅÃÇß½À´Ï´Ù. ´Ù¸¥ ÀÇ°ß ÀÖÀ¸½Ã¸é
-// ÁÖ¼®°ú ÇÔ²² ¼öÁ¤ÇØÁÖ¼¼¿ä
+// ë’¤ì§‘ì„ ì¹´ë“œë¥¼ ìŒ“ì•„ ë†“ì€ ë”ë¯¸(dummy), ë°”ë‹¥, í”Œë ˆì´ì–´ê°€ ê°ê° ê°–ê³  ìˆëŠ” ì¹´ë“œ
+// ì§‘í•© ë”ë¯¸, ë°”ë‹¥, í”Œë ˆì´ì–´ê°€ ìƒì†ë°›ìŠµë‹ˆë‹¤. random access í•  ìˆ˜ ìˆê³  ì¹´ë“œë¥¼
+// ì¶”ê°€í–ˆë‹¤ ì œê±°í–ˆë‹¤ í•  ì¼ì´ ë§ìœ¼ë¯€ë¡œ vectorë¥¼ ì„ íƒí–ˆìŠµë‹ˆë‹¤. ë‹¤ë¥¸ ì˜ê²¬ ìˆìœ¼ì‹œë©´
+// ì£¼ì„ê³¼ í•¨ê»˜ ìˆ˜ì •í•´ì£¼ì„¸ìš”
 class CardSet {
  public:
-  // °®°í ÀÖ´Â Ä«µå °³¼ö¸¦ ¸®ÅÏ
+  // ê°–ê³  ìˆëŠ” ì¹´ë“œ ê°œìˆ˜ë¥¼ ë¦¬í„´
   int GetNumOfCards() { return cardset_.size(); }
-  // Ä«µå ¼ÂÀÇ Æ¯Á¤ ÀÎµ¦½ºÀÇ Ä«µå¸¦ ¸®ÅÏ
+  // ì¹´ë“œ ì…‹ì˜ íŠ¹ì • ì¸ë±ìŠ¤ì˜ ì¹´ë“œë¥¼ ë¦¬í„´
   Card GetCard(int index) { return cardset_[index]; }
-  // Ä«µå¸¦ Ä«µå¼Â¿¡ Ãß°¡
+  // ì¹´ë“œë¥¼ ì¹´ë“œì…‹ì— ì¶”ê°€
   virtual void AddCard(Card card) {
     if (!(card.GetMonthOfCard() == 0 || card.GetMonthOfCard() > 12)) {
-      cardset_.push_back(card);  // Ä«µå Ãß°¡
+      cardset_.push_back(card);  // ì¹´ë“œ ì¶”ê°€
       std::sort(cardset_.begin(),
-                cardset_.end());  // Ãß°¡ ÈÄ < operator¿¡ µû¶ó Á¤·Ä
+                cardset_.end());  // ì¶”ê°€ í›„ < operatorì— ë”°ë¼ ì •ë ¬
     }
     return;
   }
-  // Ä«µå ¼Â¿¡¼­ Æ¯Á¤ ÀÎµ¦½ºÀÇ Ä«µå¸¦ »ÌÀ½(Ä«µå ¼Â¿¡¼­ Á¦°ÅµÊ)
+  // ì¹´ë“œ ì…‹ì—ì„œ íŠ¹ì • ì¸ë±ìŠ¤ì˜ ì¹´ë“œë¥¼ ë½‘ìŒ(ì¹´ë“œ ì…‹ì—ì„œ ì œê±°ë¨)
   Card PopIdxCard(int index) {
     if (!(index < 0 || index >= this->GetNumOfCards())) {
-      Card popped = cardset_[index];             // »ÌÀº Ä«µå
-      cardset_.erase(cardset_.begin() + index);  // Ä«µå¼Â¿¡¼­ Á¦°Å
-      // --Ãß°¡-- ÀÎµ¦½ºÀÇ ¹üÀ§°¡ 1ºÎÅÍ¸é index-1À» ÇÏ´Â °ÍÀÌ ¸Â´Âµ¥
-      // Á¦ »ı°¢¿¡´Â ±×´ë·Î 0ºÎÅÍ·Î ½ÃÀÛÇÏ´Â °ÍÀ» »ı°¢ÇÏ½Å °Í °°¾Æ¼­
-      // ÀÌ·² °æ¿ì¿¡´Â beginÀÌ ½ÃÀÛ ÁÖ¼Ò¸¦ ¹İÈ¯ÇÏ¹Ç·Î index¸¦ ´õÇÏ½Ã´Â
-      // °ÍÀÌ ¸Â½À´Ï´Ù. È¤½Ã 1ºÎÅÍ ½ÃÀÛÇÏ´Â °É·Î »ı°¢ÇÏ¼Ì´Ù¸é
-      // ´Ù½Ã index-1·Î ¹Ù²ãÁÖ¼¼¿ä.
+      Card popped = cardset_[index];             // ë½‘ì€ ì¹´ë“œ
+      cardset_.erase(cardset_.begin() + index);  // ì¹´ë“œì…‹ì—ì„œ ì œê±°
+      // --ì¶”ê°€-- ì¸ë±ìŠ¤ì˜ ë²”ìœ„ê°€ 1ë¶€í„°ë©´ index-1ì„ í•˜ëŠ” ê²ƒì´ ë§ëŠ”ë°
+      // ì œ ìƒê°ì—ëŠ” ê·¸ëŒ€ë¡œ 0ë¶€í„°ë¡œ ì‹œì‘í•˜ëŠ” ê²ƒì„ ìƒê°í•˜ì‹  ê²ƒ ê°™ì•„ì„œ
+      // ì´ëŸ´ ê²½ìš°ì—ëŠ” beginì´ ì‹œì‘ ì£¼ì†Œë¥¼ ë°˜í™˜í•˜ë¯€ë¡œ indexë¥¼ ë”í•˜ì‹œëŠ”
+      // ê²ƒì´ ë§ìŠµë‹ˆë‹¤. í˜¹ì‹œ 1ë¶€í„° ì‹œì‘í•˜ëŠ” ê±¸ë¡œ ìƒê°í•˜ì…¨ë‹¤ë©´
+      // ë‹¤ì‹œ index-1ë¡œ ë°”ê¿”ì£¼ì„¸ìš”.
       return popped;
     }
   }
-  // Æ¯Á¤ ¿ùÀÇ Ä«µå°¡ ¸î °³ ÀÖ´ÂÁö ¸®ÅÏ
+  // íŠ¹ì • ì›”ì˜ ì¹´ë“œê°€ ëª‡ ê°œ ìˆëŠ”ì§€ ë¦¬í„´
   int FindNumOfSameMonthCards(int month) {
     int i = 0;
     for (Card c : cardset_) {
@@ -116,11 +116,11 @@ class CardSet {
     }
     return i;
   }
-  // Æ¯Á¤ stateÀÇ Ä«µå°¡ ¸î °³ ÀÖ´ÂÁö ¸®ÅÏ
-  // ¿©±â¼­ state°¡ Á¦°¡ ÀÌÀü¿¡ ¾÷·ÎµåÇÑ card.txt¿¡¼­ Ä«µå ÀÌ¸§ÀÇ 'A,B,C,D'ÀÎÁö
-  // ¾Æ´Ï¸é ±¤, ÇÇ, ¿­, ´Ü°ú °°ÀÌ Ä«µå Á¾·ù¸¦ ³ªÅ¸³»´Â °ÍÀÎÁö ¸ğ¸£°Ú½À´Ï´Ù.
-  // ÈÄÀÚ¶ó¸é ÄÚµå´Â ¾Æ·¡¿Í °°°í.. ¾Æ´Ï¶ó¸é ¼öÁ¤ÇØ¾ß ÇÕ´Ï´Ù.
-  // --Ãß°¡-- state ÈÄÀÚ·Î ¼öÁ¤Çß½À´Ï´Ù. ±×³É µÎ½Ã¸é µÉ °Í °°½À´Ï´Ù.
+  // íŠ¹ì • stateì˜ ì¹´ë“œê°€ ëª‡ ê°œ ìˆëŠ”ì§€ ë¦¬í„´
+  // ì—¬ê¸°ì„œ stateê°€ ì œê°€ ì´ì „ì— ì—…ë¡œë“œí•œ card.txtì—ì„œ ì¹´ë“œ ì´ë¦„ì˜ 'A,B,C,D'ì¸ì§€
+  // ì•„ë‹ˆë©´ ê´‘, í”¼, ì—´, ë‹¨ê³¼ ê°™ì´ ì¹´ë“œ ì¢…ë¥˜ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ê²ƒì¸ì§€ ëª¨ë¥´ê² ìŠµë‹ˆë‹¤.
+  // í›„ìë¼ë©´ ì½”ë“œëŠ” ì•„ë˜ì™€ ê°™ê³ .. ì•„ë‹ˆë¼ë©´ ìˆ˜ì •í•´ì•¼ í•©ë‹ˆë‹¤.
+  // --ì¶”ê°€-- state í›„ìë¡œ ìˆ˜ì •í–ˆìŠµë‹ˆë‹¤. ê·¸ëƒ¥ ë‘ì‹œë©´ ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
   int FindNumOfSameStateCards(State state) {
     int i = 0;
     for (Card c : cardset_) {
@@ -133,11 +133,11 @@ class CardSet {
   std::vector<Card> cardset_;
 };
 
-// ÇÃ·¹ÀÌ¾î, ¹Ù´Ú, ´õ¹Ì´Â ¾Æ·¡¿Í °°ÀÌ CardSetÀ» »ó¼Ó½ÃÅ°´Â °ÍÀ¸·Î ±¸ÇöÇØ
-// ºÃ½À´Ï´Ù.
+// í”Œë ˆì´ì–´, ë°”ë‹¥, ë”ë¯¸ëŠ” ì•„ë˜ì™€ ê°™ì´ CardSetì„ ìƒì†ì‹œí‚¤ëŠ” ê²ƒìœ¼ë¡œ êµ¬í˜„í•´
+// ë´¤ìŠµë‹ˆë‹¤.
 class Dummy : public CardSet {
  public:
-  // Ä«µå ¼Â¿¡ ÀÖ´Â Ä«µåµéÀ» ¹«ÀÛÀ§·Î ¼¯´Â ÇÔ¼ö
+  // ì¹´ë“œ ì…‹ì— ìˆëŠ” ì¹´ë“œë“¤ì„ ë¬´ì‘ìœ„ë¡œ ì„ëŠ” í•¨ìˆ˜
   void Shuffle() {
     if (cardset_.size() > 1) {
       std::random_shuffle(cardset_.begin(), cardset_.end());
@@ -146,108 +146,108 @@ class Dummy : public CardSet {
   // override AddCard
   virtual void AddCard(Card card) {
     if (!(card.GetMonthOfCard() == 0 || card.GetMonthOfCard() > 12)) {
-      cardset_.push_back(card);  // Ä«µå Ãß°¡
-      // Á¤·ÄÇÏÁö ¾ÊÀ½
+      cardset_.push_back(card);  // ì¹´ë“œ ì¶”ê°€
+      // ì •ë ¬í•˜ì§€ ì•ŠìŒ
     }
     return;
   }
-  // ´õ¹ÌÀÇ °¡Àå À§¿¡ ÀÖ´Â Ä«µå¸¦ ÇÏ³ª »©³»´Â ÇÔ¼ö
+  // ë”ë¯¸ì˜ ê°€ì¥ ìœ„ì— ìˆëŠ” ì¹´ë“œë¥¼ í•˜ë‚˜ ë¹¼ë‚´ëŠ” í•¨ìˆ˜
   Card PopOneCard() {
     Card popped = cardset_.back();
-    cardset_.pop_back();  // ´õ¹Ì¿¡¼­ Á¦°Å
+    cardset_.pop_back();  // ë”ë¯¸ì—ì„œ ì œê±°
     return popped;
   }
-  // ´õ¹Ì¿¡ ³²Àº Ä«µå°¡ ¾ø´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+  // ë”ë¯¸ì— ë‚¨ì€ ì¹´ë“œê°€ ì—†ëŠ”ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
   bool isEmpty() { return this->GetNumOfCards() == 0; }
 };
 
-// ÇÃ·¹ÀÌ¾î°¡ ÀÌ¹Ì ¸ÔÀº CardµéÀÌ °ü¸®µË´Ï´Ù.
+// í”Œë ˆì´ì–´ê°€ ì´ë¯¸ ë¨¹ì€ Cardë“¤ì´ ê´€ë¦¬ë©ë‹ˆë‹¤.
 class PlayerWinCardSet : public CardSet {
  public:
   PlayerWinCardSet() : CardSet() { num_of_go = 0; }
 
-  // Á¡¼ö °è»ê¿¡ °ü·ÃµÈ ÇÔ¼öµéÀ» ¿©±â¿¡ ÀÛ¼ºÇÏ¸é µÉ °Í °°³×¿ä
+  // ì ìˆ˜ ê³„ì‚°ì— ê´€ë ¨ëœ í•¨ìˆ˜ë“¤ì„ ì—¬ê¸°ì— ì‘ì„±í•˜ë©´ ë  ê²ƒ ê°™ë„¤ìš”
 
-  // ±ÔÄ¢ º¸¸é ¾Æ½Ã°ÚÁö¸¸ ÆĞÀÇ Á¡¼öµé·Î ÇÑ °è»êÀÌ°í
-  // ÃßÈÄ¿¡ ÇÃ·¹ÀÌ¾î °£ ½ºÅ¾À» ÇßÀ» ½Ã Á¡¼ö °è»êÀº
-  // ÃßÈÄ¿¡ ±¸ÇöÇÏ¸é µÉ °Í °°½À´Ï´Ù.
-  // ÀÏ´Ü ÆĞ¸¦ ÇÑ ¹ø¸¸ ÈÈ¾úÀ» ¶§¸¦ ±âÁØÀ¸·Î ¸¸µé¾ú½À´Ï´Ù.
-  // ÈÄ¿¡ ÆĞ¸¦ ¶Ç ÈÈ¾úÀ» ¶§ °è»êµÇµµ·Ï ¼öÁ¤ÇÏ¸é µÉ °Í °°½À´Ï´Ù.
-  // ¿µ¾î´Â À§Å°ÇÇµğ¾Æ ¿µ¾îÆÇ ÂüÁ¶Çß½À´Ï´Ù.
+  // ê·œì¹™ ë³´ë©´ ì•„ì‹œê² ì§€ë§Œ íŒ¨ì˜ ì ìˆ˜ë“¤ë¡œ í•œ ê³„ì‚°ì´ê³ 
+  // ì¶”í›„ì— í”Œë ˆì´ì–´ ê°„ ìŠ¤íƒ‘ì„ í–ˆì„ ì‹œ ì ìˆ˜ ê³„ì‚°ì€
+  // ì¶”í›„ì— êµ¬í˜„í•˜ë©´ ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
+  // ì¼ë‹¨ íŒ¨ë¥¼ í•œ ë²ˆë§Œ í›‘ì—ˆì„ ë•Œë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë§Œë“¤ì—ˆìŠµë‹ˆë‹¤.
+  // í›„ì— íŒ¨ë¥¼ ë˜ í›‘ì—ˆì„ ë•Œ ê³„ì‚°ë˜ë„ë¡ ìˆ˜ì •í•˜ë©´ ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
+  // ì˜ì–´ëŠ” ìœ„í‚¤í”¼ë””ì•„ ì˜ì–´íŒ ì°¸ì¡°í–ˆìŠµë‹ˆë‹¤.
 
-  // ±¤ °ü·Ã
+  // ê´‘ ê´€ë ¨
   void calcScoreFromGwang(Player& player) {
-    int numOfGwang = player.getPlayerWinCardSet().FindNumOfSameStateCards(±¤);  // ±¤ °¹¼ö
+    int numOfGwang = player.getPlayerWinCardSet().FindNumOfSameStateCards(ê´‘);  // ê´‘ ê°¯ìˆ˜
     int numOfBiGwang =
-        player.getPlayerWinCardSet().FindNumOfSameStateCards(ºñ±¤);  // ºñ±¤ °¹¼ö
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(ë¹„ê´‘);  // ë¹„ê´‘ ê°¯ìˆ˜
 
-    if (numOfBiGwang == 0) {  // ºñ±¤ÀÌ ¾ø´Â °æ¿ì
-      if (numOfGwang == 3) {  // ±¤ÀÌ 3°³
+    if (numOfBiGwang == 0) {  // ë¹„ê´‘ì´ ì—†ëŠ” ê²½ìš°
+      if (numOfGwang == 3) {  // ê´‘ì´ 3ê°œ
         player.addScore(3);
-      } else if (numOfGwang == 4) {  // ±¤ÀÌ 4°³
+      } else if (numOfGwang == 4) {  // ê´‘ì´ 4ê°œ
         player.addScore(4);
       }
-    } else {  // ÀÖ´Â °æ¿ì
-      if (numOfGwang == 2) {  // ºñ±¤À» Æ÷ÇÔÇÑ ±¤ÀÌ 3°³
+    } else {  // ìˆëŠ” ê²½ìš°
+      if (numOfGwang == 2) {  // ë¹„ê´‘ì„ í¬í•¨í•œ ê´‘ì´ 3ê°œ
         player.addScore(2);
-      } else if (numOfGwang == 3) {  // ºñ±¤À» Æ÷ÇÔÇÑ ±¤ÀÌ 4°³
+      } else if (numOfGwang == 3) {  // ë¹„ê´‘ì„ í¬í•¨í•œ ê´‘ì´ 4ê°œ
         player.addScore(4);
       }
-      else if (numOfGwang == 4) {  // ±¤ ¸ğµÎ ¸ğÀº °æ¿ì
+      else if (numOfGwang == 4) {  // ê´‘ ëª¨ë‘ ëª¨ì€ ê²½ìš°
         player.addScore(15);
       }
     }
   }
-  // ¿­²ı °ü·Ã
+  // ì—´ë— ê´€ë ¨
   void calcScoreFromKkeut(Player& player) {
-    int numOfKkeut = player.getPlayerWinCardSet().FindNumOfSameStateCards(¿­²ı);
+    int numOfKkeut = player.getPlayerWinCardSet().FindNumOfSameStateCards(ì—´ë—);
     PlayerWinCardSet playerSet = player.getPlayerWinCardSet();
 
-    if (numOfKkeut >= 5) {  // ¿­²ıÀÌ 5°³ ÀÌ»óÀÎ °æ¿ì
+    if (numOfKkeut >= 5) {  // ì—´ë—ì´ 5ê°œ ì´ìƒì¸ ê²½ìš°
       player.addScore(numOfKkeut - 4);
     }
     if (isGodori(playerSet)) {
-      player.addScore(5);  // °íµµ¸® Á¡¼ö Ãß°¡
+      player.addScore(5);  // ê³ ë„ë¦¬ ì ìˆ˜ ì¶”ê°€
     }
   }
-  // ¶ì °ü·Ã
+  // ë  ê´€ë ¨
   void calcScoreFromTti(Player& player) {
     int numOfHongdan =
-        player.getPlayerWinCardSet().FindNumOfSameStateCards(È«´Ü);
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(í™ë‹¨);
     int numOfCheongdan =
-        player.getPlayerWinCardSet().FindNumOfSameStateCards(Ã»´Ü);
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(ì²­ë‹¨);
     int numOfChodan =
-        player.getPlayerWinCardSet().FindNumOfSameStateCards(ÃÊ´Ü);
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(ì´ˆë‹¨);
     PlayerWinCardSet cardSet = player.getPlayerWinCardSet();
 
-    int totalNumOfTti = numOfHongdan + numOfCheongdan + numOfChodan;  // ¸ğµç ¶ì °¹¼ö
+    int totalNumOfTti = numOfHongdan + numOfCheongdan + numOfChodan;  // ëª¨ë“  ë  ê°¯ìˆ˜
 
-    if (numOfHongdan == 3) {  // È«´ÜÀÎ °æ¿ì
+    if (numOfHongdan == 3) {  // í™ë‹¨ì¸ ê²½ìš°
       player.addScore(3);
     }
-    if (numOfCheongdan == 3) {  // Ã»´ÜÀÎ °æ¿ì
+    if (numOfCheongdan == 3) {  // ì²­ë‹¨ì¸ ê²½ìš°
       player.addScore(3);
     }
-    if (isChodan(cardSet)) {  // ÃÊ´ÜÀÎ °æ¿ì
+    if (isChodan(cardSet)) {  // ì´ˆë‹¨ì¸ ê²½ìš°
       player.addScore(3);
     }
     
-    player.addScore(totalNumOfTti - 4);  // ±× ¿Ü ÀÏ¹İÀûÀÎ ¶ì Á¡¼ö °è»ê
+    player.addScore(totalNumOfTti - 4);  // ê·¸ ì™¸ ì¼ë°˜ì ì¸ ë  ì ìˆ˜ ê³„ì‚°
   }
-  // ÇÇ °ü·Ã
+  // í”¼ ê´€ë ¨
   void calcScoreFromPi(Player& player) {
-    int numOfPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(ÇÇ);
-    int numOfSsangPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(½ÖÇÇ);
+    int numOfPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(í”¼);
+    int numOfSsangPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(ìŒí”¼);
     int totalNumOfPi = numOfPi + 2 * numOfSsangPi;
 
     player.addScore(totalNumOfPi - 9);
-    // 9¿ù ¿­²ı Ä«µå´Â ³ªÁß¿¡ ÆĞ¿¡¼­ ³¾ ¶§
-    // ¹«¾ùÀ¸·Î ³»³Ä¿¡ µû¶ó¼­ »óÅÂ¸¦ º¯°æÇÏ¸é
-    // µÉ °Í °°½À´Ï´Ù.
+    // 9ì›” ì—´ë— ì¹´ë“œëŠ” ë‚˜ì¤‘ì— íŒ¨ì—ì„œ ë‚¼ ë•Œ
+    // ë¬´ì—‡ìœ¼ë¡œ ë‚´ëƒì— ë”°ë¼ì„œ ìƒíƒœë¥¼ ë³€ê²½í•˜ë©´
+    // ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
   }
-
+  // ê³ ë„ë¦¬ í™•ì¸
   bool isGodori(PlayerWinCardSet& cardSet) {
-    std::vector<Card> checkCard;  //°íµµ¸® È®ÀÎ¿ë º¤ÅÍ
+    std::vector<Card> checkCard;  //ê³ ë„ë¦¬ í™•ì¸ìš© ë²¡í„°
 
     int numOfCards = cardSet.GetNumOfCards();
     for (int i = 0; i < numOfCards; i++) {
@@ -255,17 +255,17 @@ class PlayerWinCardSet : public CardSet {
       int month = card.GetMonthOfCard();
       State state = card.GetStateOfCard();
       if (month == 2 || month == 4 || month == 8) {
-        if (state == ¿­²ı) {  // °íµµ¸®¿¡ ÇØ´çÇÏ´Â Ä«µåÀÎ °æ¿ì
-          checkCard.push_back(card);  // º¤ÅÍ¿¡ Ãß°¡
+        if (state == ì—´ë—) {  // ê³ ë„ë¦¬ì— í•´ë‹¹í•˜ëŠ” ì¹´ë“œì¸ ê²½ìš°
+          checkCard.push_back(card);  // ë²¡í„°ì— ì¶”ê°€
         }
       }
     }
 
     return (checkCard.size() == 3);
   }
-
+  // ì´ˆë‹¨ í™•ì¸
   bool isChodan(PlayerWinCardSet& cardSet) {
-    std::vector<Card> checkCard;  //ÃÊ´Ü È®ÀÎ¿ë º¤ÅÍ
+    std::vector<Card> checkCard;  //ì´ˆë‹¨ í™•ì¸ìš© ë²¡í„°
 
     int numOfCards = cardSet.GetNumOfCards();
     for (int i = 0; i < numOfCards; i++) {
@@ -273,8 +273,8 @@ class PlayerWinCardSet : public CardSet {
       int month = card.GetMonthOfCard();
       State state = card.GetStateOfCard();
       if (month == 4 || month == 5 || month == 7) {
-        if (state == ÃÊ´Ü) {  // ÃÊ´Ü¿¡ ÇØ´çÇÏ´Â Ä«µåÀÎ °æ¿ì
-          checkCard.push_back(card);  // º¤ÅÍ¿¡ Ãß°¡
+        if (state == ì´ˆë‹¨) {  // ì´ˆë‹¨ì— í•´ë‹¹í•˜ëŠ” ì¹´ë“œì¸ ê²½ìš°
+          checkCard.push_back(card);  // ë²¡í„°ì— ì¶”ê°€
         }
       }
     }
@@ -286,13 +286,13 @@ class PlayerWinCardSet : public CardSet {
   int num_of_go;
 };
 
-// °ÔÀÓ ÁßÀÇ ÇÃ·¹ÀÌ¾îÀÇ CardSetÀÌ °ü¸®µË´Ï´Ù.
-// ÀÌ¹Ì ¸ÔÀº Ä«µå¼ÂÀ» ¸â¹ö·Î °®°Ô ±¸ÇöÇß½À´Ï´Ù.
+// ê²Œì„ ì¤‘ì˜ í”Œë ˆì´ì–´ì˜ CardSetì´ ê´€ë¦¬ë©ë‹ˆë‹¤.
+// ì´ë¯¸ ë¨¹ì€ ì¹´ë“œì…‹ì„ ë©¤ë²„ë¡œ ê°–ê²Œ êµ¬í˜„í–ˆìŠµë‹ˆë‹¤.
 class Player : public CardSet {
  public:
   Player() : CardSet() { winset_ = PlayerWinCardSet(); }
-  // ÇÃ·¹ÀÌ¾î°¡ ¼Õ¿¡ Áã°í ÀÖ´Â ÆĞ´Â ³ªÁß¿¡ °ÔÀÓ ½ÃÀÛÇÒ ¶§ Ãß°¡ÇÏ¸é¼­
-  // ÃÊ±âÈ­ÇÏ¸é µÉ °Í °°½À´Ï´Ù.
+  // í”Œë ˆì´ì–´ê°€ ì†ì— ì¥ê³  ìˆëŠ” íŒ¨ëŠ” ë‚˜ì¤‘ì— ê²Œì„ ì‹œì‘í•  ë•Œ ì¶”ê°€í•˜ë©´ì„œ
+  // ì´ˆê¸°í™”í•˜ë©´ ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
 
   PlayerWinCardSet getPlayerWinCardSet() { return this->winset_; }
   std::vector<Card> getPlayerCard() { return this->player_card_; }
@@ -302,75 +302,75 @@ class Player : public CardSet {
 
  private:
   PlayerWinCardSet winset_;
-  std::vector<Card> player_card_;  // ÇÃ·¹ÀÌ¾î°¡ ¼Õ¿¡ Áã°í ÀÖ´Â ÆĞ
-  int score_;                      // ÇÃ·¹ÀÌ¾îÀÇ Á¡¼ö
+  std::vector<Card> player_card_;  // í”Œë ˆì´ì–´ê°€ ì†ì— ì¥ê³  ìˆëŠ” íŒ¨
+  int score_;                      // í”Œë ˆì´ì–´ì˜ ì ìˆ˜
 };
 
 int main() {
-  // state º¯°æÀ¸·Î ÀÎÇØ ¼öÁ¤
+  // state ë³€ê²½ìœ¼ë¡œ ì¸í•´ ìˆ˜ì •
   Card deck[12][4];
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 4; j++) {
-      // Ã¹ ¹øÂ° Ä«µå ÃÊ±âÈ­
+      // ì²« ë²ˆì§¸ ì¹´ë“œ ì´ˆê¸°í™”
       if (j == 0) {
         switch (i) {
           case 0:
           case 2:
           case 7:
           case 10:
-            deck[i][j] = Card(i + 1, ±¤);
+            deck[i][j] = Card(i + 1, ê´‘);
             break;
           case 11:
-            deck[i][j] = Card(i + 1, ºñ±¤);
+            deck[i][j] = Card(i + 1, ë¹„ê´‘);
             break;
-          default:  // ³ª¸ÓÁö ¿ùµé ÃÊ±âÈ­, 9¿ù Ã¹ ¹øÂ° Ä«µå¿¡ ÇØ´çÇÏ´Â Ä«µå´Â
-                    // ÀÏ´Ü ¿­²ıÀ¸·Î ÃÊ±âÈ­
-            deck[i][j] = Card(i + 1, ¿­²ı);
+          default:  // ë‚˜ë¨¸ì§€ ì›”ë“¤ ì´ˆê¸°í™”, 9ì›” ì²« ë²ˆì§¸ ì¹´ë“œì— í•´ë‹¹í•˜ëŠ” ì¹´ë“œëŠ”
+                    // ì¼ë‹¨ ì—´ë—ìœ¼ë¡œ ì´ˆê¸°í™”
+            deck[i][j] = Card(i + 1, ì—´ë—);
             break;
         }
-      } else if (j == 1) {  // µÎ ¹øÂ° Ä«µå ÃÊ±âÈ­
+      } else if (j == 1) {  // ë‘ ë²ˆì§¸ ì¹´ë“œ ì´ˆê¸°í™”
         switch (i) {
           case 0:
           case 1:
           case 2:
-            deck[i][j] = Card(i + 1, È«´Ü);
+            deck[i][j] = Card(i + 1, í™ë‹¨);
             break;
           case 3:
           case 4:
           case 6:
-            deck[i][j] = Card(i + 1, ÃÊ´Ü);
+            deck[i][j] = Card(i + 1, ì´ˆë‹¨);
             break;
           case 5:
           case 8:
           case 9:
-            deck[i][j] = Card(i + 1, Ã»´Ü);
+            deck[i][j] = Card(i + 1, ì²­ë‹¨);
             break;
           case 11:
-            deck[i][j] = Card(i + 1, ½ÖÇÇ);
+            deck[i][j] = Card(i + 1, ìŒí”¼);
             break;
           default:
-            deck[i][j] = Card(i + 1, ¿­²ı);
+            deck[i][j] = Card(i + 1, ì—´ë—);
             break;
         }
-      } else {          // ¼¼ ¹øÂ°, ³× ¹øÂ° Ä«µå ÃÊ±âÈ­
-        if (i == 11) {  // 12¿ù´Ş
+      } else {          // ì„¸ ë²ˆì§¸, ë„¤ ë²ˆì§¸ ì¹´ë“œ ì´ˆê¸°í™”
+        if (i == 11) {  // 12ì›”ë‹¬
           if (j == 2) {
-            deck[i][j] = Card(i + 1, ÃÊ´Ü);
+            deck[i][j] = Card(i + 1, ì´ˆë‹¨);
           } else if (j == 3) {
-            deck[i][j] = Card(i + 1, ½ÖÇÇ);
+            deck[i][j] = Card(i + 1, ìŒí”¼);
           }
         } else {
-          deck[i][j] = Card(i + 1, ÇÇ);
+          deck[i][j] = Card(i + 1, í”¼);
         }
       }
     }
   }
 
-  // Å×½ºÆ® ¿ëÀÎ °Í °°Àºµ¥
-  // Á¤È®ÇÑ ¿ëµµ´Â ¸ô¶ó¼­
-  // A, B´Â ÀÓÀÇ·Î º¯°æÇß½À´Ï´Ù.
-  Card card = Card(1, ±¤);
-  Card card2 = Card(2, ¿­²ı);
+  // í…ŒìŠ¤íŠ¸ ìš©ì¸ ê²ƒ ê°™ì€ë°
+  // ì •í™•í•œ ìš©ë„ëŠ” ëª°ë¼ì„œ
+  // A, BëŠ” ì„ì˜ë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤.
+  Card card = Card(1, ê´‘);
+  Card card2 = Card(2, ì—´ë—);
   Card card3 = deck[3][2];
   std::cout << card3.toString() << std::endl;
   std::cout << (card == card2) << std::endl;
