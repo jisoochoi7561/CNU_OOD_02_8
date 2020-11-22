@@ -177,9 +177,10 @@ class PlayerWinCardSet : public CardSet {
 
   // 광 관련
   void calcScoreFromGwang(Player& player) {
-    int numOfGwang = player.getPlayerWinCardSet().FindNumOfSameStateCards(광);  // 광 갯수
-    int numOfBiGwang =
-        player.getPlayerWinCardSet().FindNumOfSameStateCards(비광);  // 비광 갯수
+    int numOfGwang =
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(광);  // 광 갯수
+    int numOfBiGwang = player.getPlayerWinCardSet().FindNumOfSameStateCards(
+        비광);  // 비광 갯수
 
     if (numOfBiGwang == 0) {  // 비광이 없는 경우
       if (numOfGwang == 3) {  // 광이 3개
@@ -187,13 +188,12 @@ class PlayerWinCardSet : public CardSet {
       } else if (numOfGwang == 4) {  // 광이 4개
         player.addScore(4);
       }
-    } else {  // 있는 경우
+    } else {                  // 있는 경우
       if (numOfGwang == 2) {  // 비광을 포함한 광이 3개
         player.addScore(2);
       } else if (numOfGwang == 3) {  // 비광을 포함한 광이 4개
         player.addScore(4);
-      }
-      else if (numOfGwang == 4) {  // 광 모두 모은 경우
+      } else if (numOfGwang == 4) {  // 광 모두 모은 경우
         player.addScore(15);
       }
     }
@@ -220,7 +220,8 @@ class PlayerWinCardSet : public CardSet {
         player.getPlayerWinCardSet().FindNumOfSameStateCards(초단);
     PlayerWinCardSet cardSet = player.getPlayerWinCardSet();
 
-    int totalNumOfTti = numOfHongdan + numOfCheongdan + numOfChodan;  // 모든 띠 갯수
+    int totalNumOfTti =
+        numOfHongdan + numOfCheongdan + numOfChodan;  // 모든 띠 갯수
 
     if (numOfHongdan == 3) {  // 홍단인 경우
       player.addScore(3);
@@ -231,13 +232,14 @@ class PlayerWinCardSet : public CardSet {
     if (isChodan(cardSet)) {  // 초단인 경우
       player.addScore(3);
     }
-    
+
     player.addScore(totalNumOfTti - 4);  // 그 외 일반적인 띠 점수 계산
   }
   // 피 관련
   void calcScoreFromPi(Player& player) {
     int numOfPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(피);
-    int numOfSsangPi = player.getPlayerWinCardSet().FindNumOfSameStateCards(쌍피);
+    int numOfSsangPi =
+        player.getPlayerWinCardSet().FindNumOfSameStateCards(쌍피);
     int totalNumOfPi = numOfPi + 2 * numOfSsangPi;
 
     player.addScore(totalNumOfPi - 9);
@@ -273,7 +275,7 @@ class PlayerWinCardSet : public CardSet {
       int month = card.GetMonthOfCard();
       State state = card.GetStateOfCard();
       if (month == 4 || month == 5 || month == 7) {
-        if (state == 초단) {  // 초단에 해당하는 카드인 경우
+        if (state == 초단) {          // 초단에 해당하는 카드인 경우
           checkCard.push_back(card);  // 벡터에 추가
         }
       }
