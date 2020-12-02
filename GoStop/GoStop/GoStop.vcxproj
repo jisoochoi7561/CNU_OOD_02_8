@@ -19,19 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardSet.cpp" />
     <ClCompile Include="Dummy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerWinCardSet.cpp" />
+    <ClCompile Include="BadakHand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardSet.h" />
     <ClInclude Include="Dummy.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerWinCardSet.h" />
+    <ClInclude Include="BadakHand.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

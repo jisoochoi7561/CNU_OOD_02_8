@@ -6,13 +6,15 @@ int CardSet::GetNumOfCards() { return cardset_.size(); }
 Card CardSet::GetCard(int index) { return cardset_[index]; }
 // 카드를 카드셋에 추가
 void CardSet::AddCard(Card card) {
-  if (!(card.GetMonthOfCard() == 0 || card.GetMonthOfCard() > 12)) {
+  std::cout << "AddCard: " << card.toString();
     cardset_.push_back(card);  // 카드 추가
     std::sort(cardset_.begin(),
               cardset_.end());  // 추가 후 < operator에 따라 정렬
-  }
   return;
 }
+
+
+std::vector<Card>& CardSet::getCardset() { return this->cardset_; }
 // 카드 셋에서 특정 인덱스의 카드를 뽑음(카드 셋에서 제거됨)
 Card CardSet::PopIdxCard(int index) {
   Card popped;
@@ -27,7 +29,13 @@ Card CardSet::PopIdxCard(int index) {
   }
   return popped;
 }
-// 특정 월의 카드가 몇 개 있는지 리턴
+//어떤 한장 pop
+Card CardSet::PopCard() {
+  Card popped = cardset_.back();
+  cardset_.pop_back();  // 더미에서 제거
+  return popped;
+}
+    // 특정 월의 카드가 몇 개 있는지 리턴
 int CardSet::FindNumOfSameMonthCards(int month) {
   int i = 0;
   for (Card c : cardset_) {
@@ -46,4 +54,11 @@ int CardSet::FindNumOfSameStateCards(State state) {
     if (c.GetStateOfCard() == state) i++;
   }
   return i;
+}
+void CardSet::printCardSet() {
+  int size = this->cardset_.size();
+  for (int i = 0; i < size; i++) {
+    std::cout << i << " " << this->cardset_.at(i).toString() << std::endl;
+  }
+
 }

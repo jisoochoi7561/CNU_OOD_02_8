@@ -13,9 +13,9 @@ class Dummy : public CardSet {
   // override AddCard
   virtual void AddCard(Card card);
   // 더미의 가장 위에 있는 카드를 하나 빼내는 함수
-  Card PopOneCard();
   // 더미에 남은 카드가 없는지 확인하는 함수
   bool isEmpty();
+  void reset();
 };
 
 #endif

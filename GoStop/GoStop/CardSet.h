@@ -22,6 +22,8 @@ class CardSet {
   virtual void AddCard(Card card);
   // 카드 셋에서 특정 인덱스의 카드를 뽑음(카드 셋에서 제거됨)
   Card PopIdxCard(int index);
+  // 카드 셋의 맨위카드를 뽑음(카드 셋에서 제거됨)
+  Card PopCard();
   // 특정 월의 카드가 몇 개 있는지 리턴
   int FindNumOfSameMonthCards(int month);
   // 특정 state의 카드가 몇 개 있는지 리턴
@@ -30,7 +32,8 @@ class CardSet {
   // 후자라면 코드는 아래와 같고.. 아니라면 수정해야 합니다.
   // --추가-- state 후자로 수정했습니다. 그냥 두시면 될 것 같습니다.
   int FindNumOfSameStateCards(State state);
-
+  std::vector<Card>& getCardset();
+  void printCardSet();
  protected:
   std::vector<Card> cardset_;
 };
