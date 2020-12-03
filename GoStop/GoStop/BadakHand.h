@@ -17,22 +17,23 @@ class BadakHand : public CardSet {
   // 일단 패를 한 번만 훑었을 때를 기준으로 만들었습니다.
   // 후에 패를 또 훑었을 때 계산되도록 수정하면 될 것 같습니다.
   // 영어는 위키피디아 영어판 참조했습니다.
-
+  void calc();
+  int getScore();
   // 광 관련
-  void calcScoreFromGwang(Player& player);
+  int calcScoreFromGwang();
   // 열끗 관련
-  void calcScoreFromKkeut(Player& player);
+  int calcScoreFromKkeut();
   // 띠 관련
-  void calcScoreFromTti(Player& player);
+  int calcScoreFromTti();
   // 피 관련
-  void calcScoreFromPi(Player& player);
+  int calcScoreFromPi();
   // 고도리 확인
   bool isGodori(BadakHand& cardSet);
   // 초단 확인
   bool isChodan(BadakHand& cardSet);
 
  private:
-  int num_of_go;
+  int score;
 };
 
 #endif

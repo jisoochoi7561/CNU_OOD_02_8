@@ -3,11 +3,15 @@
 #include <random>
 // 카드 셋에 있는 카드들을 무작위로 섞는 함수
 auto rng = std::default_random_engine{};
+//셔플 작동하지 않습니다.이함수문제인지는 모르겠지만 분명 수정이 필요합니다.정확히 말하면 섞이긴한거같은데 매게임이 모두 똑같이 섞입니다.
 void Dummy::Shuffle() {
   if (cardset_.size() > 1) {
     std::shuffle(cardset_.begin(), cardset_.end(), rng);
+    std::cout << "더미의 셔플이 완료되엇습니다." << std::endl;
   }
 }
+
+//더미를 생성합니다. 포장을 뜯지않은 카드뭉치.
 void Dummy::reset() {
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 4; j++) {
@@ -67,7 +71,7 @@ void Dummy::reset() {
       }
     }
   }
-  std::cout << "더미의 셔플이 완료되엇습니다." << std::endl;
+  
 }
 // override AddCard
 void Dummy::AddCard(Card card) {

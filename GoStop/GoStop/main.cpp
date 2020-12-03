@@ -22,11 +22,10 @@ int main() {
   board.TurnHands();
 
 
-  
+  //선을 구한다
   board.decideOrder();
-
-  Player& a = board.getIndxPlayer(0);
-  board.giveTurnToPlayer(a);
+  //게임플레이.
+  board.play();
 
   return 0;
 }

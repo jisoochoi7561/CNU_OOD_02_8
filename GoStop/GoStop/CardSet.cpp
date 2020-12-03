@@ -6,7 +6,6 @@ int CardSet::GetNumOfCards() { return cardset_.size(); }
 Card CardSet::GetCard(int index) { return cardset_[index]; }
 // 카드를 카드셋에 추가
 void CardSet::AddCard(Card card) {
-  std::cout << "AddCard: " << card.toString();
     cardset_.push_back(card);  // 카드 추가
     std::sort(cardset_.begin(),
               cardset_.end());  // 추가 후 < operator에 따라 정렬
@@ -55,6 +54,10 @@ int CardSet::FindNumOfSameStateCards(State state) {
   }
   return i;
 }
+
+
+//카드셋의 정보를 출력합니다
+//카드셋이 여러개 있는만큼 여러버전을 만드는 것도 어떨까싶습니다.
 void CardSet::printCardSet() {
   int size = this->cardset_.size();
   for (int i = 0; i < size; i++) {

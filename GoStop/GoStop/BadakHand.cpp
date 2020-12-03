@@ -2,7 +2,8 @@
 
 #include "Player.h"
 
-BadakHand::BadakHand() : CardSet() { num_of_go = 0; }
+//자신의 바닥에 가져온 패들입니다.
+BadakHand::BadakHand() : CardSet() { score = 0; }
 
 // 점수 계산에 관련된 함수들을 여기에 작성하면 될 것 같네요
 
@@ -14,73 +15,100 @@ BadakHand::BadakHand() : CardSet() { num_of_go = 0; }
 // 영어는 위키피디아 영어판 참조했습니다.
 
 // 광 관련
-void BadakHand::calcScoreFromGwang(Player& player) {
+
+//바닥패의 점수를 계산합니다.
+void BadakHand::calc() {
+  score=
+  calcScoreFromGwang()+
+  calcScoreFromKkeut()+
+  calcScoreFromPi()+
+  calcScoreFromTti();
+}
+
+//바닥패의 점수를 리턴합니다.
+int BadakHand::getScore() { return this->score; }
+
+//광관련 점수계산
+int BadakHand::calcScoreFromGwang() {
+  int score = 0;
   int numOfGwang =
-      player.getBadakHand().FindNumOfSameStateCards(광);  // 광 갯수
-  int numOfBiGwang =
-      player.getBadakHand().FindNumOfSameStateCards(비광);  // 비광 갯수
+      this->FindNumOfSameStateCards(광);  // 광 갯수
+  int numOfBiGwang = this->FindNumOfSameStateCards(비광);  // 비광 갯수
 
   if (numOfBiGwang == 0) {  // 비광이 없는 경우
     if (numOfGwang == 3) {  // 광이 3개
-      player.addScore(3);
+      score += 3;
     } else if (numOfGwang == 4) {  // 광이 4개
-      player.addScore(4);
+      score += 4;
     }
   } else {                  // 있는 경우
     if (numOfGwang == 2) {  // 비광을 포함한 광이 3개
-      player.addScore(2);
+      score += 2;
     } else if (numOfGwang == 3) {  // 비광을 포함한 광이 4개
-      player.addScore(4);
+      score+=4;
+
     } else if (numOfGwang == 4) {  // 광 모두 모은 경우
-      player.addScore(15);
+      score += 15;
     }
   }
+  return score;
 }
 // 열끗 관련
-void BadakHand::calcScoreFromKkeut(Player& player) {
-  int numOfKkeut = player.getBadakHand().FindNumOfSameStateCards(열끗);
-  BadakHand playerSet = player.getBadakHand();
+int BadakHand::calcScoreFromKkeut() {
+  int score = 0;
+  int numOfKkeut = this->FindNumOfSameStateCards(열끗);
+  BadakHand playerSet = *this;
 
   if (numOfKkeut >= 5) {  // 열끗이 5개 이상인 경우
-    player.addScore(numOfKkeut - 4);
+   score+=(numOfKkeut - 4);
   }
   if (isGodori(playerSet)) {
-    player.addScore(5);  // 고도리 점수 추가
+    score+=(5);  // 고도리 점수 추가
   }
+  return score;
 }
 // 띠 관련
-void BadakHand::calcScoreFromTti(Player& player) {
-  int numOfHongdan = player.getBadakHand().FindNumOfSameStateCards(홍단);
+int BadakHand::calcScoreFromTti() {
+  int score = 0;
+  int numOfHongdan = this->FindNumOfSameStateCards(홍단);
   int numOfCheongdan =
-      player.getBadakHand().FindNumOfSameStateCards(청단);
-  int numOfChodan = player.getBadakHand().FindNumOfSameStateCards(초단);
-  BadakHand cardSet = player.getBadakHand();
+      this->FindNumOfSameStateCards(청단);
+  int numOfChodan = this->FindNumOfSameStateCards(초단);
+  BadakHand cardSet = *this;
 
   int totalNumOfTti =
       numOfHongdan + numOfCheongdan + numOfChodan;  // 모든 띠 갯수
 
   if (numOfHongdan == 3) {  // 홍단인 경우
-    player.addScore(3);
+    score+=(3);
   }
   if (numOfCheongdan == 3) {  // 청단인 경우
-    player.addScore(3);
+    score+=(3);
   }
   if (isChodan(cardSet)) {  // 초단인 경우
-    player.addScore(3);
+    score+=(3);
   }
-
-  player.addScore(totalNumOfTti - 4);  // 그 외 일반적인 띠 점수 계산
+  if (totalNumOfTti >= 5) {
+    score += (totalNumOfTti - 4);
+    // 그 외 일반적인 띠 점수 계산
+  }
+    
+  return score;
 }
 // 피 관련
-void BadakHand::calcScoreFromPi(Player& player) {
-  int numOfPi = player.getBadakHand().FindNumOfSameStateCards(피);
-  int numOfSsangPi = player.getBadakHand().FindNumOfSameStateCards(쌍피);
+int BadakHand::calcScoreFromPi() {
+  int score = 0;
+  int numOfPi =this->FindNumOfSameStateCards(피);
+  int numOfSsangPi =this->FindNumOfSameStateCards(쌍피);
   int totalNumOfPi = numOfPi + 2 * numOfSsangPi;
-
-  player.addScore(totalNumOfPi - 9);
+  if (totalNumOfPi>=10) {
+    score += (totalNumOfPi - 9);
+  }
+ 
   // 9월 열끗 카드는 나중에 패에서 낼 때
   // 무엇으로 내냐에 따라서 상태를 변경하면
   // 될 것 같습니다.
+ return score;
 }
 // 고도리 확인
 bool BadakHand::isGodori(BadakHand& cardSet) {

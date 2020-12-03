@@ -15,13 +15,14 @@ class Board {
   void TurnHands();
   void giveCardToBadak();
   void decideOrder();
+  int makePair(Card& card, CardSet& cardset);
   Player& getIndxPlayer(int i);
-
+  void play();
  private:
   std::vector<Player> players;
   Dummy dummy;
   CardSet badak;
-
+  int go;
 
 
 };

@@ -14,21 +14,22 @@ class Player  {
   // 플레이어가 손에 쥐고 있는 패는 나중에 게임 시작할 때 추가하면서
   // 초기화하면 될 것 같습니다.
 
-  BadakHand getBadakHand();
+  BadakHand& getBadakHand();
   CardSet& getHand();
   int score();
-  void addScore(int score);
-  void multScore(int ratio);
+  void setScore(int score);
   std::string getName();
   int choice;
   void setChoice(const Card& card);
   // 정렬을 위한 < operator overloading
   bool operator<(const Player& other);
+
  private:
   std::string name_;
   CardSet hand_;
   BadakHand badakhand_;
-  int score_;                  
+  int score_;           
+  int go;
 
 };
 
