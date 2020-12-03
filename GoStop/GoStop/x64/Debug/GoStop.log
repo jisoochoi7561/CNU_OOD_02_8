@@ -1,8 +1,1 @@
-﻿  BadakHand.cpp
-  Board.cpp
-  CardSet.cpp
-C:\Users\hitom\Desktop\oopgit\CNU_OOD_02_8\GoStop\GoStop\CardSet.cpp(4,54): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\hitom\Desktop\oopgit\CNU_OOD_02_8\GoStop\GoStop\CardSet.cpp(62,35): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Dummy.cpp
-  코드를 생성하고 있습니다...
-  GoStop.vcxproj -> C:\Users\hitom\Desktop\oopgit\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe
+﻿  GoStop.vcxproj -> C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe

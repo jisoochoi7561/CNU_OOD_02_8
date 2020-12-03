@@ -2,8 +2,10 @@
 #include <algorithm>
 #include <random>
 // 카드 셋에 있는 카드들을 무작위로 섞는 함수
-auto rng = std::default_random_engine{};
+auto rd = std::random_device{};
+auto rng = std::default_random_engine{ rd() };
 //셔플 작동하지 않습니다.이함수문제인지는 모르겠지만 분명 수정이 필요합니다.정확히 말하면 섞이긴한거같은데 매게임이 모두 똑같이 섞입니다.
+// ---- 추가 ----- 해결하였습니다    -MinsuHan
 void Dummy::Shuffle() {
   if (cardset_.size() > 1) {
     std::shuffle(cardset_.begin(), cardset_.end(), rng);
