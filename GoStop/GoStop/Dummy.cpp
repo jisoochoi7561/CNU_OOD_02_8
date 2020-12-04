@@ -9,7 +9,7 @@ auto rng = std::default_random_engine{ rd() };
 void Dummy::Shuffle() {
   if (cardset_.size() > 1) {
     std::shuffle(cardset_.begin(), cardset_.end(), rng);
-    std::cout << "더미의 셔플이 완료되엇습니다." << std::endl;
+    std::cout << ">> 더미의 셔플이 완료되엇습니다." << std::endl;
   }
 }
 
