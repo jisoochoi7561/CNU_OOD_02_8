@@ -18,6 +18,7 @@ class Board {
   int makePair(Card& card, CardSet& cardset);
   Player& getIndxPlayer(int i);
   void play();
+  Card gookJinCase(Card card);
  private:
   std::vector<Player> players;
   Dummy dummy;

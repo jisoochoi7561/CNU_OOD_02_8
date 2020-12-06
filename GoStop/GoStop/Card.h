@@ -31,7 +31,7 @@ class Card {
   std::string stateToString();
   // Card 정보 출력
   std::string toString();
-
+  void setState(State state);
   // Card의 equality는 월을 기준으로 하였음.
   bool operator==(const Card& other);
 

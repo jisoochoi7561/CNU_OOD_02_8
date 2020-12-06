@@ -64,3 +64,4 @@ bool Card::operator<(const Card& other) {
     return this->month_ < other.month_;
   }
 }
+void Card::setState(State state) { this->state_ = state; }

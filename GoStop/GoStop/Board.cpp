@@ -8,7 +8,20 @@
 #include <vector>
 #include <set>
 #include <algorithm>
-
+Card Board::gookJinCase(Card card){
+  if (card.GetStateOfCard()==열끗&&card.GetMonthOfCard()==9) {
+    std::cout
+        << "국진을 추가합니다. 국진을 열끗으로 쓸지 쌍피로 쓸지 결정해주세요.\n"
+        << "0을 누르면 열끗으로, 다른 수를 누르면 쌍피로 사용합니다."
+        << std::endl;
+    int c;
+    std::cin >> c;
+    if (c!=0) {
+      card.setState(쌍피);
+    }
+  }
+  return card;
+}
 
 //게임판 객체가 필요하다고 생각해서 만들었습니다. 게임판이 주도적으로 게임을 이끌어갑니다.
 //게임판은 더미,플레이어,바닥,현재게임의상태(몇고)인지 를 제어합니다.
@@ -78,8 +91,8 @@
       badak.AddCard(card);
     } else {
       std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
-      player.getBadakHand().AddCard(card);
-      player.getBadakHand().AddCard(badak.PopIdxCard(index));
+      player.getBadakHand().AddCard(gookJinCase(card));
+      player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(index)));
     }
     // 더미의 패가 소진되었으면 현재 플레이어의 badakHand 패를 가지고 점수를 계산한 다음
     // 최종점수 계산 후 승리자를 선정하도록 처리합니다.
@@ -107,8 +120,8 @@
         badak.AddCard(popped);
       } else {
         std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
-        player.getBadakHand().AddCard(popped);
-        player.getBadakHand().AddCard(badak.PopIdxCard(index));
+        player.getBadakHand().AddCard(gookJinCase(popped));
+        player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(index)));
       }
     }
     //점수를 계산한다.
