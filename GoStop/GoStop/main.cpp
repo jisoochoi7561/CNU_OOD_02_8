@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "BadakHand.h"
 #include "Board.h"
+#include "EndGameUtil.h"
+
 int main() {
   //게임판 생성
   Board board = Board();

@@ -60,8 +60,11 @@ int CardSet::FindNumOfSameStateCards(State state) {
 //카드셋이 여러개 있는만큼 여러버전을 만드는 것도 어떨까싶습니다.
 void CardSet::printCardSet() {
   int size = this->cardset_.size();
-  for (int i = 0; i < size; i++) {
-    std::cout << i << " " << this->cardset_.at(i).toString() << std::endl;
+  if (size == 0) {
+    std::cout << "없음" << std::endl;
+  } else {
+    for (int i = 0; i < size; i++) {
+      std::cout << i << " " << this->cardset_.at(i).toString() << std::endl;
+    }
   }
-
 }

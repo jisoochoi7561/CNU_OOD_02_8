@@ -8,6 +8,8 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <cmath>
+
 Card Board::gookJinCase(Card card){
   if (card.GetStateOfCard()==열끗&&card.GetMonthOfCard()==9) {
     std::cout
@@ -25,7 +27,10 @@ Card Board::gookJinCase(Card card){
 
 //게임판 객체가 필요하다고 생각해서 만들었습니다. 게임판이 주도적으로 게임을 이끌어갑니다.
 //게임판은 더미,플레이어,바닥,현재게임의상태(몇고)인지 를 제어합니다.
-  Board::Board() : players(), dummy(), badak(),go(0) {
+// --추가-- 고의 상태는 플레이어의 고에 상태에 따라 달라집니다. 그래서 필드에 고를 제거했습니다.
+// 고박인 경우에는 종료되고 그 외의 경우에는 고를 외친 플레이어의 고에 따라
+// 달라지므로 그냥 플레이어 고를 사용하도록 했습니다.
+  Board::Board() : players(), dummy(), badak(), util(EndGameUtil::GetInstance()) {
     std::cout << ">> 새로운 게임판 세팅 완료" << std::endl;
     dummy.reset();
     std::cout << ">> 새로운 더미 세팅 완료" << std::endl;
@@ -40,20 +45,29 @@ Card Board::gookJinCase(Card card){
       for (Player& player : players) {
         sum += player.getHand().GetNumOfCards();
       }
-      if (sum == 0) {
-        std::cout << "<< 모든 플레이어의 손패가 소진되었습니다. ";
-        // TODO:최종점수를 계산하고 승리자를 선정하는 메서드(미구현 상태)
-        // ex. CalcFinalScoresAndSelectWinner(); <- 이 함수에서 게임을 반드시 종료시켜줘야 합니다. 
-        exit(0);  // 현재는 그냥 프로세스 종료하도록 처리했습니다.
+      if (sum == 0) {  //나가리인 경우
+        // 모든 플레이어가 손패가 소진된 경우에는 고를 외친 사람이
+        // 점수를 내지 못하여 스탑을 하지 못하거나 모든 플레이어가
+        // 스탑을 할 수 없는 즉, 게임을 끝낼 수 있는 점수를 획득하지 못한
+        // 경우이므로 이 경우에는 나가리로 무효판이 됩니다. 이럴 경우
+        // 다음판의 승자의 점수에 2배를 해주어야 합니다. 그러므로
+        // 현재판은 단순히 종료시킵니다.
+        std::cout << ">> 모든 플레이어의 손패가 소진되었습니다. 나가리입니다.";
+        exit(0);
       }
 
       for (Player& player : players) {
-        if (player.getHand().GetNumOfCards() != 0) {
+        // 손패가 0이면 그 턴이 마지막 턴이라는 의미입니다. 왜냐하면 더미와 손패가 소진되는 순간이
+        // 마지막 플레이어가 마지막 턴(모두 손패가 1장인 경우)에 남은 손패 하나를 내서 더미를 뒤집는 순간이기 때문입니다.
+      //  if (player.getHand().GetNumOfCards() != 0) {
           giveTurnToPlayer(player);
-        } else {
+      //  }
+        /* 여기에 해당하는 경우가 없을 겁니다. 손에 들고있는 패를 내기만 하고 추가를 하지않아서
+           최대 7턴만 진행하게 되기 때문입니다. 만약 모두 손패 다 소진해서 끝나면 위에서 종료시켜 줍니다.
+        else {
           std::cout << "<< " << player.getName()
                     << " 플레이어의 손패가 소진되어 다음 플레이어에게 차례가 넘어갑니다.\n";
-        }
+        }*/
       }
     }
     
@@ -69,7 +83,57 @@ Card Board::gookJinCase(Card card){
     players.push_back(player);
     std::cout << ">> " << name << " player 추가 완료" << std::endl;
   }
-  
+
+  // 고를 적용해 점수 계산
+  void Board::calcScoreByGo(Player& player) {
+    switch (player.getGo()) {
+      case 0:   // 고가 없으면 그냥 원점수
+        break;
+      case 1:  // 고가 1인 경우
+        player.setScore(player.getScore() + 1);
+        break;
+      case 2:  // 고가 2인 경우
+        player.setScore(player.getScore() + 2);
+        break;
+      default:  // 그 외 경우
+        player.setScore(player.getScore() * pow(2, player.getGo() - 2));
+        break;
+    }
+  }
+  // 나가리가 아닌 게임을 종료하는 함수
+  void Board::endGame(std::vector<Player>& players, Player& player) {
+    std::vector<Player> defeatedPlayers;  // 패배한 플레이어 벡터
+    for (int i = 0; i < players.size(); i++) {
+      if (players.at(i).getName() != player.getName()) {
+        defeatedPlayers.push_back(players.at(i));  // 패배한 플레이어를 추가
+      }
+    }
+
+    util->calcByMungBak(player);  // 이긴 사람의 점수를 멍박에 따라 계산(멍박이면 2배)
+
+    // 피박, 광박은 해당하는 사람만 2배로 물어줘야 하는 것이므로
+    // 해당 플레이어의 입장에서 승자의 점수를 계산
+
+    // 우선 진 사람의 입장에서 이긴 사람의 점수를 멍박까지 적용한 점수로 초기화
+    for (int i = 0; i < defeatedPlayers.size(); i++) {
+      defeatedPlayers.at(i).setScoreToPay(player.getScore());
+    }
+
+    util->calcByGwangBak(players, player);  // 광박에 해당하는 사람이 지불해야 하는 금액에 해당하는 점수(해당 플레이어 입장에서 승자의 점수)를 2배로
+    util->calcByPiBak(players, player);  // 피박에 해당하는 사람이 지불해야 하는 점수(해당 플레이어 입장에서 승자의 점수)를 2배로
+
+    util->checkGoBak(players, player);  // 고박인 사람이 있는지 확인하여 알려준다
+
+    for (int i = 0; i < defeatedPlayers.size(); i++) {
+      Player defeatedPlayer = defeatedPlayers.at(i);
+      std::cout << defeatedPlayer.getName() << "님 입장에서 "
+                << player.getName() << "님에게 지불할 금액에 해당하는 최종 점수는 "
+                << defeatedPlayer.getScoreToPay() << "점 입니다." << std::endl;
+    }
+
+    exit(0);
+  }
+
   //플레이어에게 턴을 넘겨줍니다.
   void Board::giveTurnToPlayer(Player& player) {
     std::cout << "\n[ " << player.getName()
@@ -79,6 +143,8 @@ Card Board::gookJinCase(Card card){
     player.getHand().printCardSet();  
     std::cout << "-----------------현재 바닥-----------------" << std::endl;
     badak.printCardSet();
+    std::cout << "-----------------현재 난 패 목록-----------------" << std::endl;
+    player.getBadakHand().printCardSet();
     //카드를 낸다.
     std::cout << ">> 인덱스 번호로 카드를 내 주세요" << std::endl;
     int c;
@@ -96,6 +162,14 @@ Card Board::gookJinCase(Card card){
     }
     // 더미의 패가 소진되었으면 현재 플레이어의 badakHand 패를 가지고 점수를 계산한 다음
     // 최종점수 계산 후 승리자를 선정하도록 처리합니다.
+    // --추가-- 여기서 딱히 처리를 해줄 필요는 없습니다. 사람들이 가진 손패가 21장이고
+    // 바닥에 처음에 까는게 6장입니다. 그럼 더미에 카드가 21개가 됩니다.
+    // 그러면 사람들이 자신의 차례에 카드를 내고 더미에서 카드를 하나씩 뒤집게 되있으므로
+    // 딱 맞게 끝나게 됩니다. 만약 마지막 턴(손 패가 모두 하나만 있는 경우)에 점수가 나면 무조건
+    // 스탑을 외쳐야하므로 게임이 끝나고 스탑을 하지 못하면 나가리이므로 위의 play에서
+    // 처리하게 됩니다.
+    // 일단 남겨둡니다. 나중에 삭제하면 될 것 같습니다.
+    /*
     if (dummy.isEmpty()) {
       player.getBadakHand().calc();
       std::cout << "-----------------현재 난 패 목록-----------------" << std::endl;
@@ -109,6 +183,7 @@ Card Board::gookJinCase(Card card){
       // ex. CalcFinalScoresAndSelectWinner(); <- 이 함수에서 게임을 반드시 종료시켜줘야 합니다.
     }
     else {
+    */
       //카드를 뽑는다
       std::cout << ">> 카드를 뽑겠습니다 " << std::endl;
       Card popped = dummy.PopCard();
@@ -123,52 +198,114 @@ Card Board::gookJinCase(Card card){
         player.getBadakHand().AddCard(gookJinCase(popped));
         player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(index)));
       }
-    }
+      /*
+    }*/
+
     //점수를 계산한다.
-    player.getBadakHand().calc();
+    player.getBadakHand().calc(player);
     std::cout << "-----------------현재 난 패 목록-----------------" << std::endl;
     player.getBadakHand().printCardSet();
-    std::cout << ">> " << player.getBadakHand().getScore() << "점 획득하셨습니다."
+    std::cout << ">> 지금까지 " << player.getBadakHand().getScore() << "점 획득하셨습니다."
               << std::endl;
-    if ((player.score()+3)<=player.getBadakHand().getScore()) {
-      //win
-      player.setScore(player.getBadakHand().getScore());
-      //고또는 스탑 선택.
-      std::cout << ">> " << player.getName() << " 님이 3점이상 획득!" << std::endl;
-      std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
-      int willGo;
-       std::cin>>willGo;
-      while (true) {
-         if (willGo!=0&&willGo!=1) {
-          std::cout << ">> 제대로 입력해주세요" << std::endl;
-           std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
+    if (player.getBadakHand().getScore() >=3) {  // 바닥패의 계산 점수가 3점 이상인 경우 고 또는 스탑 가능
+      int addedScore = player.getBadakHand().getScore() - player.getScore(); // 이번 판에서 추가로 획득한 점수
+      if (player.getSayGo() == true) {  // 고를 선언했던 사람인 경우
+        if (addedScore != 0) {  // 추가로 점수를 얻은 경우 고 또는 스탑을 할 수 있다
+          // 얻지 못했다면 고 또는 스탑을 할 수 없다
+          // 점수를 얻은 경우 아래의 내용 수행
+          player.setScore(player.getBadakHand().getScore());
+          //고 또는 스탑 선택.
+          std::cout << ">> " << player.getName() << " 님이 이번에 추가로 "<<addedScore<<"점을  획득!"
+                    << std::endl;
+          std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
+          int willGo;
           std::cin >> willGo;
-         } else {
-           break;
-         }
+          while (true) {
+            if (willGo != 0 && willGo != 1) {
+              std::cout << ">> 제대로 입력해주세요" << std::endl;
+              std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
+              std::cin >> willGo;
+            } else {
+              break;
+            }
+          }
+          // 플레이어의 고가 중요해서 보드의 고를 제거하고
+          // 플레이어의 고를 이용하도록 수정했습니다.
+          switch (willGo) {
+            case 0:
+              //여기 최종점수 계산 구현 안해놨습니다. 구현해주세요.
+              // --부분 구현 완료--
+              std::cout << ">> " << player.getName()
+                        << " 님의 승리로 게임이 끝났습니다!" << std::endl;
+              std::cout << ">> " << player.getName() << " 님은"
+                        << player.getScore() << " 점과 ";
+              calcScoreByGo(player);  //고로 인한 점수 업데이트
+              std::cout << player.getGo() << " 고를 획득하셔서 총"
+                        << player.getScore() << " 점으로 승리하셨습니다."
+                        << std::endl;
+              std::cout << ">> 결산 규칙을 적용하여 최종 점수를 계산합니다."
+                        << std::endl;
+              endGame(players, player);  // 나가리가 아닌 경우 게임 종료
+
+              break;
+            case 1:
+              player.setGo(player.getGo() + 1);  //이긴 플레이어의 고를 하나 늘림
+
+              std::cout << ">> " << player.getName() << " 님이 고하셨습니다!"
+                        << std::endl;
+              std::cout << "현재 " << player.getName() << "님의 고는 "
+                        << player.getGo() << "go 입니다." << std::endl;
+
+              break;
+          }
+        }
+      } else {  // 고를 외치지 않았던 사람인 경우 단지 3점만 넘으면 OK
+        player.setScore(player.getBadakHand().getScore());
+        //고 또는 스탑 선택.
+        std::cout << ">> " << player.getName() << " 님이 이번에 추가로 "
+                  << addedScore << "점을  획득!" << std::endl;
+        std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
+        int willGo;
+        std::cin >> willGo;
+        while (true) {
+          if (willGo != 0 && willGo != 1) {
+            std::cout << ">> 제대로 입력해주세요" << std::endl;
+            std::cout << ">> 0을 눌러 스탑 또는 1을 눌러 고" << std::endl;
+            std::cin >> willGo;
+          } else {
+            break;
+          }
+        }
+        // 플레이어의 고가 중요해서 보드의 고를 제거하고
+        // 플레이어의 고를 이용하도록 수정했습니다.
+        switch (willGo) {
+          case 0:
+            //여기 최종점수 계산 구현 안해놨습니다. 구현해주세요.
+            // --부분 구현 완료--
+
+            std::cout << ">> " << player.getName()
+                      << " 님의 승리로 게임이 끝났습니다!" << std::endl;
+            std::cout << ">> " << player.getName() << " 님은" << player.getScore()
+                      << " 점과 ";
+            calcScoreByGo(player);  //고로 인한 점수 업데이트
+            std::cout << player.getGo() << " 고를 획득하셔서 총"
+                      << player.getScore() << " 점으로 승리하셨습니다."
+                      << std::endl;
+            std::cout << ">> 결산 규칙을 적용하여 최종 점수를 계산합니다."
+                      << std::endl;
+            endGame(players, player);  // 나가리가 아닌 경우 게임 종료
+
+            break;
+          case 1:
+            player.setGo(player.getGo() + 1);  //이긴 플레이어의 고를 하나 늘림
+            player.setSayGo(true);  // 플레이어가 고를 말했다고 변경
+            std::cout << ">> " << player.getName() << " 님이 고하셨습니다!"<< std::endl;
+            std::cout<<"현재 "<<player.getName()<<"님의 고는 " << player.getGo() << "go 입니다." << std::endl;
+
+            break;
+        }
       }
-      switch (willGo) {
-        case 0:
-          //여기 최종점수 계산 구현 안해놨습니다. 구현해주세요.
-          std::cout << ">> " << player.getName() << " 님의 승리로 게임이 끝났습니다!" << std::endl;
-          std::cout << ">> " << player.getName() << " 님은" << player.score() << " 점과 "
-                    << go << " 고를 획득하셔서 총" << player.score() * (go+1) << " 점으로 승리하셨습니다."
-                    << std::endl;
-          exit(0);
-      
-          break;
-        case 1:
-          go++;
-          std::cout << "<< " << player.getName() << " 님이 고하셨습니다! 현재 고는 " << go
-                    << "go 입니다."
-                    << std::endl;
-          //
-          break;
-      }
-    } else {
-      //notwin
     }
-    
   }
   
   //카드와 카드셋을 가지고 짝이 페어가 만들어지는지를 확인합니다.페어가 만들어진다면 카드셋의 인덱스를, 안만들어진다면 -1을 리턴합니다
@@ -254,9 +391,6 @@ Card Board::gookJinCase(Card card){
       std::cout << player.getName() << " ";
     }
     std::cout << std::endl;
-  
-   
-
   }
   
   //i번째 플레이어를 고릅니다(선 = 0)
@@ -278,7 +412,3 @@ Card Board::gookJinCase(Card card){
     }
     std::cout << ">> 플레이어들에게 7장씩 카드분배 완료.\n>> 바닥에 6장의 카드 세팅완료" << std::endl;
   }
-
-
-
-

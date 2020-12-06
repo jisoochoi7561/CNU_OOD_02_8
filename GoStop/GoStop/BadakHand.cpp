@@ -1,5 +1,4 @@
 #include "BadakHand.h"
-
 #include "Player.h"
 
 //자신의 바닥에 가져온 패들입니다.
@@ -17,11 +16,20 @@ BadakHand::BadakHand() : CardSet() { score = 0; }
 // 광 관련
 
 //바닥패의 점수를 계산합니다.
-void BadakHand::calc() {
-  score=
-  calcScoreFromGwang()+
+void BadakHand::calc(Player& player) {
+  int gwangScore = calcScoreFromGwang();
+  int piScore = calcScoreFromPi();
+
+  if (gwangScore != 0) {  //광으로 점수가 난 경우
+    this->score += gwangScore;
+    player.setScoredByGwang(true);  //광으로 점수를 났다고 표기
+  }
+  if (piScore != 0) {  //피로 점수가 난 경우
+    this->score += piScore;
+    player.setScoredByPi(true);  //피로 점수가 났다고 표기
+  }
+  this->score+=
   calcScoreFromKkeut()+
-  calcScoreFromPi()+
   calcScoreFromTti();
 }
 
@@ -31,6 +39,7 @@ int BadakHand::getScore() { return this->score; }
 //광관련 점수계산
 int BadakHand::calcScoreFromGwang() {
   int score = 0;
+
   int numOfGwang =
       this->FindNumOfSameStateCards(광);  // 광 갯수
   int numOfBiGwang = this->FindNumOfSameStateCards(비광);  // 비광 갯수
@@ -51,6 +60,7 @@ int BadakHand::calcScoreFromGwang() {
       score += 15;
     }
   }
+
   return score;
 }
 // 열끗 관련
@@ -118,9 +128,8 @@ bool BadakHand::isGodori(BadakHand& cardSet) {
   for (int i = 0; i < numOfCards; i++) {
     Card card = cardSet.GetCard(i);
     int month = card.GetMonthOfCard();
-    State state = card.GetStateOfCard();
     if (month == 2 || month == 4 || month == 8) {
-      if (state == 열끗) {  // 고도리에 해당하는 카드인 경우
+      if (card.GetStateOfCard() == 열끗) {  // 고도리에 해당하는 카드인 경우
         checkCard.push_back(card);  // 벡터에 추가
       }
     }
@@ -136,9 +145,8 @@ bool BadakHand::isChodan(BadakHand& cardSet) {
   for (int i = 0; i < numOfCards; i++) {
     Card card = cardSet.GetCard(i);
     int month = card.GetMonthOfCard();
-    State state = card.GetStateOfCard();
     if (month == 4 || month == 5 || month == 7) {
-      if (state == 초단) {          // 초단에 해당하는 카드인 경우
+      if (card.GetStateOfCard() == 초단) {  // 초단에 해당하는 카드인 경우
         checkCard.push_back(card);  // 벡터에 추가
       }
     }

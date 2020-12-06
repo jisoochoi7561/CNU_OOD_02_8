@@ -16,20 +16,35 @@ class Player  {
 
   BadakHand& getBadakHand();
   CardSet& getHand();
-  int score();
+  int getScore();
   void setScore(int score);
   std::string getName();
-  int choice;
   void setChoice(const Card& card);
   // 정렬을 위한 < operator overloading
   bool operator<(const Player& other);
+
+  bool getSayGo();
+  void setSayGo(bool sayGo);
+  int getGo();
+  void setGo(int go);
+  bool getScoredByGwang();
+  void setScoredByGwang(bool flag);
+  bool getScoredByPi();
+  void setScoredByPi(bool flag);
+  int getScoreToPay();
+  void setScoreToPay(int score);
 
  private:
   std::string name_;
   CardSet hand_;
   BadakHand badakhand_;
-  int score_;           
+  int score_;
+  int choice;
   int go;
+  bool sayGo_;  //플레이어가 고를 말했는지의 상태
+  bool scoredByGwang_;  //광에 의해 점수가 났는지 상태
+  bool scoredByPi_;  //피에 의해 점수가 났는지 상태
+  int scoreToPay_;  // 지불할 금액에 해당하는 최종 점수
 
 };
 
