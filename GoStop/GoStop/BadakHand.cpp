@@ -29,7 +29,7 @@ void BadakHand::calc(Player& player) {
     score += piScore;
     player.setScoredByPi(true);  //피로 점수가 났다고 표기
   }
-  this->score+=
+  this->score=
   calcScoreFromKkeut()+
   calcScoreFromTti()+score;
 }
