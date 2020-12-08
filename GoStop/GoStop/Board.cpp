@@ -265,11 +265,18 @@ Card Board::gookJinCase(Card card){
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p1_index));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
-            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
-            if (p1_index < p2_index)
-              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index - 1)));
-            else
-              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+            Card c1 = gookJinCase(badak.PopIdxCard(p1_index));
+            c1.setPpuk(false);
+            player.getBadakHand().AddCard(c1);
+            if (p1_index < p2_index) {
+              Card c2 = gookJinCase(badak.PopIdxCard(p2_index - 1));
+              c2.setPpuk(false);
+              player.getBadakHand().AddCard(c2);
+            } else {
+              Card c2 = gookJinCase(badak.PopIdxCard(p2_index));
+              c2.setPpuk(false);
+              player.getBadakHand().AddCard(c2);
+            }
             player.getBadakHand().AddCard(gookJinCase(card));
           }
         } else {  // p1_index != -1 && p2_index == -1 인 경우가 여기서 처리됨
