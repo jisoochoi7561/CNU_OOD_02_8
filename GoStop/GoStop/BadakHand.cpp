@@ -19,18 +19,19 @@ BadakHand::BadakHand() : CardSet() { score = 0; }
 void BadakHand::calc(Player& player) {
   int gwangScore = calcScoreFromGwang();
   int piScore = calcScoreFromPi();
+  int score=0;
 
   if (gwangScore != 0) {  //광으로 점수가 난 경우
-    this->score += gwangScore;
+    score += gwangScore;
     player.setScoredByGwang(true);  //광으로 점수를 났다고 표기
   }
   if (piScore != 0) {  //피로 점수가 난 경우
-    this->score += piScore;
+    score += piScore;
     player.setScoredByPi(true);  //피로 점수가 났다고 표기
   }
-  this->score+=
+  this->score=
   calcScoreFromKkeut()+
-  calcScoreFromTti();
+  calcScoreFromTti()+score;
 }
 
 //바닥패의 점수를 리턴합니다.
