@@ -204,14 +204,14 @@ Card Board::gookJinCase(Card card){
             std::cout << ">> 뻑입니다. 세 장의 카드를 모두 바닥에 내려놓습니다."
                       << std::endl;
 
+            // 바닥패 뻑 여부 <= true
+            Card temp = badak.PopIdxCard(p2_index);
+            temp.setPpuk(true);
+            badak.AddCard(temp);
+
             // 더미에서 젖힌 패
             popped.setPpuk(true);
             badak.AddCard(popped);
-
-            // 바닥패는 이미 바닥에 있음
-            Card temp = badak.PopIdxCard(p1_index);
-            temp.setPpuk(true);
-            badak.AddCard(temp);
 
             // 내가 낸 패
             card.setPpuk(true);
@@ -319,7 +319,9 @@ Card Board::gookJinCase(Card card){
             std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
-            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+            Card c = gookJinCase(badak.PopIdxCard(p2_index));
+            c.setPpuk(false);
+            player.getBadakHand().AddCard(c);
           }
       }
       /*
@@ -338,6 +340,8 @@ Card Board::gookJinCase(Card card){
             pcard_index.push_back(i);
           }
         }
+        std::sort(pcard_index.begin(), pcard_index.end());
+        std::reverse(pcard_index.begin(), pcard_index.end());
         for (int i : pcard_index) {
           Card c = gookJinCase(badak.PopIdxCard(i));
           c.setPpuk(false);
@@ -357,6 +361,8 @@ Card Board::gookJinCase(Card card){
             pcard_index.push_back(i);
           }
         }
+        std::sort(pcard_index.begin(), pcard_index.end());
+        std::reverse(pcard_index.begin(), pcard_index.end());
         for (int i : pcard_index) {
           Card c = gookJinCase(badak.PopIdxCard(i));
           c.setPpuk(false);
