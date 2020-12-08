@@ -12,217 +12,217 @@
 #include <cstring>
 
 Card Board::gookJinCase(Card card){
-  if (card.GetStateOfCard()==¿­²ý&&card.GetMonthOfCard()==9) {
+  if (card.GetStateOfCard()==ì—´ë—&&card.GetMonthOfCard()==9) {
     std::cout
-        << "±¹ÁøÀ» Ãß°¡ÇÕ´Ï´Ù. ±¹ÁøÀ» ¿­²ýÀ¸·Î ¾µÁö ½ÖÇÇ·Î ¾µÁö °áÁ¤ÇØÁÖ¼¼¿ä.\n"
-        << "0À» ´©¸£¸é ¿­²ýÀ¸·Î, ´Ù¸¥ ¼ö¸¦ ´©¸£¸é ½ÖÇÇ·Î »ç¿ëÇÕ´Ï´Ù."
+        << "êµ­ì§„ì„ ì¶”ê°€í•©ë‹ˆë‹¤. êµ­ì§„ì„ ì—´ë—ìœ¼ë¡œ ì“¸ì§€ ìŒí”¼ë¡œ ì“¸ì§€ ê²°ì •í•´ì£¼ì„¸ìš”.\n"
+        << "0ì„ ëˆ„ë¥´ë©´ ì—´ë—ìœ¼ë¡œ, ë‹¤ë¥¸ ìˆ˜ë¥¼ ëˆ„ë¥´ë©´ ìŒí”¼ë¡œ ì‚¬ìš©í•©ë‹ˆë‹¤."
         << std::endl;
     int c;
     std::cin >> c;
     if (c!=0) {
-      card.setState(½ÖÇÇ);
+      card.setState(ìŒí”¼);
     }
   }
   return card;
 }
 
-//°ÔÀÓÆÇ °´Ã¼°¡ ÇÊ¿äÇÏ´Ù°í »ý°¢ÇØ¼­ ¸¸µé¾ú½À´Ï´Ù. °ÔÀÓÆÇÀÌ ÁÖµµÀûÀ¸·Î °ÔÀÓÀ» ÀÌ²ø¾î°©´Ï´Ù.
-//°ÔÀÓÆÇÀº ´õ¹Ì,ÇÃ·¹ÀÌ¾î,¹Ù´Ú,ÇöÀç°ÔÀÓÀÇ»óÅÂ(¸î°í)ÀÎÁö ¸¦ Á¦¾îÇÕ´Ï´Ù.
-// --Ãß°¡-- °íÀÇ »óÅÂ´Â ÇÃ·¹ÀÌ¾îÀÇ °í¿¡ »óÅÂ¿¡ µû¶ó ´Þ¶óÁý´Ï´Ù. ±×·¡¼­ ÇÊµå¿¡ °í¸¦ Á¦°ÅÇß½À´Ï´Ù.
-// °í¹ÚÀÎ °æ¿ì¿¡´Â Á¾·áµÇ°í ±× ¿ÜÀÇ °æ¿ì¿¡´Â °í¸¦ ¿ÜÄ£ ÇÃ·¹ÀÌ¾îÀÇ °í¿¡ µû¶ó
-// ´Þ¶óÁö¹Ç·Î ±×³É ÇÃ·¹ÀÌ¾î °í¸¦ »ç¿ëÇÏµµ·Ï Çß½À´Ï´Ù.
+//ê²Œìž„íŒ ê°ì²´ê°€ í•„ìš”í•˜ë‹¤ê³  ìƒê°í•´ì„œ ë§Œë“¤ì—ˆìŠµë‹ˆë‹¤. ê²Œìž„íŒì´ ì£¼ë„ì ìœ¼ë¡œ ê²Œìž„ì„ ì´ëŒì–´ê°‘ë‹ˆë‹¤.
+//ê²Œìž„íŒì€ ë”ë¯¸,í”Œë ˆì´ì–´,ë°”ë‹¥,í˜„ìž¬ê²Œìž„ì˜ìƒíƒœ(ëª‡ê³ )ì¸ì§€ ë¥¼ ì œì–´í•©ë‹ˆë‹¤.
+// --ì¶”ê°€-- ê³ ì˜ ìƒíƒœëŠ” í”Œë ˆì´ì–´ì˜ ê³ ì— ìƒíƒœì— ë”°ë¼ ë‹¬ë¼ì§‘ë‹ˆë‹¤. ê·¸ëž˜ì„œ í•„ë“œì— ê³ ë¥¼ ì œê±°í–ˆìŠµë‹ˆë‹¤.
+// ê³ ë°•ì¸ ê²½ìš°ì—ëŠ” ì¢…ë£Œë˜ê³  ê·¸ ì™¸ì˜ ê²½ìš°ì—ëŠ” ê³ ë¥¼ ì™¸ì¹œ í”Œë ˆì´ì–´ì˜ ê³ ì— ë”°ë¼
+// ë‹¬ë¼ì§€ë¯€ë¡œ ê·¸ëƒ¥ í”Œë ˆì´ì–´ ê³ ë¥¼ ì‚¬ìš©í•˜ë„ë¡ í–ˆìŠµë‹ˆë‹¤.
   Board::Board() : players(), dummy(), badak(), util(EndGameUtil::GetInstance()) {
-    std::cout << ">> »õ·Î¿î °ÔÀÓÆÇ ¼¼ÆÃ ¿Ï·á" << std::endl;
+    std::cout << ">> ìƒˆë¡œìš´ ê²Œìž„íŒ ì„¸íŒ… ì™„ë£Œ" << std::endl;
     dummy.reset();
-    std::cout << ">> »õ·Î¿î ´õ¹Ì ¼¼ÆÃ ¿Ï·á" << std::endl;
+    std::cout << ">> ìƒˆë¡œìš´ ë”ë¯¸ ì„¸íŒ… ì™„ë£Œ" << std::endl;
     dummy.Shuffle();
-    std::cout << ">> ´õ¹Ì¸¦ ¼¯¾ú½À´Ï´Ù." << std::endl;
+    std::cout << ">> ë”ë¯¸ë¥¼ ì„žì—ˆìŠµë‹ˆë‹¤." << std::endl;
   }
-  //ÇÃ·¹ÀÌ ¹æ½Ä : ¾î´À ÇÑ ÇÃ·¹ÀÌ¾î°¡ °ÔÀÓÀ» ³¡³¾ ¶§±îÁö ÇÃ·¹ÀÌ¾îµéÀÇ ÅÏÀ» ¹Ýº¹ÇÑ´Ù
+  //í”Œë ˆì´ ë°©ì‹ : ì–´ëŠ í•œ í”Œë ˆì´ì–´ê°€ ê²Œìž„ì„ ëë‚¼ ë•Œê¹Œì§€ í”Œë ˆì´ì–´ë“¤ì˜ í„´ì„ ë°˜ë³µí•œë‹¤
   void Board::play() {
     while (true) {
-      // ¸ðµç ÇÃ·¹ÀÌ¾îÀÇ ÆÐ°¡ ¼ÒÁøµÈ °æ¿ì¸¦ Ã¼Å©ÇÏ°í ¸¸¾à ±×·¸´Ù¸é ÃÖÁ¾Á¡¼ö °è»êÇÏ¿© Á¾·á
+      // ëª¨ë“  í”Œë ˆì´ì–´ì˜ íŒ¨ê°€ ì†Œì§„ëœ ê²½ìš°ë¥¼ ì²´í¬í•˜ê³  ë§Œì•½ ê·¸ë ‡ë‹¤ë©´ ìµœì¢…ì ìˆ˜ ê³„ì‚°í•˜ì—¬ ì¢…ë£Œ
       int sum = 0;
       for (Player& player : players) {
         sum += player.getHand().GetNumOfCards();
       }
-      if (sum == 0) {  //³ª°¡¸®ÀÎ °æ¿ì
-        // ¸ðµç ÇÃ·¹ÀÌ¾î°¡ ¼ÕÆÐ°¡ ¼ÒÁøµÈ °æ¿ì¿¡´Â °í¸¦ ¿ÜÄ£ »ç¶÷ÀÌ
-        // Á¡¼ö¸¦ ³»Áö ¸øÇÏ¿© ½ºÅ¾À» ÇÏÁö ¸øÇÏ°Å³ª ¸ðµç ÇÃ·¹ÀÌ¾î°¡
-        // ½ºÅ¾À» ÇÒ ¼ö ¾ø´Â Áï, °ÔÀÓÀ» ³¡³¾ ¼ö ÀÖ´Â Á¡¼ö¸¦ È¹µæÇÏÁö ¸øÇÑ
-        // °æ¿ìÀÌ¹Ç·Î ÀÌ °æ¿ì¿¡´Â ³ª°¡¸®·Î ¹«È¿ÆÇÀÌ µË´Ï´Ù. ÀÌ·² °æ¿ì
-        // ´ÙÀ½ÆÇÀÇ ½ÂÀÚÀÇ Á¡¼ö¿¡ 2¹è¸¦ ÇØÁÖ¾î¾ß ÇÕ´Ï´Ù. ±×·¯¹Ç·Î
-        // ÇöÀçÆÇÀº ´Ü¼øÈ÷ Á¾·á½ÃÅµ´Ï´Ù.
-        std::cout << ">> ¸ðµç ÇÃ·¹ÀÌ¾îÀÇ ¼ÕÆÐ°¡ ¼ÒÁøµÇ¾ú½À´Ï´Ù. ³ª°¡¸®ÀÔ´Ï´Ù.";
+      if (sum == 0) {  //ë‚˜ê°€ë¦¬ì¸ ê²½ìš°
+        // ëª¨ë“  í”Œë ˆì´ì–´ê°€ ì†íŒ¨ê°€ ì†Œì§„ëœ ê²½ìš°ì—ëŠ” ê³ ë¥¼ ì™¸ì¹œ ì‚¬ëžŒì´
+        // ì ìˆ˜ë¥¼ ë‚´ì§€ ëª»í•˜ì—¬ ìŠ¤íƒ‘ì„ í•˜ì§€ ëª»í•˜ê±°ë‚˜ ëª¨ë“  í”Œë ˆì´ì–´ê°€
+        // ìŠ¤íƒ‘ì„ í•  ìˆ˜ ì—†ëŠ” ì¦‰, ê²Œìž„ì„ ëë‚¼ ìˆ˜ ìžˆëŠ” ì ìˆ˜ë¥¼ íšë“í•˜ì§€ ëª»í•œ
+        // ê²½ìš°ì´ë¯€ë¡œ ì´ ê²½ìš°ì—ëŠ” ë‚˜ê°€ë¦¬ë¡œ ë¬´íš¨íŒì´ ë©ë‹ˆë‹¤. ì´ëŸ´ ê²½ìš°
+        // ë‹¤ìŒíŒì˜ ìŠ¹ìžì˜ ì ìˆ˜ì— 2ë°°ë¥¼ í•´ì£¼ì–´ì•¼ í•©ë‹ˆë‹¤. ê·¸ëŸ¬ë¯€ë¡œ
+        // í˜„ìž¬íŒì€ ë‹¨ìˆœížˆ ì¢…ë£Œì‹œí‚µë‹ˆë‹¤.
+        std::cout << ">> ëª¨ë“  í”Œë ˆì´ì–´ì˜ ì†íŒ¨ê°€ ì†Œì§„ë˜ì—ˆìŠµë‹ˆë‹¤. ë‚˜ê°€ë¦¬ìž…ë‹ˆë‹¤.";
         exit(0);
       }
 
       for (Player& player : players) {
-        // ¼ÕÆÐ°¡ 0ÀÌ¸é ±× ÅÏÀÌ ¸¶Áö¸· ÅÏÀÌ¶ó´Â ÀÇ¹ÌÀÔ´Ï´Ù. ¿Ö³ÄÇÏ¸é ´õ¹Ì¿Í ¼ÕÆÐ°¡ ¼ÒÁøµÇ´Â ¼ø°£ÀÌ
-        // ¸¶Áö¸· ÇÃ·¹ÀÌ¾î°¡ ¸¶Áö¸· ÅÏ(¸ðµÎ ¼ÕÆÐ°¡ 1ÀåÀÎ °æ¿ì)¿¡ ³²Àº ¼ÕÆÐ ÇÏ³ª¸¦ ³»¼­ ´õ¹Ì¸¦ µÚÁý´Â ¼ø°£ÀÌ±â ¶§¹®ÀÔ´Ï´Ù.
+        // ì†íŒ¨ê°€ 0ì´ë©´ ê·¸ í„´ì´ ë§ˆì§€ë§‰ í„´ì´ë¼ëŠ” ì˜ë¯¸ìž…ë‹ˆë‹¤. ì™œëƒí•˜ë©´ ë”ë¯¸ì™€ ì†íŒ¨ê°€ ì†Œì§„ë˜ëŠ” ìˆœê°„ì´
+        // ë§ˆì§€ë§‰ í”Œë ˆì´ì–´ê°€ ë§ˆì§€ë§‰ í„´(ëª¨ë‘ ì†íŒ¨ê°€ 1ìž¥ì¸ ê²½ìš°)ì— ë‚¨ì€ ì†íŒ¨ í•˜ë‚˜ë¥¼ ë‚´ì„œ ë”ë¯¸ë¥¼ ë’¤ì§‘ëŠ” ìˆœê°„ì´ê¸° ë•Œë¬¸ìž…ë‹ˆë‹¤.
       //  if (player.getHand().GetNumOfCards() != 0) {
           giveTurnToPlayer(player);
       //  }
-        /* ¿©±â¿¡ ÇØ´çÇÏ´Â °æ¿ì°¡ ¾øÀ» °Ì´Ï´Ù. ¼Õ¿¡ µé°íÀÖ´Â ÆÐ¸¦ ³»±â¸¸ ÇÏ°í Ãß°¡¸¦ ÇÏÁö¾Ê¾Æ¼­
-           ÃÖ´ë 7ÅÏ¸¸ ÁøÇàÇÏ°Ô µÇ±â ¶§¹®ÀÔ´Ï´Ù. ¸¸¾à ¸ðµÎ ¼ÕÆÐ ´Ù ¼ÒÁøÇØ¼­ ³¡³ª¸é À§¿¡¼­ Á¾·á½ÃÄÑ ÁÝ´Ï´Ù.
+        /* ì—¬ê¸°ì— í•´ë‹¹í•˜ëŠ” ê²½ìš°ê°€ ì—†ì„ ê²ë‹ˆë‹¤. ì†ì— ë“¤ê³ ìžˆëŠ” íŒ¨ë¥¼ ë‚´ê¸°ë§Œ í•˜ê³  ì¶”ê°€ë¥¼ í•˜ì§€ì•Šì•„ì„œ
+           ìµœëŒ€ 7í„´ë§Œ ì§„í–‰í•˜ê²Œ ë˜ê¸° ë•Œë¬¸ìž…ë‹ˆë‹¤. ë§Œì•½ ëª¨ë‘ ì†íŒ¨ ë‹¤ ì†Œì§„í•´ì„œ ëë‚˜ë©´ ìœ„ì—ì„œ ì¢…ë£Œì‹œì¼œ ì¤ë‹ˆë‹¤.
         else {
           std::cout << "<< " << player.getName()
-                    << " ÇÃ·¹ÀÌ¾îÀÇ ¼ÕÆÐ°¡ ¼ÒÁøµÇ¾î ´ÙÀ½ ÇÃ·¹ÀÌ¾î¿¡°Ô Â÷·Ê°¡ ³Ñ¾î°©´Ï´Ù.\n";
+                    << " í”Œë ˆì´ì–´ì˜ ì†íŒ¨ê°€ ì†Œì§„ë˜ì–´ ë‹¤ìŒ í”Œë ˆì´ì–´ì—ê²Œ ì°¨ë¡€ê°€ ë„˜ì–´ê°‘ë‹ˆë‹¤.\n";
         }*/
       }
     }
     
 
   }
-  //°ÔÀÓÆÇ¿¡ »õ·Î¿î ÇÃ·¹ÀÌ¾î Ãß°¡
+  //ê²Œìž„íŒì— ìƒˆë¡œìš´ í”Œë ˆì´ì–´ ì¶”ê°€
   void Board::addNewPlayer() {
-    std::cout << ">> Player¸¦ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
-    std::cout << ">> PlayerÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : " << std::endl;
+    std::cout << ">> Playerë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
+    std::cout << ">> Playerì˜ ì´ë¦„ì„ ìž…ë ¥í•˜ì„¸ìš” : " << std::endl;
     std::string name;
     std::cin >> name;
     Player player = Player(name);
     players.push_back(player);
-    std::cout << ">> " << name << " player Ãß°¡ ¿Ï·á" << std::endl;
+    std::cout << ">> " << name << " player ì¶”ê°€ ì™„ë£Œ" << std::endl;
   }
 
-  // °í¸¦ Àû¿ëÇØ Á¡¼ö °è»ê
+  // ê³ ë¥¼ ì ìš©í•´ ì ìˆ˜ ê³„ì‚°
   void Board::calcScoreByGo(Player& player) {
     switch (player.getGo()) {
-      case 0:   // °í°¡ ¾øÀ¸¸é ±×³É ¿øÁ¡¼ö
+      case 0:   // ê³ ê°€ ì—†ìœ¼ë©´ ê·¸ëƒ¥ ì›ì ìˆ˜
         break;
-      case 1:  // °í°¡ 1ÀÎ °æ¿ì
+      case 1:  // ê³ ê°€ 1ì¸ ê²½ìš°
         player.setScore(player.getScore() + 1);
         break;
-      case 2:  // °í°¡ 2ÀÎ °æ¿ì
+      case 2:  // ê³ ê°€ 2ì¸ ê²½ìš°
         player.setScore(player.getScore() + 2);
         break;
-      default:  // ±× ¿Ü °æ¿ì
+      default:  // ê·¸ ì™¸ ê²½ìš°
         player.setScore(player.getScore() * pow(2, player.getGo() - 2));
         break;
     }
   }
-  // ³ª°¡¸®°¡ ¾Æ´Ñ °ÔÀÓÀ» Á¾·áÇÏ´Â ÇÔ¼ö
+  // ë‚˜ê°€ë¦¬ê°€ ì•„ë‹Œ ê²Œìž„ì„ ì¢…ë£Œí•˜ëŠ” í•¨ìˆ˜
   void Board::endGame(std::vector<Player>& players, Player& player) {
-    std::vector<Player> defeatedPlayers;  // ÆÐ¹èÇÑ ÇÃ·¹ÀÌ¾î º¤ÅÍ
+    std::vector<Player> defeatedPlayers;  // íŒ¨ë°°í•œ í”Œë ˆì´ì–´ ë²¡í„°
     for (int i = 0; i < players.size(); i++) {
       if (players.at(i).getName() != player.getName()) {
-        defeatedPlayers.push_back(players.at(i));  // ÆÐ¹èÇÑ ÇÃ·¹ÀÌ¾î¸¦ Ãß°¡
+        defeatedPlayers.push_back(players.at(i));  // íŒ¨ë°°í•œ í”Œë ˆì´ì–´ë¥¼ ì¶”ê°€
       }
     }
 
-    util->calcByMungBak(player);  // ÀÌ±ä »ç¶÷ÀÇ Á¡¼ö¸¦ ¸Û¹Ú¿¡ µû¶ó °è»ê(¸Û¹ÚÀÌ¸é 2¹è)
+    util->calcByMungBak(player);  // ì´ê¸´ ì‚¬ëžŒì˜ ì ìˆ˜ë¥¼ ë©ë°•ì— ë”°ë¼ ê³„ì‚°(ë©ë°•ì´ë©´ 2ë°°)
 
-    // ÇÇ¹Ú, ±¤¹ÚÀº ÇØ´çÇÏ´Â »ç¶÷¸¸ 2¹è·Î ¹°¾îÁà¾ß ÇÏ´Â °ÍÀÌ¹Ç·Î
-    // ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ ÀÔÀå¿¡¼­ ½ÂÀÚÀÇ Á¡¼ö¸¦ °è»ê
+    // í”¼ë°•, ê´‘ë°•ì€ í•´ë‹¹í•˜ëŠ” ì‚¬ëžŒë§Œ 2ë°°ë¡œ ë¬¼ì–´ì¤˜ì•¼ í•˜ëŠ” ê²ƒì´ë¯€ë¡œ
+    // í•´ë‹¹ í”Œë ˆì´ì–´ì˜ ìž…ìž¥ì—ì„œ ìŠ¹ìžì˜ ì ìˆ˜ë¥¼ ê³„ì‚°
 
-    // ¿ì¼± Áø »ç¶÷ÀÇ ÀÔÀå¿¡¼­ ÀÌ±ä »ç¶÷ÀÇ Á¡¼ö¸¦ ¸Û¹Ú±îÁö Àû¿ëÇÑ Á¡¼ö·Î ÃÊ±âÈ­
+    // ìš°ì„  ì§„ ì‚¬ëžŒì˜ ìž…ìž¥ì—ì„œ ì´ê¸´ ì‚¬ëžŒì˜ ì ìˆ˜ë¥¼ ë©ë°•ê¹Œì§€ ì ìš©í•œ ì ìˆ˜ë¡œ ì´ˆê¸°í™”
     for (int i = 0; i < defeatedPlayers.size(); i++) {
       defeatedPlayers.at(i).setScoreToPay(player.getScore());
     }
 
-    util->calcByGwangBak(players, player);  // ±¤¹Ú¿¡ ÇØ´çÇÏ´Â »ç¶÷ÀÌ ÁöºÒÇØ¾ß ÇÏ´Â ±Ý¾×¿¡ ÇØ´çÇÏ´Â Á¡¼ö(ÇØ´ç ÇÃ·¹ÀÌ¾î ÀÔÀå¿¡¼­ ½ÂÀÚÀÇ Á¡¼ö)¸¦ 2¹è·Î
-    util->calcByPiBak(players, player);  // ÇÇ¹Ú¿¡ ÇØ´çÇÏ´Â »ç¶÷ÀÌ ÁöºÒÇØ¾ß ÇÏ´Â Á¡¼ö(ÇØ´ç ÇÃ·¹ÀÌ¾î ÀÔÀå¿¡¼­ ½ÂÀÚÀÇ Á¡¼ö)¸¦ 2¹è·Î
+    util->calcByGwangBak(players, player);  // ê´‘ë°•ì— í•´ë‹¹í•˜ëŠ” ì‚¬ëžŒì´ ì§€ë¶ˆí•´ì•¼ í•˜ëŠ” ê¸ˆì•¡ì— í•´ë‹¹í•˜ëŠ” ì ìˆ˜(í•´ë‹¹ í”Œë ˆì´ì–´ ìž…ìž¥ì—ì„œ ìŠ¹ìžì˜ ì ìˆ˜)ë¥¼ 2ë°°ë¡œ
+    util->calcByPiBak(players, player);  // í”¼ë°•ì— í•´ë‹¹í•˜ëŠ” ì‚¬ëžŒì´ ì§€ë¶ˆí•´ì•¼ í•˜ëŠ” ì ìˆ˜(í•´ë‹¹ í”Œë ˆì´ì–´ ìž…ìž¥ì—ì„œ ìŠ¹ìžì˜ ì ìˆ˜)ë¥¼ 2ë°°ë¡œ
 
-    util->checkGoBak(players, player);  // °í¹ÚÀÎ »ç¶÷ÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ¿© ¾Ë·ÁÁØ´Ù
+    util->checkGoBak(players, player);  // ê³ ë°•ì¸ ì‚¬ëžŒì´ ìžˆëŠ”ì§€ í™•ì¸í•˜ì—¬ ì•Œë ¤ì¤€ë‹¤
 
     for (int i = 0; i < defeatedPlayers.size(); i++) {
       Player defeatedPlayer = defeatedPlayers.at(i);
-      std::cout << defeatedPlayer.getName() << "´Ô ÀÔÀå¿¡¼­ "
-                << player.getName() << "´Ô¿¡°Ô ÁöºÒÇÒ ±Ý¾×¿¡ ÇØ´çÇÏ´Â ÃÖÁ¾ Á¡¼ö´Â "
-                << defeatedPlayer.getScoreToPay() << "Á¡ ÀÔ´Ï´Ù." << std::endl;
+      std::cout << defeatedPlayer.getName() << "ë‹˜ ìž…ìž¥ì—ì„œ "
+                << player.getName() << "ë‹˜ì—ê²Œ ì§€ë¶ˆí•  ê¸ˆì•¡ì— í•´ë‹¹í•˜ëŠ” ìµœì¢… ì ìˆ˜ëŠ” "
+                << defeatedPlayer.getScoreToPay() << "ì  ìž…ë‹ˆë‹¤." << std::endl;
     }
 
     exit(0);
   }
 
-  //ÇÃ·¹ÀÌ¾î¿¡°Ô ÅÏÀ» ³Ñ°ÜÁÝ´Ï´Ù.
+  //í”Œë ˆì´ì–´ì—ê²Œ í„´ì„ ë„˜ê²¨ì¤ë‹ˆë‹¤.
   void Board::giveTurnToPlayer(Player& player) {
     std::cout << "\n[ " << player.getName()
-              << "ÀÇ Â÷·ÊÀÔ´Ï´Ù. ]"
+              << "ì˜ ì°¨ë¡€ìž…ë‹ˆë‹¤. ]"
               << std::endl;
-    std::cout << "-----------------´ç½ÅÀÇ ¼ÕÆÐ-----------------" << std::endl;
+    std::cout << "-----------------ë‹¹ì‹ ì˜ ì†íŒ¨-----------------" << std::endl;
     player.getHand().printCardSet();  
-    std::cout << "-----------------ÇöÀç ¹Ù´Ú-----------------" << std::endl;
+    std::cout << "-----------------í˜„ìž¬ ë°”ë‹¥-----------------" << std::endl;
     badak.printCardSet();
-    std::cout << "-----------------ÇöÀç ³­ ÆÐ ¸ñ·Ï-----------------" << std::endl;
+    std::cout << "-----------------í˜„ìž¬ ë‚œ íŒ¨ ëª©ë¡-----------------" << std::endl;
     player.getBadakHand().printCardSet();
-    //Ä«µå¸¦ ³½´Ù.
-    std::cout << ">> ÀÎµ¦½º ¹øÈ£·Î Ä«µå¸¦ ³» ÁÖ¼¼¿ä" << std::endl;
+    //ì¹´ë“œë¥¼ ë‚¸ë‹¤.
+    std::cout << ">> ì¸ë±ìŠ¤ ë²ˆí˜¸ë¡œ ì¹´ë“œë¥¼ ë‚´ ì£¼ì„¸ìš”" << std::endl;
     int c;
     std::cin>>c;
     Card card = player.getHand().PopIdxCard(c);
-    //Â¦À» ¸ÂÃá´Ù
+    //ì§ì„ ë§žì¶˜ë‹¤
     int p1_index = makePair(card, badak);
     if (p1_index==-1) {
-      std::cout << ">> ³½ Ä«µå¸¦ ¹Ù´Ú¿¡ ±ò¾Æ³õ½À´Ï´Ù" << std::endl;
+      std::cout << ">> ë‚¸ ì¹´ë“œë¥¼ ë°”ë‹¥ì— ê¹”ì•„ë†“ìŠµë‹ˆë‹¤" << std::endl;
       badak.AddCard(card);
     } else {
-      // ¾Æ·¡¿¡¼­ »¶ÀÎÁö ÆÇ´ÜÇÑ ÈÄ Ãß°¡ÇÕ´Ï´Ù.
-      // std::cout << ">> Æä¾î¸¦ ³­ ÆÐ¿¡ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
+      // ì•„ëž˜ì—ì„œ ë»‘ì¸ì§€ íŒë‹¨í•œ í›„ ì¶”ê°€í•©ë‹ˆë‹¤.
+      // std::cout << ">> íŽ˜ì–´ë¥¼ ë‚œ íŒ¨ì— ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
       // player.getBadakHand().AddCard(gookJinCase(card));
       // player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
     }
-    // ´õ¹ÌÀÇ ÆÐ°¡ ¼ÒÁøµÇ¾úÀ¸¸é ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ badakHand ÆÐ¸¦ °¡Áö°í Á¡¼ö¸¦ °è»êÇÑ ´ÙÀ½
-    // ÃÖÁ¾Á¡¼ö °è»ê ÈÄ ½Â¸®ÀÚ¸¦ ¼±Á¤ÇÏµµ·Ï Ã³¸®ÇÕ´Ï´Ù.
-    // --Ãß°¡-- ¿©±â¼­ µüÈ÷ Ã³¸®¸¦ ÇØÁÙ ÇÊ¿ä´Â ¾ø½À´Ï´Ù. »ç¶÷µéÀÌ °¡Áø ¼ÕÆÐ°¡ 21ÀåÀÌ°í
-    // ¹Ù´Ú¿¡ Ã³À½¿¡ ±î´Â°Ô 6ÀåÀÔ´Ï´Ù. ±×·³ ´õ¹Ì¿¡ Ä«µå°¡ 21°³°¡ µË´Ï´Ù.
-    // ±×·¯¸é »ç¶÷µéÀÌ ÀÚ½ÅÀÇ Â÷·Ê¿¡ Ä«µå¸¦ ³»°í ´õ¹Ì¿¡¼­ Ä«µå¸¦ ÇÏ³ª¾¿ µÚÁý°Ô µÇÀÖÀ¸¹Ç·Î
-    // µü ¸Â°Ô ³¡³ª°Ô µË´Ï´Ù. ¸¸¾à ¸¶Áö¸· ÅÏ(¼Õ ÆÐ°¡ ¸ðµÎ ÇÏ³ª¸¸ ÀÖ´Â °æ¿ì)¿¡ Á¡¼ö°¡ ³ª¸é ¹«Á¶°Ç
-    // ½ºÅ¾À» ¿ÜÃÄ¾ßÇÏ¹Ç·Î °ÔÀÓÀÌ ³¡³ª°í ½ºÅ¾À» ÇÏÁö ¸øÇÏ¸é ³ª°¡¸®ÀÌ¹Ç·Î À§ÀÇ play¿¡¼­
-    // Ã³¸®ÇÏ°Ô µË´Ï´Ù.
-    // ÀÏ´Ü ³²°ÜµÓ´Ï´Ù. ³ªÁß¿¡ »èÁ¦ÇÏ¸é µÉ °Í °°½À´Ï´Ù.
+    // ë”ë¯¸ì˜ íŒ¨ê°€ ì†Œì§„ë˜ì—ˆìœ¼ë©´ í˜„ìž¬ í”Œë ˆì´ì–´ì˜ badakHand íŒ¨ë¥¼ ê°€ì§€ê³  ì ìˆ˜ë¥¼ ê³„ì‚°í•œ ë‹¤ìŒ
+    // ìµœì¢…ì ìˆ˜ ê³„ì‚° í›„ ìŠ¹ë¦¬ìžë¥¼ ì„ ì •í•˜ë„ë¡ ì²˜ë¦¬í•©ë‹ˆë‹¤.
+    // --ì¶”ê°€-- ì—¬ê¸°ì„œ ë”±ížˆ ì²˜ë¦¬ë¥¼ í•´ì¤„ í•„ìš”ëŠ” ì—†ìŠµë‹ˆë‹¤. ì‚¬ëžŒë“¤ì´ ê°€ì§„ ì†íŒ¨ê°€ 21ìž¥ì´ê³ 
+    // ë°”ë‹¥ì— ì²˜ìŒì— ê¹ŒëŠ”ê²Œ 6ìž¥ìž…ë‹ˆë‹¤. ê·¸ëŸ¼ ë”ë¯¸ì— ì¹´ë“œê°€ 21ê°œê°€ ë©ë‹ˆë‹¤.
+    // ê·¸ëŸ¬ë©´ ì‚¬ëžŒë“¤ì´ ìžì‹ ì˜ ì°¨ë¡€ì— ì¹´ë“œë¥¼ ë‚´ê³  ë”ë¯¸ì—ì„œ ì¹´ë“œë¥¼ í•˜ë‚˜ì”© ë’¤ì§‘ê²Œ ë˜ìžˆìœ¼ë¯€ë¡œ
+    // ë”± ë§žê²Œ ëë‚˜ê²Œ ë©ë‹ˆë‹¤. ë§Œì•½ ë§ˆì§€ë§‰ í„´(ì† íŒ¨ê°€ ëª¨ë‘ í•˜ë‚˜ë§Œ ìžˆëŠ” ê²½ìš°)ì— ì ìˆ˜ê°€ ë‚˜ë©´ ë¬´ì¡°ê±´
+    // ìŠ¤íƒ‘ì„ ì™¸ì³ì•¼í•˜ë¯€ë¡œ ê²Œìž„ì´ ëë‚˜ê³  ìŠ¤íƒ‘ì„ í•˜ì§€ ëª»í•˜ë©´ ë‚˜ê°€ë¦¬ì´ë¯€ë¡œ ìœ„ì˜ playì—ì„œ
+    // ì²˜ë¦¬í•˜ê²Œ ë©ë‹ˆë‹¤.
+    // ì¼ë‹¨ ë‚¨ê²¨ë‘¡ë‹ˆë‹¤. ë‚˜ì¤‘ì— ì‚­ì œí•˜ë©´ ë  ê²ƒ ê°™ìŠµë‹ˆë‹¤.
     /*
     if (dummy.isEmpty()) {
       player.getBadakHand().calc();
-      std::cout << "-----------------ÇöÀç ³­ ÆÐ ¸ñ·Ï-----------------" << std::endl;
+      std::cout << "-----------------í˜„ìž¬ ë‚œ íŒ¨ ëª©ë¡-----------------" << std::endl;
       player.getBadakHand().printCardSet();
-      std::cout << ">> " << player.getBadakHand().getScore() << "Á¡ È¹µæÇÏ¼Ì½À´Ï´Ù."
+      std::cout << ">> " << player.getBadakHand().getScore() << "ì  íšë“í•˜ì…¨ìŠµë‹ˆë‹¤."
                 << std::endl;
-      // ÇöÀç ÇÃ·¹ÀÌ¾î°¡ ¾òÀº Á¡¼ö ¾÷µ¥ÀÌÆ®
+      // í˜„ìž¬ í”Œë ˆì´ì–´ê°€ ì–»ì€ ì ìˆ˜ ì—…ë°ì´íŠ¸
       player.setScore(player.getBadakHand().getScore());
 
-      // TODO:ÃÖÁ¾Á¡¼ö¸¦ °è»êÇÏ°í ½Â¸®ÀÚ¸¦ ¼±Á¤ÇÏ´Â ¸Þ¼­µå(¹Ì±¸Çö »óÅÂ)
-      // ex. CalcFinalScoresAndSelectWinner(); <- ÀÌ ÇÔ¼ö¿¡¼­ °ÔÀÓÀ» ¹Ýµå½Ã Á¾·á½ÃÄÑÁà¾ß ÇÕ´Ï´Ù.
+      // TODO:ìµœì¢…ì ìˆ˜ë¥¼ ê³„ì‚°í•˜ê³  ìŠ¹ë¦¬ìžë¥¼ ì„ ì •í•˜ëŠ” ë©”ì„œë“œ(ë¯¸êµ¬í˜„ ìƒíƒœ)
+      // ex. CalcFinalScoresAndSelectWinner(); <- ì´ í•¨ìˆ˜ì—ì„œ ê²Œìž„ì„ ë°˜ë“œì‹œ ì¢…ë£Œì‹œì¼œì¤˜ì•¼ í•©ë‹ˆë‹¤.
     }
     else {
     */
-      //Ä«µå¸¦ »Ì´Â´Ù
-      std::cout << ">> Ä«µå¸¦ »Ì°Ú½À´Ï´Ù " << std::endl;
+      //ì¹´ë“œë¥¼ ë½‘ëŠ”ë‹¤
+      std::cout << ">> ì¹´ë“œë¥¼ ë½‘ê² ìŠµë‹ˆë‹¤ " << std::endl;
       Card popped = dummy.PopCard();
-      std::cout << ">> »ÌÀº Ä«µå´Â " << popped.toString() << std::endl;
-      //Â¦À» ¸ÂÃá´Ù
+      std::cout << ">> ë½‘ì€ ì¹´ë“œëŠ” " << popped.toString() << std::endl;
+      //ì§ì„ ë§žì¶˜ë‹¤
       int p2_index = makePair(popped, badak);
       std::vector<Card> addedCardfromBadak;
       if (p1_index != -1) {
-        if (p2_index != -1) { // p1_index != -1 && p2_index != -1 ÀÎ °æ¿ì°¡ ¿©±â¼­ Ã³¸®µÊ
-          // ´õ¹Ì¿¡¼­ Á¥Èù ÆÐ¿Í Â¦À» ¸ÂÃá ¹Ù´ÚÆÐ°¡, ³»°¡ ³½ ÆÐ¿Í Â¦À» ¸ÂÃè´ø ¹Ù´ÚÆÐÀÎ °æ¿ì(== »¶)
+        if (p2_index != -1) { // p1_index != -1 && p2_index != -1 ì¸ ê²½ìš°ê°€ ì—¬ê¸°ì„œ ì²˜ë¦¬ë¨
+          // ë”ë¯¸ì—ì„œ ì –ížŒ íŒ¨ì™€ ì§ì„ ë§žì¶˜ ë°”ë‹¥íŒ¨ê°€, ë‚´ê°€ ë‚¸ íŒ¨ì™€ ì§ì„ ë§žì·„ë˜ ë°”ë‹¥íŒ¨ì¸ ê²½ìš°(== ë»‘)
           if (popped.GetMonthOfCard() == badak.GetCard(p1_index).GetMonthOfCard()
             && p1_index == p2_index) {
-            // 3°³ÀÇ ÆÐ(´õ¹Ì¿¡¼­ Á¥Èù ÆÐ, ³»°¡ ³½ ÆÐ, Â¦À» ¸ÂÃá ¹Ù´ÚÆÐ)´Â ¸ðµÎ
-            // ¹Ù´Ú¿¡ ÀÖ¾î¾ß ÇÔ. ¹Ù´Ú¿¡ ³»·Á³õÀ¸¸é¼­ °¢ Ä«µåÀÇ isPpuk_ == true·Î
-            // ¼¼ÆÃ
-            std::cout << ">> »¶ÀÔ´Ï´Ù. ¼¼ ÀåÀÇ Ä«µå¸¦ ¸ðµÎ ¹Ù´Ú¿¡ ³»·Á³õ½À´Ï´Ù."
+            // 3ê°œì˜ íŒ¨(ë”ë¯¸ì—ì„œ ì –ížŒ íŒ¨, ë‚´ê°€ ë‚¸ íŒ¨, ì§ì„ ë§žì¶˜ ë°”ë‹¥íŒ¨)ëŠ” ëª¨ë‘
+            // ë°”ë‹¥ì— ìžˆì–´ì•¼ í•¨. ë°”ë‹¥ì— ë‚´ë ¤ë†“ìœ¼ë©´ì„œ ê° ì¹´ë“œì˜ isPpuk_ == trueë¡œ
+            // ì„¸íŒ…
+            std::cout << ">> ë»‘ìž…ë‹ˆë‹¤. ì„¸ ìž¥ì˜ ì¹´ë“œë¥¼ ëª¨ë‘ ë°”ë‹¥ì— ë‚´ë ¤ë†“ìŠµë‹ˆë‹¤."
                       << std::endl;
 
-            // ¹Ù´ÚÆÐ »¶ ¿©ºÎ <= true
+            // ë°”ë‹¥íŒ¨ ë»‘ ì—¬ë¶€ <= true
             Card temp = badak.PopIdxCard(p2_index);
             temp.setPpuk(true);
             badak.AddCard(temp);
 
-            // ´õ¹Ì¿¡¼­ Á¥Èù ÆÐ
+            // ë”ë¯¸ì—ì„œ ì –ížŒ íŒ¨
             popped.setPpuk(true);
             badak.AddCard(popped);
 
-            // ³»°¡ ³½ ÆÐ
+            // ë‚´ê°€ ë‚¸ íŒ¨
             card.setPpuk(true);
             badak.AddCard(card);
           }
-          // ´õ¹Ì¿¡¼­ Á¥Èù ÆÐ¿Í Â¦À» ¸ÂÃá ¹Ù´ÚÆÐ°¡, ³»°¡ ³½ ÆÐ¿Í Â¦À» ¸ÂÃè´ø
-          // ¹Ù´ÚÆÐ¿Í ¿ùÀº °°Áö¸¸, ¶È°°Àº ÆÐ´Â ¾Æ´Ï¾î¼­(Áï »¶ÀÌ ¾Æ´Ï¶ó¼­) 4ÀåÀ» ÇÑ²¨¹ø¿¡ °¡Á®¿Ã ¼ö ÀÖ´Â°æ¿ì(== µû´Ú)
+          // ë”ë¯¸ì—ì„œ ì –ížŒ íŒ¨ì™€ ì§ì„ ë§žì¶˜ ë°”ë‹¥íŒ¨ê°€, ë‚´ê°€ ë‚¸ íŒ¨ì™€ ì§ì„ ë§žì·„ë˜
+          // ë°”ë‹¥íŒ¨ì™€ ì›”ì€ ê°™ì§€ë§Œ, ë˜‘ê°™ì€ íŒ¨ëŠ” ì•„ë‹ˆì–´ì„œ(ì¦‰ ë»‘ì´ ì•„ë‹ˆë¼ì„œ) 4ìž¥ì„ í•œêº¼ë²ˆì— ê°€ì ¸ì˜¬ ìˆ˜ ìžˆëŠ”ê²½ìš°(== ë”°ë‹¥)
           else if (popped.GetMonthOfCard() == badak.GetCard(p1_index).GetMonthOfCard() 
             && p1_index != p2_index) {
-            std::cout << ">> µû´ÚÀÔ´Ï´Ù." << std::endl;
-            // 4°³ÀÇ ÆÐ¸¦ °¡Á®¿À°í ´Ù¸¥ Âü¿©ÀÚ·ÎºÎÅÍ ÇÇ¸¦ ÇÑ Àå¾¿ °¡Á®¿Â´Ù.
+            std::cout << ">> ë”°ë‹¥ìž…ë‹ˆë‹¤." << std::endl;
+            // 4ê°œì˜ íŒ¨ë¥¼ ê°€ì ¸ì˜¤ê³  ë‹¤ë¥¸ ì°¸ì—¬ìžë¡œë¶€í„° í”¼ë¥¼ í•œ ìž¥ì”© ê°€ì ¸ì˜¨ë‹¤.
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p1_index));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
@@ -233,35 +233,35 @@ Card Board::gookJinCase(Card card){
               player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
             player.getBadakHand().AddCard(gookJinCase(card));
 
-            // ´Ù¸¥ ÇÃ·¹ÀÌ¾î·ÎºÎÅÍ ÇÇ¸¦ ÇÑ Àå¾¿ ¹Þ¾Æ¿Â´Ù.
+            // ë‹¤ë¥¸ í”Œë ˆì´ì–´ë¡œë¶€í„° í”¼ë¥¼ í•œ ìž¥ì”© ë°›ì•„ì˜¨ë‹¤.
             for (Player& p : players) {
               if (p.getName().compare(
-                      player.getName())) {  // ÀÌ¸§ÀÌ ´Ù¸¥ ÇÃ·¹ÀÌ¾îÀÏ °æ¿ì
+                      player.getName())) {  // ì´ë¦„ì´ ë‹¤ë¥¸ í”Œë ˆì´ì–´ì¼ ê²½ìš°
                 std::cout << ">> " << p.getName()
-                          << " ·ÎºÎÅÍ ÇÇ¸¦ ÇÑ Àå ¹Þ¾Æ¿É´Ï´Ù." << std::endl;
+                          << " ë¡œë¶€í„° í”¼ë¥¼ í•œ ìž¥ ë°›ì•„ì˜µë‹ˆë‹¤." << std::endl;
                 int pi_num = 0;
                 for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
-                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ÇÇ) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == í”¼) {
                     player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(
-                        i));  // ÇÇ¸¦ ¹Þ¾Æ¼­ ³­ÆÐ¿¡ Ãß°¡
+                        i));  // í”¼ë¥¼ ë°›ì•„ì„œ ë‚œíŒ¨ì— ì¶”ê°€
                     pi_num++;
                     break;
                   }
                 }
-                // »ó´ë¹æÀÌ ÇÇ°¡ ¾øÀ» °æ¿ì ½ÖÇÇ°¡ ÀÖ´Ù¸é ½ÖÇÇ¸¦ ¹Þ¾Æ¿Â´Ù.
+                // ìƒëŒ€ë°©ì´ í”¼ê°€ ì—†ì„ ê²½ìš° ìŒí”¼ê°€ ìžˆë‹¤ë©´ ìŒí”¼ë¥¼ ë°›ì•„ì˜¨ë‹¤.
                 for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
-                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ½ÖÇÇ) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ìŒí”¼) {
                     player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(
-                        i));  // ½ÖÇÇ¸¦ ¹Þ¾Æ¼­ ³­ÆÐ¿¡ Ãß°¡
+                        i));  // ìŒí”¼ë¥¼ ë°›ì•„ì„œ ë‚œíŒ¨ì— ì¶”ê°€
                     break;
                   }
                 }
               }
             }
           } 
-          else {  // µû´ÚÀÌ³ª »¶ÀÌ ¾Æ´Ñ °æ¿ì
-            // 4ÀåÀÇ Ä«µå¸¸ °¡Á®¿Â´Ù.
-            std::cout << ">> Æä¾î¸¦ ³­ ÆÐ¿¡ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
+          else {  // ë”°ë‹¥ì´ë‚˜ ë»‘ì´ ì•„ë‹Œ ê²½ìš°
+            // 4ìž¥ì˜ ì¹´ë“œë§Œ ê°€ì ¸ì˜¨ë‹¤.
+            std::cout << ">> íŽ˜ì–´ë¥¼ ë‚œ íŒ¨ì— ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p1_index));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
@@ -272,51 +272,53 @@ Card Board::gookJinCase(Card card){
               player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
             player.getBadakHand().AddCard(gookJinCase(card));
           }
-        } else {  // p1_index != -1 && p2_index == -1 ÀÎ °æ¿ì°¡ ¿©±â¼­ Ã³¸®µÊ
-          // ³»°¡ ³½ ÆÐ¿Í, Â¦ÀÌ ¸ÂÀº ¹Ù´ÚÆÐ¸¸ °¡Á®¿Â´Ù
-          std::cout << ">> Æä¾î¸¦ ³­ ÆÐ¿¡ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
-          addedCardfromBadak.push_back(badak.GetCard(p1_index));
-          player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
+        } else {  // p1_index != -1 && p2_index == -1 ì¸ ê²½ìš°ê°€ ì—¬ê¸°ì„œ ì²˜ë¦¬ë¨
+          // ë‚´ê°€ ë‚¸ íŒ¨ì™€, ì§ì´ ë§žì€ ë°”ë‹¥íŒ¨ë§Œ ê°€ì ¸ì˜¨ë‹¤
+          std::cout << ">> íŽ˜ì–´ë¥¼ ë‚œ íŒ¨ì— ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
           player.getBadakHand().AddCard(gookJinCase(card));
+          addedCardfromBadak.push_back(badak.GetCard(p1_index));
+          Card c = gookJinCase(badak.PopIdxCard(p1_index));
+          c.setPpuk(false);
+          player.getBadakHand().AddCard(c);
         }
       }
 
-      if (p1_index == -1 && p2_index == -1) { // p1_index == -1 && p2_index == -1 ÀÎ °æ¿ì°¡ ¿©±â¼­ Ã³¸®µÊ
-        std::cout << ">> »ÌÀº Ä«µå¸¦ ¹Ù´Ú¿¡ ±ò¾Æ³õ½À´Ï´Ù." << std::endl;
+      if (p1_index == -1 && p2_index == -1) { // p1_index == -1 && p2_index == -1 ì¸ ê²½ìš°ê°€ ì—¬ê¸°ì„œ ì²˜ë¦¬ë¨
+        std::cout << ">> ë½‘ì€ ì¹´ë“œë¥¼ ë°”ë‹¥ì— ê¹”ì•„ë†“ìŠµë‹ˆë‹¤." << std::endl;
         badak.AddCard(popped);
-      } else if(p1_index == -1 && p2_index != -1) {  // p1_index == -1 && p2_index != -1 ÀÎ °æ¿ì°¡ ¿©±â¼­ Ã³¸®µÊ
-          // <ÂÊ>
-          // ¹Ù´ÚÆÐ¿Í Â¦ÀÌ µÇ´Â Ä«µå°¡ ¾ø¾î¼­ ¾Æ¹«°Å³ª ³½ Ä«µå¸¦ ´õ¹Ì¿¡¼­ »ÌÀº Ä«µå¿Í
-          // ÇÔ²² ´Ù½Ã °¡Á®¿À´Â °æ¿ì. Áï ³»°¡ ³½ Ä«µå¸¦ ´Ù½Ã °¡Á®¿À´Â °æ¿ì
+      } else if(p1_index == -1 && p2_index != -1) {  // p1_index == -1 && p2_index != -1 ì¸ ê²½ìš°ê°€ ì—¬ê¸°ì„œ ì²˜ë¦¬ë¨
+          // <ìª½>
+          // ë°”ë‹¥íŒ¨ì™€ ì§ì´ ë˜ëŠ” ì¹´ë“œê°€ ì—†ì–´ì„œ ì•„ë¬´ê±°ë‚˜ ë‚¸ ì¹´ë“œë¥¼ ë”ë¯¸ì—ì„œ ë½‘ì€ ì¹´ë“œì™€
+          // í•¨ê»˜ ë‹¤ì‹œ ê°€ì ¸ì˜¤ëŠ” ê²½ìš°. ì¦‰ ë‚´ê°€ ë‚¸ ì¹´ë“œë¥¼ ë‹¤ì‹œ ê°€ì ¸ì˜¤ëŠ” ê²½ìš°
           if (badak.GetCard(p2_index) == card) {
-            std::cout << ">> 'ÂÊ'ÀÔ´Ï´Ù. ÂÊÀ» ÇÑ µÎ Â¦ÆÐ¸¦ ³­ ÆÐ¿¡ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
+            std::cout << ">> 'ìª½'ìž…ë‹ˆë‹¤. ìª½ì„ í•œ ë‘ ì§íŒ¨ë¥¼ ë‚œ íŒ¨ì— ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
             player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
-            // ´Ù¸¥ ÇÃ·¹ÀÌ¾î·ÎºÎÅÍ ÇÇ¸¦ ÇÑ Àå¾¿ ¹Þ¾Æ¿Â´Ù.
+            // ë‹¤ë¥¸ í”Œë ˆì´ì–´ë¡œë¶€í„° í”¼ë¥¼ í•œ ìž¥ì”© ë°›ì•„ì˜¨ë‹¤.
             for (Player& p : players) {
-              if (p.getName().compare(player.getName())) {  // ÀÌ¸§ÀÌ ´Ù¸¥ ÇÃ·¹ÀÌ¾îÀÏ °æ¿ì
+              if (p.getName().compare(player.getName())) {  // ì´ë¦„ì´ ë‹¤ë¥¸ í”Œë ˆì´ì–´ì¼ ê²½ìš°
                 std::cout << ">> " << p.getName()
-                          << " ·ÎºÎÅÍ ÇÇ¸¦ ÇÑ Àå ¹Þ¾Æ¿É´Ï´Ù." << std::endl;
+                          << " ë¡œë¶€í„° í”¼ë¥¼ í•œ ìž¥ ë°›ì•„ì˜µë‹ˆë‹¤." << std::endl;
                 int pi_num = 0;
                 for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
-                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ÇÇ) {
-                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // ÇÇ¸¦ ¹Þ¾Æ¼­ ³­ÆÐ¿¡ Ãß°¡
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == í”¼) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // í”¼ë¥¼ ë°›ì•„ì„œ ë‚œíŒ¨ì— ì¶”ê°€
                     pi_num++;
                     break;
                   }
                 }
-                // »ó´ë¹æÀÌ ÇÇ°¡ ¾øÀ» °æ¿ì ½ÖÇÇ°¡ ÀÖ´Ù¸é ½ÖÇÇ¸¦ ¹Þ¾Æ¿Â´Ù.
+                // ìƒëŒ€ë°©ì´ í”¼ê°€ ì—†ì„ ê²½ìš° ìŒí”¼ê°€ ìžˆë‹¤ë©´ ìŒí”¼ë¥¼ ë°›ì•„ì˜¨ë‹¤.
                 for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
-                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ½ÖÇÇ) {
-                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // ½ÖÇÇ¸¦ ¹Þ¾Æ¼­ ³­ÆÐ¿¡ Ãß°¡
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == ìŒí”¼) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // ìŒí”¼ë¥¼ ë°›ì•„ì„œ ë‚œíŒ¨ì— ì¶”ê°€
                     break;
                   }
                 }
               }
             }
           } else {
-            std::cout << ">> Æä¾î¸¦ ³­ ÆÐ¿¡ Ãß°¡ÇÕ´Ï´Ù." << std::endl;
+            std::cout << ">> íŽ˜ì–´ë¥¼ ë‚œ íŒ¨ì— ì¶”ê°€í•©ë‹ˆë‹¤." << std::endl;
             player.getBadakHand().AddCard(gookJinCase(popped));
             addedCardfromBadak.push_back(badak.GetCard(p2_index));
             Card c = gookJinCase(badak.PopIdxCard(p2_index));
@@ -327,11 +329,11 @@ Card Board::gookJinCase(Card card){
       /*
     }*/
     
-    // »ó´ë°¡ »¶³½ Ä«µå¸¦ ¸Ô¾ú´ÂÁö È®ÀÎÇÏ°í ±×·¸´Ù¸é ÇÇ¸¦ ÇÑÀå¾¿ °¡Á®¿Â´Ù.
+    // ìƒëŒ€ê°€ ë»‘ë‚¸ ì¹´ë“œë¥¼ ë¨¹ì—ˆëŠ”ì§€ í™•ì¸í•˜ê³  ê·¸ë ‡ë‹¤ë©´ í”¼ë¥¼ í•œìž¥ì”© ê°€ì ¸ì˜¨ë‹¤.
     if (!addedCardfromBadak.empty()) {
       if (addedCardfromBadak[0].IsPpuk() == true) {
-        std::cout << ">> »ó´ë°¡ »¶À» ³½ Ä«µå¸¦ ¸Ô¾ú½À´Ï´Ù. »¶À» ³½ Ä«µå "
-                      "3ÀåÀ» ¸ðµÎ °¡Á®¿É´Ï´Ù."
+        std::cout << ">> ìƒëŒ€ê°€ ë»‘ì„ ë‚¸ ì¹´ë“œë¥¼ ë¨¹ì—ˆìŠµë‹ˆë‹¤. ë»‘ì„ ë‚¸ ì¹´ë“œ "
+                      "3ìž¥ì„ ëª¨ë‘ ê°€ì ¸ì˜µë‹ˆë‹¤."
                   << std::endl;
         std::vector<int> pcard_index;
         for (int i = 0; i < badak.GetNumOfCards(); i++) {
@@ -350,8 +352,8 @@ Card Board::gookJinCase(Card card){
       }
       if (addedCardfromBadak.size() >= 2 &&
           addedCardfromBadak[1].IsPpuk() == true) {
-        std::cout << ">> »ó´ë°¡ »¶À» ³½ Ä«µå¸¦ ¸Ô¾ú½À´Ï´Ù. »¶À» ³½ Ä«µå "
-                      "3ÀåÀ» ¸ðµÎ °¡Á®¿É´Ï´Ù."
+        std::cout << ">> ìƒëŒ€ê°€ ë»‘ì„ ë‚¸ ì¹´ë“œë¥¼ ë¨¹ì—ˆìŠµë‹ˆë‹¤. ë»‘ì„ ë‚¸ ì¹´ë“œ "
+                      "3ìž¥ì„ ëª¨ë‘ ê°€ì ¸ì˜µë‹ˆë‹¤."
                   << std::endl;
         std::vector<int> pcard_index;
         for (int i = 0; i < badak.GetNumOfCards(); i++) {
@@ -372,106 +374,106 @@ Card Board::gookJinCase(Card card){
     }
       
 
-    //Á¡¼ö¸¦ °è»êÇÑ´Ù.
+    //ì ìˆ˜ë¥¼ ê³„ì‚°í•œë‹¤.
     player.getBadakHand().calc(player);
-    std::cout << "-----------------ÇöÀç ³­ ÆÐ ¸ñ·Ï-----------------" << std::endl;
+    std::cout << "-----------------í˜„ìž¬ ë‚œ íŒ¨ ëª©ë¡-----------------" << std::endl;
     player.getBadakHand().printCardSet();
-    std::cout << ">> Áö±Ý±îÁö " << player.getBadakHand().getScore() << "Á¡ È¹µæÇÏ¼Ì½À´Ï´Ù."
+    std::cout << ">> ì§€ê¸ˆê¹Œì§€ " << player.getBadakHand().getScore() << "ì  íšë“í•˜ì…¨ìŠµë‹ˆë‹¤."
               << std::endl;
-    if (player.getBadakHand().getScore() >=3) {  // ¹Ù´ÚÆÐÀÇ °è»ê Á¡¼ö°¡ 3Á¡ ÀÌ»óÀÎ °æ¿ì °í ¶Ç´Â ½ºÅ¾ °¡´É
-      int addedScore = player.getBadakHand().getScore() - player.getScore(); // ÀÌ¹ø ÆÇ¿¡¼­ Ãß°¡·Î È¹µæÇÑ Á¡¼ö
-      if (player.getSayGo() == true) {  // °í¸¦ ¼±¾ðÇß´ø »ç¶÷ÀÎ °æ¿ì
-        if (addedScore != 0) {  // Ãß°¡·Î Á¡¼ö¸¦ ¾òÀº °æ¿ì °í ¶Ç´Â ½ºÅ¾À» ÇÒ ¼ö ÀÖ´Ù
-          // ¾òÁö ¸øÇß´Ù¸é °í ¶Ç´Â ½ºÅ¾À» ÇÒ ¼ö ¾ø´Ù
-          // Á¡¼ö¸¦ ¾òÀº °æ¿ì ¾Æ·¡ÀÇ ³»¿ë ¼öÇà
+    if (player.getBadakHand().getScore() >=3) {  // ë°”ë‹¥íŒ¨ì˜ ê³„ì‚° ì ìˆ˜ê°€ 3ì  ì´ìƒì¸ ê²½ìš° ê³  ë˜ëŠ” ìŠ¤íƒ‘ ê°€ëŠ¥
+      int addedScore = player.getBadakHand().getScore() - player.getScore(); // ì´ë²ˆ íŒì—ì„œ ì¶”ê°€ë¡œ íšë“í•œ ì ìˆ˜
+      if (player.getSayGo() == true) {  // ê³ ë¥¼ ì„ ì–¸í–ˆë˜ ì‚¬ëžŒì¸ ê²½ìš°
+        if (addedScore != 0) {  // ì¶”ê°€ë¡œ ì ìˆ˜ë¥¼ ì–»ì€ ê²½ìš° ê³  ë˜ëŠ” ìŠ¤íƒ‘ì„ í•  ìˆ˜ ìžˆë‹¤
+          // ì–»ì§€ ëª»í–ˆë‹¤ë©´ ê³  ë˜ëŠ” ìŠ¤íƒ‘ì„ í•  ìˆ˜ ì—†ë‹¤
+          // ì ìˆ˜ë¥¼ ì–»ì€ ê²½ìš° ì•„ëž˜ì˜ ë‚´ìš© ìˆ˜í–‰
           player.setScore(player.getBadakHand().getScore());
-          //°í ¶Ç´Â ½ºÅ¾ ¼±ÅÃ.
-          std::cout << ">> " << player.getName() << " ´ÔÀÌ ÀÌ¹ø¿¡ Ãß°¡·Î "<<addedScore<<"Á¡À»  È¹µæ!"
+          //ê³  ë˜ëŠ” ìŠ¤íƒ‘ ì„ íƒ.
+          std::cout << ">> " << player.getName() << " ë‹˜ì´ ì´ë²ˆì— ì¶”ê°€ë¡œ "<<addedScore<<"ì ì„  íšë“!"
                     << std::endl;
-          std::cout << ">> 0À» ´­·¯ ½ºÅ¾ ¶Ç´Â 1À» ´­·¯ °í" << std::endl;
+          std::cout << ">> 0ì„ ëˆŒëŸ¬ ìŠ¤íƒ‘ ë˜ëŠ” 1ì„ ëˆŒëŸ¬ ê³ " << std::endl;
           int willGo;
           std::cin >> willGo;
           while (true) {
             if (willGo != 0 && willGo != 1) {
-              std::cout << ">> Á¦´ë·Î ÀÔ·ÂÇØÁÖ¼¼¿ä" << std::endl;
-              std::cout << ">> 0À» ´­·¯ ½ºÅ¾ ¶Ç´Â 1À» ´­·¯ °í" << std::endl;
+              std::cout << ">> ì œëŒ€ë¡œ ìž…ë ¥í•´ì£¼ì„¸ìš”" << std::endl;
+              std::cout << ">> 0ì„ ëˆŒëŸ¬ ìŠ¤íƒ‘ ë˜ëŠ” 1ì„ ëˆŒëŸ¬ ê³ " << std::endl;
               std::cin >> willGo;
             } else {
               break;
             }
           }
-          // ÇÃ·¹ÀÌ¾îÀÇ °í°¡ Áß¿äÇØ¼­ º¸µåÀÇ °í¸¦ Á¦°ÅÇÏ°í
-          // ÇÃ·¹ÀÌ¾îÀÇ °í¸¦ ÀÌ¿ëÇÏµµ·Ï ¼öÁ¤Çß½À´Ï´Ù.
+          // í”Œë ˆì´ì–´ì˜ ê³ ê°€ ì¤‘ìš”í•´ì„œ ë³´ë“œì˜ ê³ ë¥¼ ì œê±°í•˜ê³ 
+          // í”Œë ˆì´ì–´ì˜ ê³ ë¥¼ ì´ìš©í•˜ë„ë¡ ìˆ˜ì •í–ˆìŠµë‹ˆë‹¤.
           switch (willGo) {
             case 0:
-              //¿©±â ÃÖÁ¾Á¡¼ö °è»ê ±¸Çö ¾ÈÇØ³ù½À´Ï´Ù. ±¸ÇöÇØÁÖ¼¼¿ä.
-              // --ºÎºÐ ±¸Çö ¿Ï·á--
+              //ì—¬ê¸° ìµœì¢…ì ìˆ˜ ê³„ì‚° êµ¬í˜„ ì•ˆí•´ë†¨ìŠµë‹ˆë‹¤. êµ¬í˜„í•´ì£¼ì„¸ìš”.
+              // --ë¶€ë¶„ êµ¬í˜„ ì™„ë£Œ--
               std::cout << ">> " << player.getName()
-                        << " ´ÔÀÇ ½Â¸®·Î °ÔÀÓÀÌ ³¡³µ½À´Ï´Ù!" << std::endl;
-              std::cout << ">> " << player.getName() << " ´ÔÀº"
-                        << player.getScore() << " Á¡°ú ";
-              calcScoreByGo(player);  //°í·Î ÀÎÇÑ Á¡¼ö ¾÷µ¥ÀÌÆ®
-              std::cout << player.getGo() << " °í¸¦ È¹µæÇÏ¼Å¼­ ÃÑ"
-                        << player.getScore() << " Á¡À¸·Î ½Â¸®ÇÏ¼Ì½À´Ï´Ù."
+                        << " ë‹˜ì˜ ìŠ¹ë¦¬ë¡œ ê²Œìž„ì´ ëë‚¬ìŠµë‹ˆë‹¤!" << std::endl;
+              std::cout << ">> " << player.getName() << " ë‹˜ì€"
+                        << player.getScore() << " ì ê³¼ ";
+              calcScoreByGo(player);  //ê³ ë¡œ ì¸í•œ ì ìˆ˜ ì—…ë°ì´íŠ¸
+              std::cout << player.getGo() << " ê³ ë¥¼ íšë“í•˜ì…”ì„œ ì´"
+                        << player.getScore() << " ì ìœ¼ë¡œ ìŠ¹ë¦¬í•˜ì…¨ìŠµë‹ˆë‹¤."
                         << std::endl;
-              std::cout << ">> °á»ê ±ÔÄ¢À» Àû¿ëÇÏ¿© ÃÖÁ¾ Á¡¼ö¸¦ °è»êÇÕ´Ï´Ù."
+              std::cout << ">> ê²°ì‚° ê·œì¹™ì„ ì ìš©í•˜ì—¬ ìµœì¢… ì ìˆ˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤."
                         << std::endl;
-              endGame(players, player);  // ³ª°¡¸®°¡ ¾Æ´Ñ °æ¿ì °ÔÀÓ Á¾·á
+              endGame(players, player);  // ë‚˜ê°€ë¦¬ê°€ ì•„ë‹Œ ê²½ìš° ê²Œìž„ ì¢…ë£Œ
 
               break;
             case 1:
-              player.setGo(player.getGo() + 1);  //ÀÌ±ä ÇÃ·¹ÀÌ¾îÀÇ °í¸¦ ÇÏ³ª ´Ã¸²
+              player.setGo(player.getGo() + 1);  //ì´ê¸´ í”Œë ˆì´ì–´ì˜ ê³ ë¥¼ í•˜ë‚˜ ëŠ˜ë¦¼
 
-              std::cout << ">> " << player.getName() << " ´ÔÀÌ °íÇÏ¼Ì½À´Ï´Ù!"
+              std::cout << ">> " << player.getName() << " ë‹˜ì´ ê³ í•˜ì…¨ìŠµë‹ˆë‹¤!"
                         << std::endl;
-              std::cout << "ÇöÀç " << player.getName() << "´ÔÀÇ °í´Â "
-                        << player.getGo() << "go ÀÔ´Ï´Ù." << std::endl;
+              std::cout << "í˜„ìž¬ " << player.getName() << "ë‹˜ì˜ ê³ ëŠ” "
+                        << player.getGo() << "go ìž…ë‹ˆë‹¤." << std::endl;
 
               break;
           }
         }
-      } else {  // °í¸¦ ¿ÜÄ¡Áö ¾Ê¾Ò´ø »ç¶÷ÀÎ °æ¿ì ´ÜÁö 3Á¡¸¸ ³ÑÀ¸¸é OK
+      } else {  // ê³ ë¥¼ ì™¸ì¹˜ì§€ ì•Šì•˜ë˜ ì‚¬ëžŒì¸ ê²½ìš° ë‹¨ì§€ 3ì ë§Œ ë„˜ìœ¼ë©´ OK
         player.setScore(player.getBadakHand().getScore());
-        //°í ¶Ç´Â ½ºÅ¾ ¼±ÅÃ.
-        std::cout << ">> " << player.getName() << " ´ÔÀÌ ÀÌ¹ø¿¡ Ãß°¡·Î "
-                  << addedScore << "Á¡À»  È¹µæ!" << std::endl;
-        std::cout << ">> 0À» ´­·¯ ½ºÅ¾ ¶Ç´Â 1À» ´­·¯ °í" << std::endl;
+        //ê³  ë˜ëŠ” ìŠ¤íƒ‘ ì„ íƒ.
+        std::cout << ">> " << player.getName() << " ë‹˜ì´ ì´ë²ˆì— ì¶”ê°€ë¡œ "
+                  << addedScore << "ì ì„  íšë“!" << std::endl;
+        std::cout << ">> 0ì„ ëˆŒëŸ¬ ìŠ¤íƒ‘ ë˜ëŠ” 1ì„ ëˆŒëŸ¬ ê³ " << std::endl;
         int willGo;
         std::cin >> willGo;
         while (true) {
           if (willGo != 0 && willGo != 1) {
-            std::cout << ">> Á¦´ë·Î ÀÔ·ÂÇØÁÖ¼¼¿ä" << std::endl;
-            std::cout << ">> 0À» ´­·¯ ½ºÅ¾ ¶Ç´Â 1À» ´­·¯ °í" << std::endl;
+            std::cout << ">> ì œëŒ€ë¡œ ìž…ë ¥í•´ì£¼ì„¸ìš”" << std::endl;
+            std::cout << ">> 0ì„ ëˆŒëŸ¬ ìŠ¤íƒ‘ ë˜ëŠ” 1ì„ ëˆŒëŸ¬ ê³ " << std::endl;
             std::cin >> willGo;
           } else {
             break;
           }
         }
-        // ÇÃ·¹ÀÌ¾îÀÇ °í°¡ Áß¿äÇØ¼­ º¸µåÀÇ °í¸¦ Á¦°ÅÇÏ°í
-        // ÇÃ·¹ÀÌ¾îÀÇ °í¸¦ ÀÌ¿ëÇÏµµ·Ï ¼öÁ¤Çß½À´Ï´Ù.
+        // í”Œë ˆì´ì–´ì˜ ê³ ê°€ ì¤‘ìš”í•´ì„œ ë³´ë“œì˜ ê³ ë¥¼ ì œê±°í•˜ê³ 
+        // í”Œë ˆì´ì–´ì˜ ê³ ë¥¼ ì´ìš©í•˜ë„ë¡ ìˆ˜ì •í–ˆìŠµë‹ˆë‹¤.
         switch (willGo) {
           case 0:
-            //¿©±â ÃÖÁ¾Á¡¼ö °è»ê ±¸Çö ¾ÈÇØ³ù½À´Ï´Ù. ±¸ÇöÇØÁÖ¼¼¿ä.
-            // --ºÎºÐ ±¸Çö ¿Ï·á--
+            //ì—¬ê¸° ìµœì¢…ì ìˆ˜ ê³„ì‚° êµ¬í˜„ ì•ˆí•´ë†¨ìŠµë‹ˆë‹¤. êµ¬í˜„í•´ì£¼ì„¸ìš”.
+            // --ë¶€ë¶„ êµ¬í˜„ ì™„ë£Œ--
 
             std::cout << ">> " << player.getName()
-                      << " ´ÔÀÇ ½Â¸®·Î °ÔÀÓÀÌ ³¡³µ½À´Ï´Ù!" << std::endl;
-            std::cout << ">> " << player.getName() << " ´ÔÀº" << player.getScore()
-                      << " Á¡°ú ";
-            calcScoreByGo(player);  //°í·Î ÀÎÇÑ Á¡¼ö ¾÷µ¥ÀÌÆ®
-            std::cout << player.getGo() << " °í¸¦ È¹µæÇÏ¼Å¼­ ÃÑ"
-                      << player.getScore() << " Á¡À¸·Î ½Â¸®ÇÏ¼Ì½À´Ï´Ù."
+                      << " ë‹˜ì˜ ìŠ¹ë¦¬ë¡œ ê²Œìž„ì´ ëë‚¬ìŠµë‹ˆë‹¤!" << std::endl;
+            std::cout << ">> " << player.getName() << " ë‹˜ì€" << player.getScore()
+                      << " ì ê³¼ ";
+            calcScoreByGo(player);  //ê³ ë¡œ ì¸í•œ ì ìˆ˜ ì—…ë°ì´íŠ¸
+            std::cout << player.getGo() << " ê³ ë¥¼ íšë“í•˜ì…”ì„œ ì´"
+                      << player.getScore() << " ì ìœ¼ë¡œ ìŠ¹ë¦¬í•˜ì…¨ìŠµë‹ˆë‹¤."
                       << std::endl;
-            std::cout << ">> °á»ê ±ÔÄ¢À» Àû¿ëÇÏ¿© ÃÖÁ¾ Á¡¼ö¸¦ °è»êÇÕ´Ï´Ù."
+            std::cout << ">> ê²°ì‚° ê·œì¹™ì„ ì ìš©í•˜ì—¬ ìµœì¢… ì ìˆ˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤."
                       << std::endl;
-            endGame(players, player);  // ³ª°¡¸®°¡ ¾Æ´Ñ °æ¿ì °ÔÀÓ Á¾·á
+            endGame(players, player);  // ë‚˜ê°€ë¦¬ê°€ ì•„ë‹Œ ê²½ìš° ê²Œìž„ ì¢…ë£Œ
 
             break;
           case 1:
-            player.setGo(player.getGo() + 1);  //ÀÌ±ä ÇÃ·¹ÀÌ¾îÀÇ °í¸¦ ÇÏ³ª ´Ã¸²
-            player.setSayGo(true);  // ÇÃ·¹ÀÌ¾î°¡ °í¸¦ ¸»Çß´Ù°í º¯°æ
-            std::cout << ">> " << player.getName() << " ´ÔÀÌ °íÇÏ¼Ì½À´Ï´Ù!"<< std::endl;
-            std::cout<<"ÇöÀç "<<player.getName()<<"´ÔÀÇ °í´Â " << player.getGo() << "go ÀÔ´Ï´Ù." << std::endl;
+            player.setGo(player.getGo() + 1);  //ì´ê¸´ í”Œë ˆì´ì–´ì˜ ê³ ë¥¼ í•˜ë‚˜ ëŠ˜ë¦¼
+            player.setSayGo(true);  // í”Œë ˆì´ì–´ê°€ ê³ ë¥¼ ë§í–ˆë‹¤ê³  ë³€ê²½
+            std::cout << ">> " << player.getName() << " ë‹˜ì´ ê³ í•˜ì…¨ìŠµë‹ˆë‹¤!"<< std::endl;
+            std::cout<<"í˜„ìž¬ "<<player.getName()<<"ë‹˜ì˜ ê³ ëŠ” " << player.getGo() << "go ìž…ë‹ˆë‹¤." << std::endl;
 
             break;
         }
@@ -479,7 +481,7 @@ Card Board::gookJinCase(Card card){
     }
   }
   
-  //Ä«µå¿Í Ä«µå¼ÂÀ» °¡Áö°í Â¦ÀÌ Æä¾î°¡ ¸¸µé¾îÁö´ÂÁö¸¦ È®ÀÎÇÕ´Ï´Ù.Æä¾î°¡ ¸¸µé¾îÁø´Ù¸é Ä«µå¼ÂÀÇ ÀÎµ¦½º¸¦, ¾È¸¸µé¾îÁø´Ù¸é -1À» ¸®ÅÏÇÕ´Ï´Ù
+  //ì¹´ë“œì™€ ì¹´ë“œì…‹ì„ ê°€ì§€ê³  ì§ì´ íŽ˜ì–´ê°€ ë§Œë“¤ì–´ì§€ëŠ”ì§€ë¥¼ í™•ì¸í•©ë‹ˆë‹¤.íŽ˜ì–´ê°€ ë§Œë“¤ì–´ì§„ë‹¤ë©´ ì¹´ë“œì…‹ì˜ ì¸ë±ìŠ¤ë¥¼, ì•ˆë§Œë“¤ì–´ì§„ë‹¤ë©´ -1ì„ ë¦¬í„´í•©ë‹ˆë‹¤
   int Board::makePair(Card& card,CardSet& cardset) { 
     CardSet available = CardSet();
     std::vector<int> index;
@@ -490,18 +492,18 @@ Card Board::gookJinCase(Card card){
       }
     }
     if (available.GetNumOfCards()==0) {
-      std::cout << ">> Æä¾î¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù." << std::endl;
+      std::cout << ">> íŽ˜ì–´ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << std::endl;
       return -1;
     } else {
-      std::cout << ">> ¼±ÅÃÇÏ½Å Ä«µå´Â " << card.toString() << std::endl;
-      std::cout << ">> °í¸£½Ç ¼ö ÀÖ´Â Ä«µå´Â " << std::endl;
+      std::cout << ">> ì„ íƒí•˜ì‹  ì¹´ë“œëŠ” " << card.toString() << std::endl;
+      std::cout << ">> ê³ ë¥´ì‹¤ ìˆ˜ ìžˆëŠ” ì¹´ë“œëŠ” " << std::endl;
       available.printCardSet();
       int c;
       while (true) {
-        std::cout << ">> ÀÎµ¦½º ¹øÈ£·Î Ä«µå¸¦ °ñ¶ó ÁÖ¼¼¿ä" << std::endl;
+        std::cout << ">> ì¸ë±ìŠ¤ ë²ˆí˜¸ë¡œ ì¹´ë“œë¥¼ ê³¨ë¼ ì£¼ì„¸ìš”" << std::endl;
         std::cin >> c;
         if (c < 0 || c >= index.size()) {
-          std::cout << ">> Á¸ÀçÇÏÁö ¾Ê´Â ÀÎµ¦½ºÀÔ´Ï´Ù.Àç½ÃµµÇÕ´Ï´Ù." << std::endl;
+          std::cout << ">> ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì¸ë±ìŠ¤ìž…ë‹ˆë‹¤.ìž¬ì‹œë„í•©ë‹ˆë‹¤." << std::endl;
         } else {
           break;
         }
@@ -510,45 +512,45 @@ Card Board::gookJinCase(Card card){
     }
   }
  
-  //ÇÃ·¹ÀÌ¾î¿¡°Ô Ä«µå¸¦ ³Ñ°ÜÁÝ´Ï´Ù.
+  //í”Œë ˆì´ì–´ì—ê²Œ ì¹´ë“œë¥¼ ë„˜ê²¨ì¤ë‹ˆë‹¤.
   void Board::giveCardToPlayer(Player& player) {
     player.getHand().AddCard(dummy.PopCard());
-    std::cout << ">> " << player.getName()<< " player¿¡°Ô Ä«µå ÇÑÀå Áö±Þ ÇÏ¿´½À´Ï´Ù."
+    std::cout << ">> " << player.getName()<< " playerì—ê²Œ ì¹´ë“œ í•œìž¥ ì§€ê¸‰ í•˜ì˜€ìŠµë‹ˆë‹¤."
               << std::endl;
   }
 
-  //¹Ù´Ú¿¡ Ä«µå¸¦ ±õ´Ï´Ù.
+  //ë°”ë‹¥ì— ì¹´ë“œë¥¼ ê¹ë‹ˆë‹¤.
   void Board::giveCardToBadak() {
     Card c = dummy.PopCard();
     badak.AddCard(c);
-    std::cout  << ">> ¹Ù´Ú¿¡ Ä«µå ÇÑÀåÀ» ±ò¾Ò½À´Ï´Ù."
+    std::cout  << ">> ë°”ë‹¥ì— ì¹´ë“œ í•œìž¥ì„ ê¹”ì•˜ìŠµë‹ˆë‹¤."
               << std::endl;
   }
  
-  //ÃÊ¹Ý¿¡ ¼±À» Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
-  //Çö½Ç¿¡¼­´Â ½Ã°è¹Ý´ë¹æÇâÀÌÁö¸¸,
-  //ÀÌ°ÔÀÓ¿¡¼­´Â ÀÏ´Ü ³ôÀº°É »ÌÀº ¼ø¼­´ë·Î ¼±ÀÌ¶ó°í Á¤Çß½À´Ï´Ù.
+  //ì´ˆë°˜ì— ì„ ì„ ì •í•˜ëŠ” í•¨ìˆ˜ìž…ë‹ˆë‹¤.
+  //í˜„ì‹¤ì—ì„œëŠ” ì‹œê³„ë°˜ëŒ€ë°©í–¥ì´ì§€ë§Œ,
+  //ì´ê²Œìž„ì—ì„œëŠ” ì¼ë‹¨ ë†’ì€ê±¸ ë½‘ì€ ìˆœì„œëŒ€ë¡œ ì„ ì´ë¼ê³  ì •í–ˆìŠµë‹ˆë‹¤.
   void Board::decideOrder() { 
     std::set<int> s;
     int a;
     for (int i = 0; i < 3; i++) {
       while (true) {
         std::cout << ">> " << players.at(i).getName()
-                  << " ÇÃ·¹ÀÌ¾î´Â ¹Ù´ÚÄ«µå[0-5]¸¦ ÇÑÀå °ñ¶óÁÖ½Ê½Ã¿À."
+                  << " í”Œë ˆì´ì–´ëŠ” ë°”ë‹¥ì¹´ë“œ[0-5]ë¥¼ í•œìž¥ ê³¨ë¼ì£¼ì‹­ì‹œì˜¤."
                   << std::endl;
         std::cin >> a;
         if (a > 5 || a < 0) {
-          std::cout << ">> 0-5 °¡ ¾Æ´Õ´Ï´Ù.Á¦´ë·Î °ñ¶óÁÖ¼¼¿ä."
+          std::cout << ">> 0-5 ê°€ ì•„ë‹™ë‹ˆë‹¤.ì œëŒ€ë¡œ ê³¨ë¼ì£¼ì„¸ìš”."
                     << std::endl;
           continue;
         } 
         else if (s.find(a)!=s.end()) {
-          std::cout << ">> ´Ù¸¥ ÇÃ·¹ÀÌ¾î°¡ °í¸¥°É °í¸£¼Ì½À´Ï´Ù.. Á¦´ë·Î °ñ¶óÁÖ¼¼¿ä." << std::endl;
+          std::cout << ">> ë‹¤ë¥¸ í”Œë ˆì´ì–´ê°€ ê³ ë¥¸ê±¸ ê³ ë¥´ì…¨ìŠµë‹ˆë‹¤.. ì œëŒ€ë¡œ ê³¨ë¼ì£¼ì„¸ìš”." << std::endl;
           continue;
         }
         else {
           s.insert(a);
-          std::cout << ">> ´ç½ÅÀÌ °í¸¥ Ä«µå´Â :" << std::endl;
+          std::cout << ">> ë‹¹ì‹ ì´ ê³ ë¥¸ ì¹´ë“œëŠ” :" << std::endl;
           std::cout << badak.GetCard(a).toString() << std::endl;
           players.at(i).setChoice(badak.GetCard(a));
           break;
@@ -557,21 +559,21 @@ Card Board::gookJinCase(Card card){
       
     }
     std::sort(players.begin(), players.end());
-    std::cout << ">> ¼ø¼­´Â ´ÙÀ½°ú °°½À´Ï´Ù : " << std::endl;
+    std::cout << ">> ìˆœì„œëŠ” ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤ : " << std::endl;
     for (Player& player : players) {
       std::cout << player.getName() << " ";
     }
     std::cout << std::endl;
   }
   
-  //i¹øÂ° ÇÃ·¹ÀÌ¾î¸¦ °í¸¨´Ï´Ù(¼± = 0)
+  //ië²ˆì§¸ í”Œë ˆì´ì–´ë¥¼ ê³ ë¦…ë‹ˆë‹¤(ì„  = 0)
   Player& Board::getIndxPlayer(int i) { 
 
     return this->players.at(i);
   }
 
 
-  //ÃÊ¹Ý¿¡ ÇÃ·¹ÀÌ¾îµé¿¡°Ô ÆÐ¸¦ µ¹¸®°í, ¹Ù´Ú¿¡ 6ÀåÀ» ±õ´Ï´Ù.
+  //ì´ˆë°˜ì— í”Œë ˆì´ì–´ë“¤ì—ê²Œ íŒ¨ë¥¼ ëŒë¦¬ê³ , ë°”ë‹¥ì— 6ìž¥ì„ ê¹ë‹ˆë‹¤.
   void Board::TurnHands() {
     for (int i = 0; i < 7; i++) {
       for (Player& player : players) {
@@ -581,5 +583,5 @@ Card Board::gookJinCase(Card card){
     for (int i = 0; i < 6; i++) {
       giveCardToBadak();
     }
-    std::cout << ">> ÇÃ·¹ÀÌ¾îµé¿¡°Ô 7Àå¾¿ Ä«µåºÐ¹è ¿Ï·á.\n>> ¹Ù´Ú¿¡ 6ÀåÀÇ Ä«µå ¼¼ÆÃ¿Ï·á" << std::endl;
+    std::cout << ">> í”Œë ˆì´ì–´ë“¤ì—ê²Œ 7ìž¥ì”© ì¹´ë“œë¶„ë°° ì™„ë£Œ.\n>> ë°”ë‹¥ì— 6ìž¥ì˜ ì¹´ë“œ ì„¸íŒ…ì™„ë£Œ" << std::endl;
   }
