@@ -17,7 +17,7 @@ class CardSet {
   // 갖고 있는 카드 개수를 리턴
   int GetNumOfCards();
   // 카드 셋의 특정 인덱스의 카드를 리턴
-  Card GetCard(int index);
+  Card& GetCard(int index);
   // 카드를 카드셋에 추가
   virtual void AddCard(Card card);
   // 카드 셋에서 특정 인덱스의 카드를 뽑음(카드 셋에서 제거됨)

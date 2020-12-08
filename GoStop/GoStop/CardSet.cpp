@@ -3,7 +3,7 @@
 // 갖고 있는 카드 개수를 리턴
 int CardSet::GetNumOfCards() { return cardset_.size(); }
 // 카드 셋의 특정 인덱스의 카드를 리턴
-Card CardSet::GetCard(int index) { return cardset_[index]; }
+Card& CardSet::GetCard(int index) { return cardset_[index]; }
 // 카드를 카드셋에 추가
 void CardSet::AddCard(Card card) {
     cardset_.push_back(card);  // 카드 추가

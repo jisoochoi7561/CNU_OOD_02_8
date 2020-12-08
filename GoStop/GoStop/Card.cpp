@@ -2,16 +2,17 @@
 #include <iostream>
 
 // Card 클래스
-Card::Card() : month_(1), state_(광) {}
+Card::Card() : month_(1), state_(광), isPpuk_(false) {}
 // Card 생성 : 월,상태
-Card::Card(const int month, const State state) : month_(month), state_(state) {}
+Card::Card(const int month, const State state, const bool isPpuk) : month_(month), state_(state), isPpuk_(isPpuk) {}
 // Card 월 리턴
 int Card::GetMonthOfCard() const { return this->month_; }
 // Card 상태 리턴
-State Card::GetStateOfCard() const {
-  //
-  return this->state_;
-}
+State Card::GetStateOfCard() const {  return this->state_; }
+// 뻑 여부 리턴
+bool Card::IsPpuk() const { return isPpuk_; }
+// 뻑 여부 세팅
+void Card::setPpuk(bool p) { this->isPpuk_ = p; }
 // Card 상태 문자열로 변환
 std::string Card::stateToString() {
   // switch 문으로 구현
@@ -45,7 +46,7 @@ std::string Card::stateToString() {
 // Card 정보 출력
 std::string Card::toString() {
   return ("card info: month = " + std::to_string(this->month_)) +
-         (" state = " + this->stateToString());
+         (" state = " + this->stateToString() + ((isPpuk_)? " - 뻑" : ""));
 }
 
 // Card의 equality는 월을 기준으로 하였음.

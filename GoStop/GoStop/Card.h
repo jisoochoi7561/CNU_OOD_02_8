@@ -16,16 +16,20 @@ class Card {
   explicit Card();
 
   // Card 생성 : 월,상태
-  Card(const int month, const State state);
+  Card(const int month, const State state, const bool isPpuk);
 
   // Card 월 리턴
   int GetMonthOfCard() const;
+  // Card 상태 리턴
   State GetStateOfCard() const;
+  // 뻑 여부 리턴
+  bool IsPpuk() const;
   // Card 상태 문자열로 변환
   std::string stateToString();
   // Card 정보 출력
   std::string toString();
   void setState(State state);
+  void setPpuk(bool p);
   // Card의 equality는 월을 기준으로 하였음.
   bool operator==(const Card& other);
 
@@ -35,6 +39,7 @@ class Card {
  private:
   State state_;
   int month_;
+  bool isPpuk_;
 };
 
 #endif

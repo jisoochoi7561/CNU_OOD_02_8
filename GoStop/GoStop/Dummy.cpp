@@ -24,16 +24,16 @@ void Dummy::reset() {
           case 2:
           case 7:
           case 10:
-            this->AddCard(Card(i + 1, ±¤));
+            this->AddCard(Card(i + 1, ±¤, false));
             break;
           case 11:
-            this->AddCard(Card(i + 1, ºñ±¤));
+            this->AddCard(Card(i + 1, ºñ±¤, false));
             break;
           case 8:
-            this->AddCard(Card(i + 1, ¿­²ı));
+            this->AddCard(Card(i + 1, ¿­²ı, false));
             break;
           default: 
-            this->AddCard(Card(i + 1, ¿­²ı));
+            this->AddCard(Card(i + 1, ¿­²ı, false));
             break;
         }
       } else if (j == 1) {  // µÎ ¹øÂ° Ä«µå ÃÊ±âÈ­
@@ -41,34 +41,34 @@ void Dummy::reset() {
           case 0:
           case 1:
           case 2:
-            this->AddCard(Card(i + 1, È«´Ü));
+            this->AddCard(Card(i + 1, È«´Ü, false));
             break;
           case 3:
           case 4:
           case 6:
-            this->AddCard(Card(i + 1, ÃÊ´Ü));
+            this->AddCard(Card(i + 1, ÃÊ´Ü, false));
             break;
           case 5:
           case 8:
           case 9:
-            this->AddCard(Card(i + 1, Ã»´Ü));
+            this->AddCard(Card(i + 1, Ã»´Ü, false));
             break;
           case 11:
-            this->AddCard(Card(i + 1, ½ÖÇÇ));
+            this->AddCard(Card(i + 1, ½ÖÇÇ, false));
             break;
           default:
-            this->AddCard(Card(i + 1, ¿­²ı));
+            this->AddCard(Card(i + 1, ¿­²ı, false));
             break;
         }
       } else {          // ¼¼ ¹øÂ°, ³× ¹øÂ° Ä«µå ÃÊ±âÈ­
         if (i == 11) {  // 12¿ù´Ş
           if (j == 2) {
-            this->AddCard(Card(i + 1, ÃÊ´Ü));
+            this->AddCard(Card(i + 1, ÃÊ´Ü, false));
           } else if (j == 3) {
-            this->AddCard(Card(i + 1, ½ÖÇÇ));
+            this->AddCard(Card(i + 1, ½ÖÇÇ, false));
           }
         } else {
-          this->AddCard(Card(i + 1, ÇÇ));
+          this->AddCard(Card(i + 1, ÇÇ, false));
         }
       }
     }

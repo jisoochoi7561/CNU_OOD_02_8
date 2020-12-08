@@ -9,6 +9,7 @@
 #include <set>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 
 Card Board::gookJinCase(Card card){
   if (card.GetStateOfCard()==열끗&&card.GetMonthOfCard()==9) {
@@ -151,14 +152,15 @@ Card Board::gookJinCase(Card card){
     std::cin>>c;
     Card card = player.getHand().PopIdxCard(c);
     //짝을 맞춘다
-    int index = makePair(card, badak);
-    if (index==-1) {
+    int p1_index = makePair(card, badak);
+    if (p1_index==-1) {
       std::cout << ">> 낸 카드를 바닥에 깔아놓습니다" << std::endl;
       badak.AddCard(card);
     } else {
-      std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
-      player.getBadakHand().AddCard(gookJinCase(card));
-      player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(index)));
+      // 아래에서 뻑인지 판단한 후 추가합니다.
+      // std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
+      // player.getBadakHand().AddCard(gookJinCase(card));
+      // player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
     }
     // 더미의 패가 소진되었으면 현재 플레이어의 badakHand 패를 가지고 점수를 계산한 다음
     // 최종점수 계산 후 승리자를 선정하도록 처리합니다.
@@ -189,17 +191,180 @@ Card Board::gookJinCase(Card card){
       Card popped = dummy.PopCard();
       std::cout << ">> 뽑은 카드는 " << popped.toString() << std::endl;
       //짝을 맞춘다
-      index = makePair(popped, badak);
-      if (index == -1) {
+      int p2_index = makePair(popped, badak);
+      std::vector<Card> addedCardfromBadak;
+      if (p1_index != -1) {
+        if (p2_index != -1) { // p1_index != -1 && p2_index != -1 인 경우가 여기서 처리됨
+          // 더미에서 젖힌 패와 짝을 맞춘 바닥패가, 내가 낸 패와 짝을 맞췄던 바닥패인 경우(== 뻑)
+          if (popped.GetMonthOfCard() == badak.GetCard(p1_index).GetMonthOfCard()
+            && p1_index == p2_index) {
+            // 3개의 패(더미에서 젖힌 패, 내가 낸 패, 짝을 맞춘 바닥패)는 모두
+            // 바닥에 있어야 함. 바닥에 내려놓으면서 각 카드의 isPpuk_ == true로
+            // 세팅
+            std::cout << ">> 뻑입니다. 세 장의 카드를 모두 바닥에 내려놓습니다."
+                      << std::endl;
+
+            // 더미에서 젖힌 패
+            popped.setPpuk(true);
+            badak.AddCard(popped);
+
+            // 바닥패는 이미 바닥에 있음
+            Card temp = badak.PopIdxCard(p1_index);
+            temp.setPpuk(true);
+            badak.AddCard(temp);
+
+            // 내가 낸 패
+            card.setPpuk(true);
+            badak.AddCard(card);
+          }
+          // 더미에서 젖힌 패와 짝을 맞춘 바닥패가, 내가 낸 패와 짝을 맞췄던
+          // 바닥패와 월은 같지만, 똑같은 패는 아니어서(즉 뻑이 아니라서) 4장을 한꺼번에 가져올 수 있는경우(== 따닥)
+          else if (popped.GetMonthOfCard() == badak.GetCard(p1_index).GetMonthOfCard() 
+            && p1_index != p2_index) {
+            std::cout << ">> 따닥입니다." << std::endl;
+            // 4개의 패를 가져오고 다른 참여자로부터 피를 한 장씩 가져온다.
+            player.getBadakHand().AddCard(gookJinCase(popped));
+            addedCardfromBadak.push_back(badak.GetCard(p1_index));
+            addedCardfromBadak.push_back(badak.GetCard(p2_index));
+            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
+            if (p1_index < p2_index)
+              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index - 1)));
+            else
+              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+            player.getBadakHand().AddCard(gookJinCase(card));
+
+            // 다른 플레이어로부터 피를 한 장씩 받아온다.
+            for (Player& p : players) {
+              if (p.getName().compare(
+                      player.getName())) {  // 이름이 다른 플레이어일 경우
+                std::cout << ">> " << p.getName()
+                          << " 로부터 피를 한 장 받아옵니다." << std::endl;
+                int pi_num = 0;
+                for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == 피) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(
+                        i));  // 피를 받아서 난패에 추가
+                    pi_num++;
+                    break;
+                  }
+                }
+                // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
+                for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == 쌍피) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(
+                        i));  // 쌍피를 받아서 난패에 추가
+                    break;
+                  }
+                }
+              }
+            }
+          } 
+          else {  // 따닥이나 뻑이 아닌 경우
+            // 4장의 카드만 가져온다.
+            std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
+            player.getBadakHand().AddCard(gookJinCase(popped));
+            addedCardfromBadak.push_back(badak.GetCard(p1_index));
+            addedCardfromBadak.push_back(badak.GetCard(p2_index));
+            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
+            if (p1_index < p2_index)
+              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index - 1)));
+            else
+              player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+            player.getBadakHand().AddCard(gookJinCase(card));
+          }
+        } else {  // p1_index != -1 && p2_index == -1 인 경우가 여기서 처리됨
+          // 내가 낸 패와, 짝이 맞은 바닥패만 가져온다
+          std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
+          addedCardfromBadak.push_back(badak.GetCard(p1_index));
+          player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p1_index)));
+          player.getBadakHand().AddCard(gookJinCase(card));
+        }
+      }
+
+      if (p1_index == -1 && p2_index == -1) { // p1_index == -1 && p2_index == -1 인 경우가 여기서 처리됨
         std::cout << ">> 뽑은 카드를 바닥에 깔아놓습니다." << std::endl;
         badak.AddCard(popped);
-      } else {
-        std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
-        player.getBadakHand().AddCard(gookJinCase(popped));
-        player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(index)));
+      } else if(p1_index == -1 && p2_index != -1) {  // p1_index == -1 && p2_index != -1 인 경우가 여기서 처리됨
+          // <쪽>
+          // 바닥패와 짝이 되는 카드가 없어서 아무거나 낸 카드를 더미에서 뽑은 카드와
+          // 함께 다시 가져오는 경우. 즉 내가 낸 카드를 다시 가져오는 경우
+          if (badak.GetCard(p2_index) == card) {
+            std::cout << ">> '쪽'입니다. 쪽을 한 두 짝패를 난 패에 추가합니다." << std::endl;
+            player.getBadakHand().AddCard(gookJinCase(popped));
+            addedCardfromBadak.push_back(badak.GetCard(p2_index));
+            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+            // 다른 플레이어로부터 피를 한 장씩 받아온다.
+            for (Player& p : players) {
+              if (p.getName().compare(player.getName())) {  // 이름이 다른 플레이어일 경우
+                std::cout << ">> " << p.getName()
+                          << " 로부터 피를 한 장 받아옵니다." << std::endl;
+                int pi_num = 0;
+                for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == 피) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // 피를 받아서 난패에 추가
+                    pi_num++;
+                    break;
+                  }
+                }
+                // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
+                for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+                  if (p.getBadakHand().GetCard(i).GetStateOfCard() == 쌍피) {
+                    player.getBadakHand().AddCard(p.getBadakHand().PopIdxCard(i));  // 쌍피를 받아서 난패에 추가
+                    break;
+                  }
+                }
+              }
+            }
+          } else {
+            std::cout << ">> 페어를 난 패에 추가합니다." << std::endl;
+            player.getBadakHand().AddCard(gookJinCase(popped));
+            addedCardfromBadak.push_back(badak.GetCard(p2_index));
+            player.getBadakHand().AddCard(gookJinCase(badak.PopIdxCard(p2_index)));
+          }
       }
       /*
     }*/
+    
+    // 상대가 뻑낸 카드를 먹었는지 확인하고 그렇다면 피를 한장씩 가져온다.
+    if (!addedCardfromBadak.empty()) {
+      if (addedCardfromBadak[0].IsPpuk() == true) {
+        std::cout << ">> 상대가 뻑을 낸 카드를 먹었습니다. 뻑을 낸 카드 "
+                      "3장을 모두 가져옵니다."
+                  << std::endl;
+        std::vector<int> pcard_index;
+        for (int i = 0; i < badak.GetNumOfCards(); i++) {
+          if (badak.GetCard(i).GetMonthOfCard() == addedCardfromBadak[0].GetMonthOfCard() &&
+              badak.GetCard(i).IsPpuk() == true) {
+            pcard_index.push_back(i);
+          }
+        }
+        for (int i : pcard_index) {
+          Card c = gookJinCase(badak.PopIdxCard(i));
+          c.setPpuk(false);
+          player.getBadakHand().AddCard(c);
+        }
+      }
+      if (addedCardfromBadak.size() >= 2 &&
+          addedCardfromBadak[1].IsPpuk() == true) {
+        std::cout << ">> 상대가 뻑을 낸 카드를 먹었습니다. 뻑을 낸 카드 "
+                      "3장을 모두 가져옵니다."
+                  << std::endl;
+        std::vector<int> pcard_index;
+        for (int i = 0; i < badak.GetNumOfCards(); i++) {
+          if (badak.GetCard(i).GetMonthOfCard() ==
+                  addedCardfromBadak[1].GetMonthOfCard() &&
+              badak.GetCard(i).IsPpuk() == true) {
+            pcard_index.push_back(i);
+          }
+        }
+        for (int i : pcard_index) {
+          Card c = gookJinCase(badak.PopIdxCard(i));
+          c.setPpuk(false);
+          player.getBadakHand().AddCard(c);
+        }
+      }
+    }
+      
 
     //점수를 계산한다.
     player.getBadakHand().calc(player);

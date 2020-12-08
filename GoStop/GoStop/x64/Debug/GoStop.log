@@ -1,3 +1,3 @@
 ﻿  Board.cpp
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(99,43): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GoStop.vcxproj -> C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe
+C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(100,43): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GoStop.vcxproj -> C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe
