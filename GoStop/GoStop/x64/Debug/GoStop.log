@@ -1,18 +1,1 @@
-﻿  Board.cpp
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(171,16): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(172,3): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(379,22): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(380,9): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(385,26): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(386,18): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(402,44): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(426,20): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(427,7): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(433,24): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(434,16): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(451,42): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(495,20): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(496,12): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
-  BadakHand.cpp
-  코드를 생성하고 있습니다...
+﻿  GoStop.vcxproj -> C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe
