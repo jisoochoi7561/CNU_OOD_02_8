@@ -14,6 +14,7 @@ class EndGameUtil {
   void checkGoBak(std::vector<Player>& players, Player& player);
   void calcByPiBak(std::vector<Player>& players, Player& player);
   void calcByGwangBak(std::vector<Player>& players, Player& player);
+  void calcScoreByGo(Player& player);  // 추가 함수
 
  private:
   EndGameUtil() {}

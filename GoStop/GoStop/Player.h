@@ -33,6 +33,9 @@ class Player  {
   void setScoredByPi(bool flag);
   int getScoreToPay();
   void setScoreToPay(int score);
+  bool getIsPresident();
+  void setIsPresident(bool isPresident);
+  void getPiFromPlayer(std::vector<Player>& players);
 
  private:
   std::string name_;
@@ -45,6 +48,7 @@ class Player  {
   bool scoredByGwang_;  //광에 의해 점수가 났는지 상태
   bool scoredByPi_;  //피에 의해 점수가 났는지 상태
   int scoreToPay_;  // 지불할 금액에 해당하는 최종 점수
+  bool isPresident_; // 총통 여부
 
 };
 

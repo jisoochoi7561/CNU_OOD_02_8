@@ -24,16 +24,16 @@ void Dummy::reset() {
           case 2:
           case 7:
           case 10:
-            this->AddCard(Card(i + 1, ±¤, false));
+            this->AddCard(Card(i + 1, gwang, false));
             break;
           case 11:
-            this->AddCard(Card(i + 1, ºñ±¤, false));
+            this->AddCard(Card(i + 1, bigwang, false));
             break;
           case 8:
-            this->AddCard(Card(i + 1, ¿­²ı, false));
+            this->AddCard(Card(i + 1, kkeut, false));
             break;
           default: 
-            this->AddCard(Card(i + 1, ¿­²ı, false));
+            this->AddCard(Card(i + 1, kkeut, false));
             break;
         }
       } else if (j == 1) {  // µÎ ¹øÂ° Ä«µå ÃÊ±âÈ­
@@ -41,34 +41,34 @@ void Dummy::reset() {
           case 0:
           case 1:
           case 2:
-            this->AddCard(Card(i + 1, È«´Ü, false));
+            this->AddCard(Card(i + 1, hongdan, false));
             break;
           case 3:
           case 4:
           case 6:
-            this->AddCard(Card(i + 1, ÃÊ´Ü, false));
+            this->AddCard(Card(i + 1, chodan, false));
             break;
           case 5:
           case 8:
           case 9:
-            this->AddCard(Card(i + 1, Ã»´Ü, false));
+            this->AddCard(Card(i + 1, cheongdan, false));
             break;
           case 11:
-            this->AddCard(Card(i + 1, ½ÖÇÇ, false));
+            this->AddCard(Card(i + 1, ssangpi, false));
             break;
           default:
-            this->AddCard(Card(i + 1, ¿­²ı, false));
+            this->AddCard(Card(i + 1, kkeut, false));
             break;
         }
       } else {          // ¼¼ ¹øÂ°, ³× ¹øÂ° Ä«µå ÃÊ±âÈ­
         if (i == 11) {  // 12¿ù´Ş
           if (j == 2) {
-            this->AddCard(Card(i + 1, ÃÊ´Ü, false));
+            this->AddCard(Card(i + 1, chodan, false));
           } else if (j == 3) {
-            this->AddCard(Card(i + 1, ½ÖÇÇ, false));
+            this->AddCard(Card(i + 1, ssangpi, false));
           }
         } else {
-          this->AddCard(Card(i + 1, ÇÇ, false));
+          this->AddCard(Card(i + 1, pi, false));
         }
       }
     }

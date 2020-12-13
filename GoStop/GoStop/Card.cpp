@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Card Å¬·¡½º
-Card::Card() : month_(1), state_(±¤), isPpuk_(false) {}
+Card::Card() : month_(1), state_(gwang), isPpuk_(false) {}
 // Card »ý¼º : ¿ù,»óÅÂ
 Card::Card(const int month, const State state, const bool isPpuk) : month_(month), state_(state), isPpuk_(isPpuk) {}
 // Card ¿ù ¸®ÅÏ
@@ -17,28 +17,28 @@ void Card::setPpuk(bool p) { this->isPpuk_ = p; }
 std::string Card::stateToString() {
   // switch ¹®À¸·Î ±¸Çö
   switch (this->state_) {
-    case ±¤:
+    case gwang:
       return "±¤";
       break;
-    case ºñ±¤:
+    case bigwang:
       return "ºñ±¤";
       break;
-    case È«´Ü:
+    case hongdan:
       return "È«´Ü";
       break;
-    case ÃÊ´Ü:
+    case chodan:
       return "ÃÊ´Ü";
       break;
-    case Ã»´Ü:
+    case cheongdan:
       return "Ã»´Ü";
       break;
-    case ÇÇ:
+    case pi:
       return "ÇÇ";
       break;
-    case ¿­²ý:
+    case kkeut:
       return "¿­²ý";
       break;
-    case ½ÖÇÇ:
+    case ssangpi:
       return "½ÖÇÇ";
       break;
   }

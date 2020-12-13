@@ -10,8 +10,25 @@ EndGameUtil* EndGameUtil::GetInstance() {
   return instance_;
 }
 
+// 고를 적용해 점수 계산
+void EndGameUtil::calcScoreByGo(Player& player) {
+  switch (player.getGo()) {
+    case 0:  // 고가 없으면 그냥 원점수
+      break;
+    case 1:  // 고가 1인 경우
+      player.setScore(player.getScore() + 1);
+      break;
+    case 2:  // 고가 2인 경우
+      player.setScore(player.getScore() + 2);
+      break;
+    default:  // 그 외 경우
+      player.setScore(player.getScore() * pow(2, player.getGo() - 2));
+      break;
+  }
+}
+
 void EndGameUtil::calcByMungBak(Player& player) {  //멍박으로 점수 계산하는 함수
-  if (player.getBadakHand().FindNumOfSameStateCards(열끗) >= 7) {  //이긴 사람이 끗이 7장 이상인 경우
+  if (player.getBadakHand().FindNumOfSameStateCards(kkeut) >= 7) {  //이긴 사람이 끗이 7장 이상인 경우
     std::cout << player.getName() << "님은 멍박입니다." << std::endl;
     std::cout << player.getName() << "님의 점수가 2배가 됩니다." << std::endl;
     player.setScore(player.getScore() * 2);  //점수 두배
@@ -43,9 +60,9 @@ void EndGameUtil::calcByGwangBak(std::vector<Player>& players, Player& player) {
         continue;
       } else {  // 진 사람인 경우
         int numOfGwang = players.at(i).getBadakHand().FindNumOfSameStateCards(
-            광);  // 광 갯수
+            gwang);  // 광 갯수
         int numOfBiGwang = players.at(i).getBadakHand().FindNumOfSameStateCards(
-            비광);                             // 비광 갯수
+            bigwang);                             // 비광 갯수
         if (numOfGwang + numOfBiGwang == 0) {  // 광이 하나도 없어 광박인 경우
           std::cout << player.getName() << "님은 광박입니다." << std::endl;
           std::cout << player.getName() << "님은 승자에게 지불할 금액에 해당하는 점수가 2배가 됩니다." << std::endl;
@@ -64,8 +81,8 @@ void EndGameUtil::calcByPiBak(std::vector<Player>& players, Player& player) {
       if (players.at(i).getName() == player.getName()) {  // 이긴 사람인 경우
         continue;
       } else {  // 진 사람인 경우
-        int numOfPi = players.at(i).getBadakHand().FindNumOfSameStateCards(피);  // 피 갯수
-        int numOfSsangPi = players.at(i).getBadakHand().FindNumOfSameStateCards(쌍피);   // 쌍피 갯수
+        int numOfPi = players.at(i).getBadakHand().FindNumOfSameStateCards(pi);  // 피 갯수
+        int numOfSsangPi = players.at(i).getBadakHand().FindNumOfSameStateCards(ssangpi);   // 쌍피 갯수
         if ((numOfPi + numOfSsangPi) <= 5 && (numOfPi + numOfSsangPi)>=1) {  // 피가 5장 이하인 경우는 피박
           // 단 피가 한장도 없으면 피박이 아님
           std::cout << player.getName() << "님은 피박입니다." << std::endl;

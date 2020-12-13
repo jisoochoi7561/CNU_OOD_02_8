@@ -42,8 +42,8 @@ int BadakHand::calcScoreFromGwang() {
   int score = 0;
 
   int numOfGwang =
-      this->FindNumOfSameStateCards(광);  // 광 갯수
-  int numOfBiGwang = this->FindNumOfSameStateCards(비광);  // 비광 갯수
+      this->FindNumOfSameStateCards(gwang);  // 광 갯수
+  int numOfBiGwang = this->FindNumOfSameStateCards(bigwang);  // 비광 갯수
 
   if (numOfBiGwang == 0) {  // 비광이 없는 경우
     if (numOfGwang == 3) {  // 광이 3개
@@ -67,7 +67,7 @@ int BadakHand::calcScoreFromGwang() {
 // 열끗 관련
 int BadakHand::calcScoreFromKkeut() {
   int score = 0;
-  int numOfKkeut = this->FindNumOfSameStateCards(열끗);
+  int numOfKkeut = this->FindNumOfSameStateCards(kkeut);
   BadakHand playerSet = *this;
 
   if (numOfKkeut >= 5) {  // 열끗이 5개 이상인 경우
@@ -81,10 +81,10 @@ int BadakHand::calcScoreFromKkeut() {
 // 띠 관련
 int BadakHand::calcScoreFromTti() {
   int score = 0;
-  int numOfHongdan = this->FindNumOfSameStateCards(홍단);
+  int numOfHongdan = this->FindNumOfSameStateCards(hongdan);
   int numOfCheongdan =
-      this->FindNumOfSameStateCards(청단);
-  int numOfChodan = this->FindNumOfSameStateCards(초단);
+      this->FindNumOfSameStateCards(cheongdan);
+  int numOfChodan = this->FindNumOfSameStateCards(chodan);
   BadakHand cardSet = *this;
 
   int totalNumOfTti =
@@ -109,8 +109,8 @@ int BadakHand::calcScoreFromTti() {
 // 피 관련
 int BadakHand::calcScoreFromPi() {
   int score = 0;
-  int numOfPi =this->FindNumOfSameStateCards(피);
-  int numOfSsangPi =this->FindNumOfSameStateCards(쌍피);
+  int numOfPi =this->FindNumOfSameStateCards(pi);
+  int numOfSsangPi =this->FindNumOfSameStateCards(ssangpi);
   int totalNumOfPi = numOfPi + 2 * numOfSsangPi;
   if (totalNumOfPi>=10) {
     score += (totalNumOfPi - 9);
@@ -130,7 +130,7 @@ bool BadakHand::isGodori(BadakHand& cardSet) {
     Card card = cardSet.GetCard(i);
     int month = card.GetMonthOfCard();
     if (month == 2 || month == 4 || month == 8) {
-      if (card.GetStateOfCard() == 열끗) {  // 고도리에 해당하는 카드인 경우
+      if (card.GetStateOfCard() == kkeut) {  // 고도리에 해당하는 카드인 경우
         checkCard.push_back(card);  // 벡터에 추가
       }
     }
@@ -147,7 +147,7 @@ bool BadakHand::isChodan(BadakHand& cardSet) {
     Card card = cardSet.GetCard(i);
     int month = card.GetMonthOfCard();
     if (month == 4 || month == 5 || month == 7) {
-      if (card.GetStateOfCard() == 초단) {  // 초단에 해당하는 카드인 경우
+      if (card.GetStateOfCard() == chodan) {  // 초단에 해당하는 카드인 경우
         checkCard.push_back(card);  // 벡터에 추가
       }
     }

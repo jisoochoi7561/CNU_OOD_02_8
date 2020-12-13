@@ -9,7 +9,7 @@
 
 // 상태 : 광 초단 청단 홍단 피 열끗 쌍피
 // 상태는 card.txt에 있는 것을 기준으로 하였습니다.
-enum State { 광, 비광, 홍단, 초단, 청단, 피, 열끗, 쌍피 };
+enum State { gwang, bigwang, hongdan, chodan, cheongdan, pi, kkeut, ssangpi };
 // Card 클래스
 class Card {
  public:

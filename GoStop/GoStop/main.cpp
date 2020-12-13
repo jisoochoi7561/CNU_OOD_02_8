@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "Card.h"
 #include "CardSet.h"
 #include "Dummy.h"

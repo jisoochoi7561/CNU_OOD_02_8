@@ -1,52 +1,18 @@
 ﻿  Board.cpp
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(15,6): error C2059: 구문 오류: '?'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(15,65): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(23,21): error C2143: 구문 오류: ')'이(가) '?' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(23,21): error C2660: 'Card::setState': 함수는 0개의 인수를 사용하지 않습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Card.h(31,8): message : 'Card::setState' 선언을 참조하십시오.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(23,22): error C2065: '랁뵾': 선언되지 않은 식별자입니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(23,28): error C2059: 구문 오류: ')'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(23,29): error C2059: 구문 오류: ';'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(100,43): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(150,18): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(151,5): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(250,17): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(259,15): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(260,13): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(261,11): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(275,9): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(284,7): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(393,24): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(399,28): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(416,46): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(440,22): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(446,26): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(464,44): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(482,3): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(503,22): error C2001: 상수에 줄 바꿈 문자가 있습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(244,22): error C2059: 구문 오류: '?'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(244,22): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(253,1): error C2059: 구문 오류: '?'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(253,1): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(310,1): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(318,1): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(319,1): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(320,1): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(328,1): error C2059: 구문 오류: '}'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(305,1): error C2059: 구문 오류: '?'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(305,1): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(313,1): error C2059: 구문 오류: '?'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(313,1): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(394,11): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(400,20): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(441,9): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(447,18): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(482,1): error C2059: 구문 오류: ')'
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(485,1): error C2601: 'Board::makePair': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(516,1): error C2601: 'Board::giveCardToPlayer': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(523,1): error C2601: 'Board::giveCardToBadak': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(533,1): error C2601: 'Board::decideOrder': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(570,1): error C2601: 'Board::getIndxPlayer': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(577,1): error C2601: 'Board::TurnHands': 지역 함수 정의가 잘못되었습니다.
-C:\Users\MinsuHan\Documents\git\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(588,1): fatal error C1004: 예기치 않은 파일의 끝이 나타났습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(171,16): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(172,3): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(379,22): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(380,9): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(385,26): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(386,18): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(402,44): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(426,20): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(427,7): error C2144: 구문 오류: int'은(는) ';' 다음에 와야 합니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(433,24): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(434,16): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(451,42): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(495,20): error C2001: 상수에 줄 바꿈 문자가 있습니다.
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\Board.cpp(496,12): error C2143: 구문 오류: ';'이(가) 'std::cin' 앞에 없습니다.
+  BadakHand.cpp
+  코드를 생성하고 있습니다...

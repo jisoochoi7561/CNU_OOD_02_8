@@ -21,13 +21,20 @@ class Board {
   Player& getIndxPlayer(int i);
   void play();
   Card gookJinCase(Card card);
-  void calcScoreByGo(Player& player);  // 추가 함수
   void endGame(std::vector<Player>& players, Player& player);  //추가 함수
+  void checkPresident(Player& player);
+  void setLastTurn(bool lastTurn);
+  bool getLastTurn();
+  void setExistPresident(bool flag);
+  bool getExistPresident();
+
 
  private:
   std::vector<Player> players;
   Dummy dummy;
   CardSet badak;
   EndGameUtil* util;
+  bool isLastTurn;
+  bool existPresident;
 
 };

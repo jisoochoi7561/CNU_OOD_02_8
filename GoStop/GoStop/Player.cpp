@@ -9,7 +9,7 @@ Player::Player()
       go(0),
       sayGo_(false),
       scoredByGwang_(false),
-      scoredByPi_(false), scoreToPay_(0) {}
+      scoredByPi_(false), scoreToPay_(0), isPresident_(false) {}
 Player::Player(std::string name)
     : hand_(),
       badakhand_(),
@@ -19,7 +19,8 @@ Player::Player(std::string name)
       go(0),
       sayGo_(false), scoredByGwang_(false),
       scoredByPi_(false),
-      scoreToPay_(0) {}
+      scoreToPay_(0),
+      isPresident_(false) {}
 // 플레이어가 손에 쥐고 있는 패는 나중에 게임 시작할 때 추가하면서
 // 초기화하면 될 것 같습니다.
 void Player::setChoice(const Card& card) {
@@ -54,3 +55,36 @@ void Player::setScoredByPi(bool flag) {
 // 고박, 멍박 등 결산 시 필요
 int Player::getScoreToPay() { return this->scoreToPay_; }  // 현재 플레이어 입장에서 승자의 점수(즉, 지불할 금액을 결정하는 점수)를 가져오는 함수
 void Player::setScoreToPay(int score) { this->scoreToPay_ = score; }  // 현재 플레이어 입장에서 승자의 점수(즉, 지불할 금액을 결정하는 점수)를 설정하는 함수
+
+void Player::setIsPresident(bool isPresident) {
+  this->isPresident_ = isPresident;
+}
+
+bool Player::getIsPresident() { return this -> isPresident_; }
+
+void Player::getPiFromPlayer(std::vector<Player>& players) {
+  // 다른 플레이어로부터 피를 한 장씩 받아온다.
+  for (Player& p : players) {
+    if (p.getName().compare(this->getName())) {  // 이름이 다른 플레이어일 경우
+      std::cout << ">> " << p.getName() << " 로부터 피를 한 장 받아옵니다."
+                << std::endl;
+      int pi_num = 0;
+      for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+        if (p.getBadakHand().GetCard(i).GetStateOfCard() == pi) {
+          this->getBadakHand().AddCard(
+              p.getBadakHand().PopIdxCard(i));  // 피를 받아서 난패에 추가
+          pi_num++;
+          break;
+        }
+      }
+      // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
+      for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+        if (p.getBadakHand().GetCard(i).GetStateOfCard() == ssangpi) {
+          this->getBadakHand().AddCard(
+              p.getBadakHand().PopIdxCard(i));  // 쌍피를 받아서 난패에 추가
+          break;
+        }
+      }
+    }
+  }
+}
