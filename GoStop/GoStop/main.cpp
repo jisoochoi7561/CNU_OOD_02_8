@@ -18,10 +18,8 @@ int main() {
   board.addNewPlayer();
   board.addNewPlayer();
 
-
   //첫패를 돌린다.
   board.TurnHands();
-
 
   //선을 구한다
   board.decideOrder();

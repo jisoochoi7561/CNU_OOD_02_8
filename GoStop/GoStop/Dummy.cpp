@@ -53,7 +53,7 @@ void Dummy::reset() {
           case 9:
             this->AddCard(Card(i + 1, cheongdan, false));
             break;
-          case 11:
+          case 10:
             this->AddCard(Card(i + 1, ssangpi, false));
             break;
           default:
