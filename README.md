@@ -9,20 +9,20 @@ C++ 언어 표준은 C++17 표준을 사용하였습니다.<br>
 그러면 헤더 파일과 소스 파일이 분리되어 있는 것을 확인할 수 있습니다.<br>
 여기서 소스 파일에 있는 main.cpp에서 프로그램 실행을 통해 프로그램을 실행하면 프로그램이 실행됩니다.<br>
 <br>
-**② repl.it 기준으로 clang 이용**
-우선 헤더 파일들과 소스 파일들을 복사하고 붙여넣기 해줍니다.(저같은 경우에는 업로드 파일로가져오면 한글이 깨졌습니다.)
-이렇게 한글이 깨지지 않는 상태로 헤더와 소스 파일을 가져옵니다.
-그 후 repl.it을 기준으로 창에서 main.cpp 소스 파일을 제외하고
-clang++ -c BadakHand.cpp
-clang++ -c Board.cpp
-clang++ -c Card.cpp
-clang++ -c CardSet.cpp
-clang++ -c Dummy.cpp
-clang++ -c EndGameUtil.cpp
-clang++ -c Player.cpp
-이렇게 7개의 cpp 파일에 대해 수행하여 7개의 .o 파일을 만들어줍니다.
-그 후 clang++ main.cpp BadakHand.o Board.o Card.o CardSet.o Dummy.o EndGameUtil.o Player.o
-을 통해 링킹을 해서 실행 파일인 a.out을 만듭니다.
+**② repl.it 기준으로 clang 이용<br>**
+우선 헤더 파일들과 소스 파일들을 복사하고 붙여넣기 해줍니다.(저같은 경우에는 업로드 파일로가져오면 한글이 깨졌습니다.)<br>
+이렇게 한글이 깨지지 않는 상태로 헤더와 소스 파일을 가져옵니다.<br>
+그 후 repl.it을 기준으로 창에서 main.cpp 소스 파일을 제외하고<br>
+clang++ -c BadakHand.cpp<br>
+clang++ -c Board.cpp<br>
+clang++ -c Card.cpp<br>
+clang++ -c CardSet.cpp<br>
+clang++ -c Dummy.cpp<br>
+clang++ -c EndGameUtil.cpp<br>
+clang++ -c Player.cpp<br>
+이렇게 7개의 cpp 파일에 대해 수행하여 7개의 .o 파일을 만들어줍니다.<br>
+그 후 clang++ main.cpp BadakHand.o Board.o Card.o CardSet.o Dummy.o EndGameUtil.o Player.o<br>
+을 통해 링킹을 해서 실행 파일인 a.out을 만듭니다.<br>
 그 후 ./a.out을 통해 실행해보면 고스톱 프로그램이 실행됩니다.<br>
 <br>
 
