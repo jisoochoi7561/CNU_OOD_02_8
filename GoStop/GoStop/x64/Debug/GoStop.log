@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  EndGameUtil.cpp
+C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\GoStop\EndGameUtil.cpp(26,45): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Player.cpp
+  코드를 생성하고 있습니다...
   GoStop.vcxproj -> C:\Users\user\Desktop\GitHub\CNU_OOD_02_8\GoStop\x64\Debug\GoStop.exe

@@ -68,16 +68,17 @@ void Player::getPiFromPlayer(std::vector<Player>& players) {
     if (p.getName().compare(this->getName())) {  // 이름이 다른 플레이어일 경우
       std::cout << ">> " << p.getName() << " 로부터 피를 한 장 받아옵니다."
                 << std::endl;
-      int pi_num = 0;
+      int numberOfPi = 0;
       for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
         if (p.getBadakHand().GetCard(i).GetStateOfCard() == pi) {
           this->getBadakHand().AddCard(
               p.getBadakHand().PopIdxCard(i));  // 피를 받아서 난패에 추가
-          pi_num++;
+          numberOfPi++;
           break;
         }
       }
-      if (pi_num == 0) {  // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
+      if (numberOfPi ==
+          0) {  // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
         for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
           if (p.getBadakHand().GetCard(i).GetStateOfCard() == ssangpi) {
             this->getBadakHand().AddCard(

@@ -16,13 +16,13 @@ void EndGameUtil::calcScoreByGo(Player& player) {
   switch (player.getGo()) {
     case 0:  // 고가 없으면 그냥 원점수
       break;
-    case 1:  // 고가 1인 경우
+    case 1:  // 1고인 경우
       player.setScore(player.getScore() + 1);
       break;
-    case 2:  // 고가 2인 경우
+    case 2:  // 2고인 경우
       player.setScore(player.getScore() + 3);
       break;
-    default:  // 그 외 경우
+    default:  // 3고 이상인 경우
       player.setScore((player.getScore()+3) * pow(2, player.getGo() - 2));
       break;
   }
