@@ -1,6 +1,7 @@
 #include "EndGameUtil.h"
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 // 객체를 반환하는 함수
 EndGameUtil* EndGameUtil::GetInstance() {
@@ -19,10 +20,10 @@ void EndGameUtil::calcScoreByGo(Player& player) {
       player.setScore(player.getScore() + 1);
       break;
     case 2:  // 고가 2인 경우
-      player.setScore(player.getScore() + 2);
+      player.setScore(player.getScore() + 3);
       break;
     default:  // 그 외 경우
-      player.setScore(player.getScore() * pow(2, player.getGo() - 2));
+      player.setScore((player.getScore()+3) * pow(2, player.getGo() - 2));
       break;
   }
 }

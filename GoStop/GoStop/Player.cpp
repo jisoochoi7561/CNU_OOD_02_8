@@ -77,12 +77,13 @@ void Player::getPiFromPlayer(std::vector<Player>& players) {
           break;
         }
       }
-      // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
-      for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
-        if (p.getBadakHand().GetCard(i).GetStateOfCard() == ssangpi) {
-          this->getBadakHand().AddCard(
-              p.getBadakHand().PopIdxCard(i));  // 쌍피를 받아서 난패에 추가
-          break;
+      if (pi_num == 0) {  // 상대방이 피가 없을 경우 쌍피가 있다면 쌍피를 받아온다.
+        for (int i = 0; i < p.getBadakHand().GetNumOfCards(); i++) {
+          if (p.getBadakHand().GetCard(i).GetStateOfCard() == ssangpi) {
+            this->getBadakHand().AddCard(
+                p.getBadakHand().PopIdxCard(i));  // 쌍피를 받아서 난패에 추가
+            break;
+          }
         }
       }
     }
